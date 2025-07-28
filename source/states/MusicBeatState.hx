@@ -8,7 +8,7 @@ import utilities.PlayerSettings;
 import game.Conductor.BPMChangeEvent;
 import utilities.Controls;
 import flixel.FlxG;
-
+import flixel.FlxBasic;
 /**
  * The backend state all states will extend from.
  */
@@ -127,6 +127,17 @@ class MusicBeatState extends #if MODCHARTING_TOOLS modcharting.ModchartMusicBeat
 
 	public function beatHit():Void {/* do literally nothing dumbass */}
 
+	/**
+	 * Adds `behind` behind `obj`
+	 * @param behind The object to add behind
+	 * @param obj The object that will be in front
+	 */
+	function addBehind(behind:FlxBasic, obj:FlxBasic) {
+		insert(members.indexOf(obj), behind);
+	}
+
+
+
 	@:noCompletion
 	inline static function set_windowNameSuffix(value:String):String {
 		windowNameSuffix = value;
@@ -147,7 +158,7 @@ class MusicBeatState extends #if MODCHARTING_TOOLS modcharting.ModchartMusicBeat
 
 
 	@:noCompletion
-	inline static function _refreshWindowName():Void{
+	inline static function _refreshWindowName():Void {
 		FlxG.stage.window.title = windowNamePrefix + windowNameSuffix #if debug + ' (DEBUG)' #end;
 	}
 }

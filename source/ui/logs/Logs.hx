@@ -8,7 +8,7 @@ import flixel.FlxG;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.display.BitmapData;
-
+import flixel.system.debug.log.LogStyle;
 class Logs extends Sprite {
 	public var logs:Array<String> = [];
 	public var bg:Bitmap;
@@ -75,6 +75,10 @@ class Logs extends Sprite {
 	public static inline function error(message:Dynamic) {
 		if (Logs.instance != null)
 			Logs.instance.addLog(message, PrintType.ERROR);
+		if (LogStyle.ERROR.throwException) {
+			throw message;
+		}
+
 	}
 
 	public function addLog(message:String, ?logType:PrintType) {

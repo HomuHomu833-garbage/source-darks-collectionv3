@@ -38,6 +38,8 @@ class StrumNote extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxS
 
 	public var modAngle:Float = 0;
 
+	
+
 	public function new(x:Float, y:Float, noteData:Int, ?ui_Skin:String, ?ui_settings:Array<String>, ?mania_size:Array<String>, ?keyCount:Int, ?isPlayer:Float) {
 		super(x, y);
 		if (ui_Skin == null)

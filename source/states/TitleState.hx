@@ -36,7 +36,7 @@ import shaders.ColorSwapHSV;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import openfl.display.BlendMode;
-
+import flixel.system.debug.log.LogStyle;
 import flixel.system.FlxSplash;
 import haxe.Http;
 using StringTools;
@@ -75,7 +75,7 @@ class TitleState extends MusicBeatState {
 
 			Options.init();
 			Options.fixBinds();
-
+			LogStyle.ERROR.throwException = Options.getData("throwExceptionOnError");
 			FlxSprite.defaultAntialiasing = Options.getData("antialiasing");
 
 			FlxG.stage.window.vsync = Options.getData("vSync");

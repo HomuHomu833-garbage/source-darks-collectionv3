@@ -3163,11 +3163,7 @@ class PlayState extends MusicBeatState {
 
 	function finishSongStuffs() {
 		AwardManager.onBeatSong(this);
-		
-
 		//AwardManager.checkStarBasedAwards(SongLoader.songs);
-
-
 		AwardManager.checkMultiClears(this);
 		// AwardManager.checkStarAwards(this);
 
@@ -4813,14 +4809,7 @@ class PlayState extends MusicBeatState {
 		return name;
 	}
 
-	/**
-		 * Adds `behind` behind `obj`
-		 * @param behind The object to add behind
-		 * @param obj The object that will be in front
-		 */
-	function addBehind(behind:FlxBasic, obj:FlxBasic) {
-		insert(members.indexOf(obj), behind);
-	}
+
 
 	function addBehindGF(behind:FlxBasic) {
 		insert(members.indexOf(gf), behind);

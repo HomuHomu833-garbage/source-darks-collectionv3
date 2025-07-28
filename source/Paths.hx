@@ -19,6 +19,13 @@ class Paths {
 
 	public static var graphics:Map<String, FlxGraphic> = new Map<String, FlxGraphic>();
 
+
+	static public function setCurrentLevel(name:String)
+	{
+		currentLevel = name.toLowerCase();
+	}
+
+
 	public static function getPath(file:String, type:AssetType, library:Null<String>):String {
 		if (library != null)
 			return getLibraryPath(file, library);
@@ -101,7 +108,7 @@ class Paths {
 	static public function gpuBitmap(key:String, ?library:String, avoidGPU:Bool = false):FlxGraphicAsset {
 		var file:String = image(key, library);
 		var bitmap:BitmapData = Assets.exists(file) ? OpenFlAssets.getBitmapData(file) : null;
-		if (!Options.getData("gpuCaching") || avoidGPU || bitmap?.image == null) {
+		if (!Options.getData("vramSprites") || avoidGPU || bitmap?.image == null) {
 			bitmap = null;
 			return file;
 		}

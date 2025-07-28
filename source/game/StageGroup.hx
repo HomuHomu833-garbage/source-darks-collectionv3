@@ -19,13 +19,14 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import modding.CharacterConfig;
 import game.DancingSprite;
-
+import shaders.Shaders.VortexEffect;
+import shaders.ColorSwap;
 using StringTools;
-
+import flixel.util.FlxDestroyUtil;
 class StageGroup extends FlxGroup {
 	public var stage:String = "stage";
 	public var camZoom:Float = 1.05;
-
+	private var goodElapse:Float = 0;
 	public var player_1_Point:FlxPoint = new FlxPoint(1000, 800);
 	public var player_2_Point:FlxPoint = new FlxPoint(300, 800);
 	public var gf_Point:FlxPoint = new FlxPoint(600, 750);
@@ -54,6 +55,10 @@ class StageGroup extends FlxGroup {
 	public var stageScript:Script = null;
 
 	public var colorSwap:ColorSwapHSV;
+	public var vortexShader:VortexEffect = new VortexEffect();
+
+	public var rgbKeyboardMode:Bool = false;
+
 
 	public function updateStage(?newStage:String) {
 		if (newStage != null)
@@ -144,6 +149,13 @@ class StageGroup extends FlxGroup {
 							} else
 								sprite.loadGraphic(Paths.gpuBitmap((stageData.imageDirectory ?? stage) + "/" + object.file_Name, "stages"));
 
+							if(object.object_Name != null && object.object_Name == "vortex")
+                            {
+                                sprite.makeGraphic(1,1);
+                                sprite.shader = vortexShader.shader;
+                            }
+
+
 							if (object.uses_Frame_Width)
 								sprite.setGraphicSize(sprite.frameWidth * object.scale);
 							else
@@ -200,6 +212,13 @@ class StageGroup extends FlxGroup {
 				}
 		}
 	}
+	public var iTime:Float = 0;
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+			vortexShader.iTime += elapsed;
+	}
 
 	public function setCharOffsets(?p1:Character, ?gf:Character, ?p2:Character):Void {
 		if (p1 == null)
@@ -231,6 +250,27 @@ class StageGroup extends FlxGroup {
 				gf.visible = false;
 		}
 
+		if (stageData != null)
+        {
+            if (stageData.rtxData != null)
+                {
+                    var chars = [p1, gf, p2];
+                    for (c in chars)
+                    {
+                        if (!c.debugMode)
+                        {
+                            setCharacterRTX(c);
+        
+                            if (c.otherCharacters != null)
+                                for (o in c.otherCharacters)
+                                    setCharacterRTX(o); //set for extra chars
+                            
+                        }
+                    }
+        
+                }
+        }
+
 		if (p1.otherCharacters != null) {
 			for (character in p1.otherCharacters) {
 				character.setPosition((player_1_Point.x - (character.width / 2)) + character.positioningOffset[0],
@@ -255,6 +295,35 @@ class StageGroup extends FlxGroup {
 			}
 		}
 	}
+
+	function setCharacterRTX(c:Character)
+    {
+        if (stageData.rtxData != null)
+        {
+            var overlay = FlxColor.fromString(stageData.rtxData.overlay);
+            var satin = FlxColor.fromString(stageData.rtxData.satin);
+            var inner = FlxColor.fromString(stageData.rtxData.inner);
+            if (!c.debugMode)
+            {
+                c.rtxShader.overlayColor = FlxColor.fromRGBFloat(overlay.redFloat, overlay.greenFloat, overlay.blueFloat, stageData.rtxData.overlayAlpha);
+                c.rtxShader.satinColor = FlxColor.fromRGBFloat(satin.redFloat, satin.greenFloat, satin.blueFloat, stageData.rtxData.satinAlpha);
+                c.rtxShader.innerShadowColor = FlxColor.fromRGBFloat(inner.redFloat, inner.greenFloat, inner.blueFloat, stageData.rtxData.innerAlpha);
+    
+                c.rtxShader.innerShadowAngle = stageData.rtxData.innerAngle;
+                c.rtxShader.innerShadowDistance = stageData.rtxData.innerDistance;
+                c.rtxShader.updateColorShift();
+
+                if (stageData.rtxData.pointLight != null)
+                {
+                    c.rtxShader.pointLight = stageData.rtxData.pointLight;
+                    c.rtxShader.lightX = stageData.rtxData.lightX;
+                    c.rtxShader.lightY = stageData.rtxData.lightY;
+                    //trace(stageData.rtxData);
+                }
+                
+            }
+        }
+    }
 
 	public function getCharacterPos(character:Int, char:Character = null):Array<Float> {
 		switch (character) {
@@ -293,7 +362,11 @@ class StageGroup extends FlxGroup {
 		stage = stageName;
 		updateStage();
 	}
-
+	override function destroy() {
+		super.destroy();
+		FlxDestroyUtil.destroy(infrontOfGFSprites);
+		FlxDestroyUtil.destroy(foregroundSprites);
+	}
 	public function beatHit() {
 		if (Options.getData("animatedBGs")) {
 			for (sprite in onBeatHit_Group) {
@@ -335,8 +408,24 @@ typedef StageData = {
 	var scriptName:Null<String>;
 	var backgroundColor:Null<String>;
 	var imageDirectory:Null<String>;
-}
+	var rtxData:Null<RTXData>;
 
+}
+typedef RTXData = 
+{
+    var overlay:String;
+    var overlayAlpha:Float;
+    var satin:String;
+    var satinAlpha:Float;
+    var inner:String;
+    var innerAlpha:Float;
+    var innerDistance:Float;
+    var innerAngle:Float;
+
+    var ?pointLight:Bool;
+    var ?lightX:Float;
+    var ?lightY:Float;
+}
 typedef StageObject = {
 	// General sprite object Data //
 	var position:Array<Float>;

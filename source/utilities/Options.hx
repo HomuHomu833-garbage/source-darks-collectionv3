@@ -143,6 +143,24 @@ class Options {
 			saves.get(saveKey).flush();
 		}
 	}
+		#if MODDING_ALLOWED
+	public static function initModOptions() {
+		for (mod in modding.ModList.getActiveMods(modding.PolymodHandler.metadataArrays)) {
+			createSave(mod, mod);
+			if (sys.FileSystem.exists('mods/$mod/data/options.json')) {
+				var modOptions:modding.ModOptions = cast Json.parse(sys.io.File.getContent('mods/$mod/data/options.json'));
+				for (option in modOptions.options) {
+					var trimmedType:String = option.type.trim().toLowerCase();
+					if (trimmedType == "bool" || trimmedType == "string") {
+						if (getData(option.save, mod) == null) {
+							setData(option.defaultValue, option.save, mod);
+						}
+					}
+				}
+			}
+		}
+	}
+	#end
 
 	@:noCompletion public static function fixBinds() {
 		if (getData("binds", "binds") == null)

@@ -15,10 +15,22 @@ import modding.CharacterConfig;
 import modding.scripts.languages.HScript;
 import states.PlayState;
 import modcharting.FlxSprite3D;
+import toolbox.CharacterCreator;
+import flixel.math.FlxMatrix;
+import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
+import flixel.math.FlxRect;
+import shaders.Shaders.RTXEffect;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.FlxCamera;
 /**
  * The base character class.
  */
-class Character extends FlxSprite3D {
+class Character extends ReflectedSprite  { //FLX3D
+	public var lastHitStrumTime:Float = 0;
+	public var justHitStrumTime:Float = -5000;
+	public var rtxShader:RTXEffect = new RTXEffect();
+
 	public var animOffsets:Map<String, Array<Dynamic>> = new Map<String, Array<Dynamic>>();
 	public var debugMode:Bool = false;
 
@@ -77,7 +89,8 @@ class Character extends FlxSprite3D {
 		dancesLeftAndRight = false;
 
 		var ilikeyacutg:Bool = false;
-
+		rtxShader.parentSprite = this;
+		shader = rtxShader.shader;
 		switch (curCharacter) {
 			case '':
 				deathCharacter = "bf-dead";
@@ -150,7 +163,7 @@ class Character extends FlxSprite3D {
 		}
 		#if HSCRIPT_ALLOWED
 		if (Assets.exists(Paths.hx("data/character data/" + curCharacter + "/script"))) {
-			script.call("createCharacterPost", [curCharacter]);
+			script?.call("createCharacterPost", [curCharacter]);
 		}
 
 		animation.onFinish.add((animName) -> {
@@ -166,12 +179,14 @@ class Character extends FlxSprite3D {
 				curCharacter = characterName;
 			}
 			#if HSCRIPT_ALLOWED
-			if (Assets.exists(Paths.hx("data/character data/" + characterName + "/script"))) {
-				script = new HScript(Paths.hx("data/character data/" + characterName + "/script"));
+			if(FlxG.state is PlayState){
+				if (Assets.exists(Paths.hx("data/character data/" + characterName + "/script"))) {
+					script = new HScript(Paths.hx("data/character data/" + characterName + "/script"));
 
-				script.interp.variables.set("character", this);
-				PlayState.instance.scripts.set(characterName, script);
-				script.call("createCharacter", [curCharacter]);
+					script.interp.variables.set("character", this);
+					PlayState.instance.scripts.set(characterName, script);
+					script.call("createCharacter", [curCharacter]);
+				}
 			}
 			#end
 
@@ -238,12 +253,19 @@ class Character extends FlxSprite3D {
 			atlas.antialiasing = antialiasing;
 			atlas.color = color;
 			atlas.colorTransform = colorTransform;
+			atlas.blend = blend;
 			atlas.draw();
+			rtxShader.update(0); //update right before drawing
 		} else {
+			rtxShader.update(0); //update right before drawing
 			super.draw();
 		}
 	}
-
+	override function destroy() {
+		FlxDestroyUtil.destroy(coolTrail);
+		FlxDestroyUtil.destroy(atlas);
+		super.destroy();
+	}
 	public function loadCharacterConfiguration(config:CharacterConfig) {
 		if (config.characters == null || config.characters.length <= 1) {
 			if (!isPlayer)
@@ -269,7 +291,10 @@ class Character extends FlxSprite3D {
 					offsetsFlipWhenEnemy = false;
 			} else
 				offsetsFlipWhenEnemy = config.offsetsFlipWhenEnemy;
-
+			if((isPlayer && offsetsFlipWhenPlayer) || (!isPlayer && offsetsFlipWhenEnemy))
+			{
+				rtxShader.flipX = true;
+			}
 			dancesLeftAndRight = config.dancesLeftAndRight;
 
 			if (Assets.exists(Paths.file("images/characters/" + config.imagePath + "/Animation.json", TEXT))) {
@@ -345,8 +370,10 @@ class Character extends FlxSprite3D {
 			if (config.positionOffset != null)
 				positioningOffset = config.positionOffset;
 
-			if (config.trail == true)
-				coolTrail = new FlxTrail(this, null, config.trailLength, config.trailDelay, config.trailStalpha, config.trailDiff);
+			if (config.trail || FlxG.state is CharacterCreator){
+				coolTrail = new FlxTrail(this, null, config.trailLength ?? 10, config.trailDelay ?? 3, config.trailStalpha ?? 0.4, config.trailDiff ?? 0.05);
+			}
+
 
 			if (config.swapDirectionSingWhenPlayer != null)
 				swapLeftAndRightSingPlayer = config.swapDirectionSingWhenPlayer;
@@ -458,6 +485,11 @@ class Character extends FlxSprite3D {
 				if (curAnimName() == 'hairFall' && curAnimFinished())
 					playAnim('danceRight');
 			}
+			if (FlxG.state == PlayState.instance)
+			{
+				@:privateAccess
+				rtxShader.hue = PlayState.instance.stage.colorSwap.hue;
+			}
 		}
 
 		if (atlasMode && atlas != null) {
@@ -540,7 +572,7 @@ class Character extends FlxSprite3D {
 		}
 	}
 
-	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void {
+	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0, ?strumTime:Float):Void {
 		if (playFullAnim || !hasAnim(AnimName))
 			return;
 
@@ -550,6 +582,56 @@ class Character extends FlxSprite3D {
 			if (animation.getByName(anim) != null) // check if it exists so no broken anims
 				AnimName = anim;
 		}
+
+		if (strumTime != null)
+			{
+				justHitStrumTime = strumTime;
+			}
+			else
+				justHitStrumTime = Conductor.songPosition;
+			
+			if (lastHitStrumTime == justHitStrumTime && animation.curAnim != null)
+			{
+				//trace('hit double');
+	
+				var actor = this;
+				var Sprite:ReflectedSprite = new ReflectedSprite(actor.x, actor.y);
+				Sprite.drawFlipped = this.drawFlipped;
+				//copy sprite
+				Sprite.loadGraphicFromSprite(actor);
+				Sprite.alpha = 0.5;
+				Sprite.angle = actor.angle;
+				Sprite.offset.x = actor.offset.x;
+				Sprite.offset.y = actor.offset.y;
+				Sprite.origin.x = actor.origin.x;
+				Sprite.origin.y = actor.origin.y;
+				Sprite.scale.x = actor.scale.x;
+				Sprite.scale.y = actor.scale.y;
+				Sprite.active = false;
+				Sprite.animation.frameIndex = actor.animation.frameIndex;
+				Sprite.flipX = actor.flipX;
+				Sprite.flipY = actor.flipY;
+				
+				Sprite.shader = rtxShader.copy().shader;
+
+				//play anim
+				Sprite.animation.play(animation.curAnim.name, Force, Reversed, Frame);
+				var daOffset = animOffsets.get(AnimName);
+				if (animOffsets.exists(AnimName)) {
+					//offset.set((daOffset[0] * _cosAngle) - (daOffset[1] * _sinAngle), (daOffset[1] * _cosAngle) + (daOffset[0] * _sinAngle));
+					//offset.set(daOffset[0], daOffset[1]);
+				} else
+					offset.set(0, 0);
+
+				//add
+				FlxG.state.insert(FlxG.state.members.indexOf(this)-1, Sprite);
+				FlxTween.tween(Sprite, {alpha: 0}, Conductor.crochet*0.001*1.4, {ease: FlxEase.expoIn, onComplete: function(twn:FlxTween) // Aumentado ligeramente
+				{
+					//remove sprite
+					Sprite.destroy();
+				}});
+			}
+			lastHitStrumTime = justHitStrumTime;
 
 		preventDanceForAnim = false; // reset it
 
@@ -587,6 +669,124 @@ class Character extends FlxSprite3D {
 	
 }
 
+class ReflectedSprite extends FlxSprite
+{
+	public var drawFlipped = false;
+	public var drawReflection:Bool = false;
+	public var reflectionYOffset:Float = 0;
+	public var reflectionAlpha:Float = 0.5;
+	private var _drawingReflection:Bool = false;
+	public var reflectionColor:FlxColor = 0xFF000000;
+	public var reflectionScaleY:Float = 0.6;
+
+	public var transform:FlxMatrix = new FlxMatrix();
+
+	override public function draw()
+	{
+		if (drawReflection)
+		{
+			_drawingReflection = true;
+			var startX = x;
+			var startY = y;
+			var alp = alpha;
+			var col = color;
+			var scaleY = scale.y;
+			//flip everything
+			color = reflectionColor;
+			scale.y = -scale.y;
+			offset.y = -offset.y;
+			alpha *= reflectionAlpha;
+			y += height+reflectionYOffset;
+			x += width;
+
+			transform.identity();
+
+			//transform.c += 2.0;
+			
+
+			super.draw(); //draw reflection
+			//reset back to default
+			scale.y = scaleY;
+			offset.y = -offset.y;
+			alpha = alp;
+			y = startY;
+			x = startX;
+			color = col;
+			_drawingReflection = false;
+		}
+		if (drawFlipped)
+		{
+			flipX = !flipX;
+			scale.x = -scale.x;
+			super.draw();
+			flipX = !flipX;
+			scale.x = -scale.x;
+		}
+		else 
+		{
+			super.draw(); //draw normal sprite
+		}
+	}
+
+	override function drawComplex(camera:FlxCamera):Void
+	{
+		_frame.prepareMatrix(_matrix, FlxFrameAngle.ANGLE_0, checkFlipX(), checkFlipY());
+
+		_matrix.translate(-origin.x, -origin.y);
+		_matrix.scale(scale.x, scale.y);
+		if (_drawingReflection)
+		{
+			_matrix.concat(transform);
+		}
+
+
+
+		if (bakedRotationAngle <= 0)
+		{
+			updateTrig();
+
+			if (angle != 0)
+				_matrix.rotateWithTrig(_cosAngle, _sinAngle);
+		}
+
+		getScreenPosition(_point, camera).subtractPoint(offset);
+		_point.add(origin.x, origin.y);
+		_matrix.translate(_point.x, _point.y);
+
+		if (isPixelPerfectRender(camera))
+		{
+			_matrix.tx = Math.floor(_matrix.tx);
+			_matrix.ty = Math.floor(_matrix.ty);
+		}
+
+
+		camera.drawPixels(_frame, framePixels, _matrix, colorTransform, blend, antialiasing, shader);
+	}
+
+
+	override public function isOnScreen(?camera:FlxCamera):Bool //stupid shit breaking with negative scaley
+	{
+		return super.isOnScreen(camera);
+	}
+	override public function getScreenBounds(?newRect:FlxRect, ?camera:FlxCamera):FlxRect 
+	{
+		if (drawFlipped) //shoutout to CNE devs
+		{
+			scale.x = -scale.x;
+			var bounds = super.getScreenBounds(newRect, camera);
+			scale.x = -scale.x;
+			return bounds;
+		}
+		if (_drawingReflection)
+		{
+			scale.y = -scale.y;
+			var bounds = super.getScreenBounds(newRect, camera);
+			scale.y = -scale.y;
+			return bounds;
+		}
+		return super.getScreenBounds(newRect, camera);
+	}
+}
 typedef PsychCharacterFile = {
 	var animations:Array<PsychAnimArray>;
 	var image:String;

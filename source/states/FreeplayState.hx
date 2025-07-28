@@ -754,7 +754,9 @@ class FreeplayState extends MusicBeatState {
 
 		PlayState.loadChartEvents = true;
 		destroyFreeplayVocals();
-		FlxG.switchState(() -> new PlayState());
+		LoadingState.loadAndSwitchState(() -> new PlayState());
+
+		//FlxG.switchState(() -> new PlayState());
 	}
 
 	override function closeSubState() {

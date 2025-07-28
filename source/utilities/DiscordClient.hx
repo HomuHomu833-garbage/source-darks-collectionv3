@@ -1,16 +1,18 @@
 package utilities;
 
+import haxe.Json;
 #if DISCORD_ALLOWED
 import cpp.ConstCharStar;
 import cpp.RawConstPointer;
 import flixel.util.FlxSignal;
 import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
+import sys.FileSystem;
+import sys.io.File;
 import sys.thread.Thread;
 
 using cpp.RawPointer;
 using cpp.Function;
-
 class DiscordClient {
 	/**
 	 * Whether the client has been started
@@ -101,9 +103,8 @@ class DiscordClient {
 
 		onReady.dispatch(request);
 	}
-
 	public static function changePresence(details:String = "", ?state:String, ?smallImageKey:String, ?hasStartTimestamp:Bool, ?endTimestamp:Float,
-			largeImageKey:String = "") {
+			largeImageKey:String = "icon", largeImageText:String = "Leather Engine") {
 		var startTimestamp:Float = hasStartTimestamp ? Date.now().getTime() : 0;
 
 		if (endTimestamp > 0) {
@@ -113,12 +114,34 @@ class DiscordClient {
 		presence.details = details;
 		presence.state = state;
 		presence.largeImageKey = largeImageKey;
+		presence.largeImageText = largeImageText;
 		presence.smallImageKey = smallImageKey;
 		presence.startTimestamp = Std.int(startTimestamp / 1000);
 		presence.endTimestamp = Std.int(endTimestamp / 1000);
+		updatePresence();
+	}
+		public static inline function updatePresence() {
+		if(!active) {
+			return;
+		}
 		Discord.UpdatePresence(presence.addressOf());
 	}
 
+	public static function loadModPresence():Bool {
+		var jsonPath:String = 'mods/${Options.getData("curMod")}/discord.json';
+		if (FileSystem.exists(jsonPath)) {
+			var discordData:DiscordData = cast Json.parse(File.getContent(jsonPath));
+			ID = discordData.ID;
+			changePresence("", null, null, null, null, discordData.key, discordData.text);
+			trace('Found mod presence at $jsonPath');
+			return true;
+		} else {
+			ID = defaultID;
+			changePresence();
+		}
+		trace("didnt find mod presence");
+		return false;
+	}
 	private static inline function _onDisconnect(errorCode:Int, message:ConstCharStar):Void {
 		trace('Discord: Disconnected ($errorCode:$message)', WARNING);
 		onDisconnect.dispatch(errorCode, message);
@@ -141,5 +164,10 @@ class DiscordClient {
 		}
 		return ID = newID;
 	}
+}
+typedef DiscordData = {
+	var ID:String;
+	var key:String;
+	var text:String;
 }
 #end
