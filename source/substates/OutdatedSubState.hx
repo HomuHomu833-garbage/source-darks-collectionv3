@@ -23,10 +23,8 @@ class OutdatedSubState extends MusicBeatState {
 	override function create() {
 		super.create();
 
-		// Fondo negro
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK));
 
-		// Texto principal
 		var txt:FlxText = new FlxText(0, 20, FlxG.width,
 			"Nueva actualización encontrada para Darks Collection!\n" +
 			"Versión actual: " + CoolUtil.getCurrentVersion() +
@@ -37,15 +35,12 @@ class OutdatedSubState extends MusicBeatState {
 		txt.screenCenter(X);
 		add(txt);
 
-		// Descargar changelog desde tu repo
 		loadChangelog();
 
-		// Texto changelog (se actualizará al descargar)
 		var changelogTxt:FlxText = new FlxText(50, 150, FlxG.width - 100, changelog, 18);
 		changelogTxt.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.LIME, LEFT);
 		add(changelogTxt);
 
-		// Botón ACTUALIZAR
 		var btnUpdate:FlxButton = new FlxButton(FlxG.width / 2 - 150, FlxG.height - 100, "Actualizar", () -> {
 			trace("Usuario eligió actualizar.");
 			updateFromGit("assets", "assets");
@@ -54,7 +49,6 @@ class OutdatedSubState extends MusicBeatState {
 		btnUpdate.scale.set(2, 2);
 		add(btnUpdate);
 
-		// Botón MENÚ
 		var btnMenu:FlxButton = new FlxButton(FlxG.width / 2 + 50, FlxG.height - 100, "Menú Principal", () -> {
 			trace("Usuario decidió ignorar la actualización.");
 			FlxG.switchState(() -> new MainMenuState());
@@ -62,15 +56,12 @@ class OutdatedSubState extends MusicBeatState {
 		btnMenu.scale.set(2, 2);
 		add(btnMenu);
 
-		// Activar mouse
 		FlxG.mouse.visible = true;
 	}
 
-	// ============================================================
-	// Descargar changelog.txt del repositorio
-	// ============================================================
 	function loadChangelog() {
 		var http:Http = new Http("https://raw.githubusercontent.com/darkroft123/source-darks-collectionv3/main/changelog.txt");
+		http.setHeader("User-Agent", "darkroft123-game");
 		http.onData = (data:String) -> {
 			trace("Changelog cargado correctamente.");
 			changelog = data;
@@ -81,12 +72,10 @@ class OutdatedSubState extends MusicBeatState {
 		http.request();
 	}
 
-	// ============================================================
-	// Función recursiva para actualizar cualquier carpeta desde GitHub
-	// ============================================================
 	function updateFromGit(remotePath:String, localBase:String) {
 		trace("Revisando carpeta remota: " + remotePath);
 		var http:Http = new Http("https://api.github.com/repos/darkroft123/source-darks-collectionv3/contents/" + remotePath);
+		http.setHeader("User-Agent", "darkroft123-game");
 		http.onData = (data:String) -> {
 			var files:Array<Dynamic> = (haxe.Json.parse(data) : Array<Dynamic>);
 			for (file in files) {
@@ -105,11 +94,9 @@ class OutdatedSubState extends MusicBeatState {
 		http.request();
 	}
 
-	// ============================================================
-	// Descargar archivos
-	// ============================================================
 	function downloadFile(url:String, savePath:String) {
 		var http:Http = new Http(url);
+		http.setHeader("User-Agent", "darkroft123-game");
 		http.onData = (data:String) -> {
 			var parts = savePath.split("/");
 			if (parts.length > 1) {
