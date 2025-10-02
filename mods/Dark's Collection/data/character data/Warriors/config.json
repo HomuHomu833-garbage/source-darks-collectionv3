@@ -1,0 +1,14 @@
+{
+    "cameraOffset": [70, -280],
+    "barColor": [255, 74, 0],
+    "characters": [
+        {
+            "name": "PACIO Matt",
+            "positionOffset": [50,0]
+        },
+        {
+            "name": "Blue Matt 2",
+            "positionOffset": [-325,0]
+        }
+    ]
+}

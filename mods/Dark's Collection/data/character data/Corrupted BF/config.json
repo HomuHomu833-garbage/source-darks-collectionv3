@@ -1,0 +1,65 @@
+{
+  "defaultFlipX": true,
+  "cameraOffset": [-50, 50],
+  "dancesLeftAndRight": false,
+  "imagePath": "cboyfriend",
+  "barColor": [249, 27, 78],
+  "offsetsFlipWhenEnemy": true,
+  "offsetsFlipWhenPlayer": true,
+  "animations": [
+    {
+      "name": "idle",
+      "animation_name": "idle0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singLEFT",
+      "animation_name": "right0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singDOWN",
+      "animation_name": "down0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singUP",
+      "animation_name": "up0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singRIGHT",
+      "animation_name": "left0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singLEFTmiss",
+      "animation_name": "miss right0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singDOWNmiss",
+      "animation_name": "miss down0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singUPmiss",
+      "animation_name": "miss up0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singRIGHTmiss",
+      "animation_name": "miss left0",
+      "fps": 24,
+      "looped": false
+    }
+  ]
+}

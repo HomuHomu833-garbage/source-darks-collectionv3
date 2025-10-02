@@ -1,0 +1,67 @@
+{
+    "defaultFlipX": true,
+    "cameraOffset": [-150, -50],
+    "dancesLeftAndRight": false,
+    "imagePath": "VSBF",
+    "healthIcon": "VSBF",
+    "spritesheetType": "SPARROW",
+    "barColor": [255, 175, 175],
+	"offsetsFlipWhenEnemy": true,
+    "offsetsFlipWhenPlayer": false,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "BF idle dance instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "BF NOTE RIGHT instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "BF NOTE DOWN instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "BF NOTE UP instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "BF NOTE LEFT instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFTmiss",
+            "animation_name": "BF NOTE RIGHT MISS instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWNmiss",
+            "animation_name": "BF NOTE DOWN MISS instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUPmiss",
+            "animation_name": "BF NOTE UP MISS instancia 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHTmiss",
+            "animation_name": "BF NOTE LEFT MISS instancia 1",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+
+	"outerBorderTop": "#ffffff",
+	"outerBorderBot": "#ffffff",
+	"midBorderTop": "#000000",
+	"midBorderBot": "#000000",
+	"innerBorderTop": "#08d5ff",
+	"innerBorderBot": "#0344d5",
+
+	"outerBorderSize": 6
+
+}

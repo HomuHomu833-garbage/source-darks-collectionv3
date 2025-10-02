@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="tvblue.png">
+	<!-- Created with Adobe Animate version 21.0.5.40714 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tvorange0000" x="10" y="10" width="857" height="687"/>
+	<SubTexture name="tvorange0001" x="877" y="10" width="851" height="679" frameX="-3" frameY="-4" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0002" x="10" y="707" width="847" height="670" frameX="-5" frameY="-8" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0003" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0004" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0005" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0006" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0007" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0008" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0009" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0010" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0011" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0012" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+	<SubTexture name="tvorange0013" x="867" y="707" width="841" height="661" frameX="-8" frameY="-13" frameWidth="857" frameHeight="687"/>
+</TextureAtlas>

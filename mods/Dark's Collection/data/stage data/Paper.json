@@ -1,0 +1,121 @@
+{
+	"rtxData": {
+		"overlay": "0x00008B",
+		"overlayAlpha": 0.195876288659794,
+		"inner": "0x00C0DD",
+		"innerAlpha": 0.45360824742268,
+		"innerAngle": 14.8453608247423,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.649484536082474,
+		"innerDistance": 19.7938144329897,
+		"pointLight": false,
+		"satin": "0x006C81"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"position": [
+				-1020,
+				-562
+			],
+			"file_Name": "Backgraoundsito Qlo",
+			"scale": 1
+		},
+		{
+			"is_Animated": true,
+			"position": [
+				-1356,
+				-276
+			],
+			"scroll_Factor": [
+				0.85,
+				0.85
+			],
+			"antialiased": true,
+			"scale": 4.1,
+			"file_Name": "paper bg vortex shit",
+			"animations": [
+				{
+					"animation_name": "simbolo polla",
+					"name": "simbolo polla",
+					"fps": 48,
+					"looped": true
+				}
+			],
+			"start_Animation": "simbolo polla"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-1304,
+				-303
+			],
+			"file_Name": "Weas De Atras Nose",
+			"scale": 1
+		},
+		{
+			"is_Animated": true,
+			"position": [
+				-650,
+				-100
+			],
+			"scroll_Factor": [
+				0.85,
+				0.85
+			],
+			"antialiased": true,
+			"scale": 2,
+			"file_Name": "Fire",
+			"animations": [
+				{
+					"animation_name": "FireStage",
+					"name": "FireStage",
+					"fps": 32,
+					"looped": true
+				}
+			],
+			"start_Animation": "FireStage"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1475,
+				-400
+			],
+			"file_Name": "Arenita Qla",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			519,
+			679
+		],
+		[
+			-753,
+			768
+		],
+		[
+			3225,
+			-705
+		]
+	],
+	"camera_Zoom": 0.67,
+	"scriptName": "Paper"
+}

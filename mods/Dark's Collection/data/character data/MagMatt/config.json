@@ -1,0 +1,41 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "MagMatt",
+    "spritesheetType": "SPARROW",
+	"healthIcon": "Matt",
+    "barColor": [255, 140, 0],
+    "graphicSize": 0.9,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "magmatt idle",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "magmatt left0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "magmatt down0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "magmatt up0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "magmatt right0",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

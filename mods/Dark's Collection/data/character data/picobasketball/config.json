@@ -1,0 +1,44 @@
+{
+  "cameraOffset": [-70, 50],
+  "positionOffset": [0, 300],
+  "defaultFlipX": true,
+  "dancesLeftAndRight": false,
+  "imagePath": "PicoWii",
+  "barColor": [183, 216, 65],
+  "offsetsFlipWhenEnemy": false,
+  "offsetsFlipWhenPlayer": true,
+  "healthIcon": "pico",
+  "deathCharacterName": "pico-dead",
+  "animations": [
+    {
+      "name": "idle",
+      "animation_name": "PicoWiiIdle0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singLEFT",
+      "animation_name": "PicoWiiRight0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singDOWN",
+      "animation_name": "PicoWiiDown0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singUP",
+      "animation_name": "PicoWiiUp0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singRIGHT",
+      "animation_name": "PicoWiiLeft0",
+      "fps": 24,
+      "looped": false
+    }
+  ]
+}

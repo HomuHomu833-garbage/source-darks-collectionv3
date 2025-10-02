@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0x59002A",
+		"overlayAlpha": 0.206185567010309,
+		"inner": "0x930071",
+		"innerAlpha": 0.412371134020619,
+		"innerAngle": 270,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.525773195876289,
+		"innerDistance": 30.9278350515464,
+		"pointLight": false,
+		"satin": "0xCA0061"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.95,
+				0.95
+			],
+			"position": [
+				131,
+				152
+			],
+			"file_Name": "ringswole",
+			"scale": 0.999999999999999
+		}
+	],
+	"character_Positions": [
+		[
+			2058,
+			1375
+		],
+		[
+			961,
+			1289
+		],
+		[
+			2058,
+			1152
+		]
+	],
+	"camera_Zoom": 0.6,
+	"scriptName": "Swole"
+}

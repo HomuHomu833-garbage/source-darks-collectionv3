@@ -1,0 +1,85 @@
+{
+	"rtxData": {
+		"overlay": "0x6E0076",
+		"overlayAlpha": 0.0309278350515464,
+		"inner": "0xC000D2",
+		"innerAlpha": 0.164948453608247,
+		"innerAngle": 263.505154639175,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.309278350515464,
+		"innerDistance": 15.6701030927835,
+		"pointLight": false,
+		"satin": "0xFF00CD"
+	},
+	"character_Positions": [
+		[
+			1563,
+			1604
+		],
+		[
+			612,
+			1558
+		],
+		[
+			-2761,
+			-1516
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.1,
+				0.4
+			],
+			"position": [
+				-826,
+				-745
+			],
+			"file_Name": "BG",
+			"scale": 1.89999999999999,
+			"start_Animation": "",
+			"animations": [
+				{
+					"animation_name": "",
+					"looped": true,
+					"fps": 24,
+					"name": ""
+				}
+			]
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-435,
+				-215
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 0.8,
+			"file_Name": "Island"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-1685,
+				-865
+			],
+			"file_Name": "ruido",
+			"scale": 3.1
+		}
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "VS Final Destination"
+}

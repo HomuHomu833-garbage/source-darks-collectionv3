@@ -1,0 +1,12 @@
+{
+	
+	"outerBorderTop": "#000000",
+	"outerBorderBot": "#000000",
+	"midBorderTop": "#af3847",
+	"midBorderBot": "#52122b",
+	"innerBorderTop": "#3f3f3f",
+	"innerBorderBot": "#121617",
+
+	"sobelStrength": 0.5,
+	"sobelIntensity": 1.0
+}

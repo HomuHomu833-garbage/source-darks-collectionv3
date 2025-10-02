@@ -1,0 +1,76 @@
+{
+			"rtxData": {
+		"overlay": "0x7C20B5",
+		"overlayAlpha": 0.0309278350515464,
+		"inner": "0xC59BCD",
+		"innerAlpha": 0.45360824742268,
+		"innerAngle": 241.237113402062,
+		"satinAlpha": 0.494845360824742,
+		"innerDistance": 16.0824742268041,
+		"satin": "0x812AA0"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				-569,
+				-345
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"position": [
+				484,
+				-728
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-985,
+				-785
+			],
+			"file_Name": "AHP",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1547,
+			837
+		],
+		[
+			420,
+			846
+		],
+		[
+			929,
+			394
+		]
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.5
+}

@@ -1,0 +1,41 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "graphicSize":1,
+    "imagePath": "DemonMatt",
+    "healthIcon": "Demon Matt",
+    "spritesheetType": "SPARROW",
+    "barColor": [255, 0, 0],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "idle",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "left",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "abajoxd",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singUP",
+            "animation_name": "up",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "right",
+            "fps": 24,
+            "looped": true
+        }
+    ]
+}

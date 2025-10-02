@@ -1,0 +1,46 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": true,
+    "imagePath": "Double God Saggy",
+    "offsetsFlipWhenPlayer": false,
+    "spritesheetType": "SPARROW",
+    "barColor": [44,44,44],
+    "animations": [
+        {
+            "name": "danceLeft",
+            "animation_name": "shaggy_idle0",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "danceRight",
+            "animation_name": "shaggy_idle2",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "shaggy_left",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "shaggy_down",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singUP",
+            "animation_name": "shaggy_up",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "shaggy_right",
+            "fps": 60,
+            "looped": true
+        }
+    ]
+}

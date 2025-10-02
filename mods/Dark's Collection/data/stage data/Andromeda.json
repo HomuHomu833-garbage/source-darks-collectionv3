@@ -1,0 +1,66 @@
+{
+	"rtxData": {
+		"overlay": "0x000000",
+		"overlayAlpha": 0,
+		"inner": "0x222D44",
+		"innerAlpha": 0.783505154639175,
+		"innerAngle": 285.773195876289,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.608247422680412,
+		"innerDistance": 16.4948453608247,
+		"pointLight": false,
+		"satin": "0x000000"
+	},
+	"character_Positions": [
+		[
+			1303,
+			1184
+		],
+		[
+			389,
+			624
+		],
+		[
+			1743,
+			-1195
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1366,
+				-1095
+			],
+			"scroll_Factor": [
+				0.2,
+				0.2
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "galaxy"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-50,
+				-1115
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.05,
+			"file_Name": "island"
+		}
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.35,
+	"scriptName": "Big Boxing Arena Destroyed"
+}

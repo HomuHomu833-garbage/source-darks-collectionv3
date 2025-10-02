@@ -1,0 +1,89 @@
+{
+	"rtxData": {
+		"overlay": "0xB33F00",
+		"overlayAlpha": 0.123711340206186,
+		"inner": "0xFF1D2D",
+		"innerAlpha": 0.247422680412371,
+		"innerAngle": 274.639175257732,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.649484536082474,
+		"innerDistance": 7.83505154639175,
+		"pointLight": false,
+		"satin": "0xFF1D03"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"position": [
+				-710,
+				-740
+			],
+			"file_Name": "5galaxy",
+			"scale": 1.25
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-660,
+				-350
+			],
+			"file_Name": "4arenaringback",
+			"scale": 1.05
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-1050,
+				-300
+			],
+			"file_Name": "2arenaring",
+			"scale": 1.2
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-795,
+				-230
+			],
+			"file_Name": "1arenastage",
+			"scale": 1.1
+		}
+	],
+	"character_Positions": [
+		[
+			1393,
+			1019
+		],
+		[
+			234,
+			1044
+		],
+		[
+			833,
+			814
+		]
+	],
+	"camera_Zoom": 0.7,
+	"scriptName": "Mii Boxing Arena Rev"
+}

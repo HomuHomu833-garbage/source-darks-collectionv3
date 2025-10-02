@@ -1,0 +1,12 @@
+Hadoken -70 46
+ShootDown -54 -34
+singDOWN -66 -40
+ShootUp 3 4
+singUP 7 106
+idle -91 21
+ShootRight -60 -22
+singRIGHT -57 -22
+ShootLeft 9 -77
+singLEFT 52 -63
+dodge -51 -61
+Shoot -95 -165

@@ -1,0 +1,91 @@
+{
+	"scriptName": "Corruption2",
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.3,
+				0.3
+			],
+			"position": [
+				-800,
+				-350
+			],
+			"file_Name": "corruption20005",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.35,
+				0.35
+			],
+			"position": [
+				-600,
+				-350
+			],
+			"file_Name": "corruption20004",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.4,
+				0.4
+			],
+			"position": [
+				-300,
+				-550
+			],
+			"file_Name": "corruption20001",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-750,
+				-350
+			],
+			"file_Name": "corruption20003",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-700,
+				-350
+			],
+			"file_Name": "corruption20002",
+			"scale": 1
+		}
+		
+	],
+	"character_Positions": [
+		[
+			841,
+			750
+		],
+		[
+			-205,
+			802
+		],
+		[
+			751,
+			450
+		]
+	],
+	"camera_Zoom": 0.5
+}

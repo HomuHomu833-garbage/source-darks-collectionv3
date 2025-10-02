@@ -1,0 +1,40 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "REVShaggyGOD",
+    "cameraOffset": [100, 0],
+    "spritesheetType": "SPARROW",
+    "barColor": [80, 80, 80],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Shaggy_Idle",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Shaggy_Left",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Shaggy_Down",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Shaggy_Up",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Shaggy_Right",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

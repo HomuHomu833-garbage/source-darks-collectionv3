@@ -1,0 +1,75 @@
+{
+	"rtxData": {
+		"overlay": "0x791A00",
+		"overlayAlpha": 0.0824742268041237,
+		"inner": "0xA04F05",
+		"innerAlpha": 0.494845360824742,
+		"innerAngle": 263.505154639175,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.65979381443299,
+		"innerDistance": 36.2886597938144,
+		"pointLight": false,
+		"satin": "0xCA6E00"
+	},
+	"character_Positions": [
+		[
+			1473,
+			733
+		],
+		[
+			259,
+			721
+		],
+		[
+			881,
+			618
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-569,
+				-345
+			],
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				484,
+				-728
+			],
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-985,
+				-785
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "Volcano Arena"
+		}
+	],
+	"camera_Zoom": 0.6,
+	"scriptName": "Volcano Arena"
+}

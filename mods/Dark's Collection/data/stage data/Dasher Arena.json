@@ -1,0 +1,66 @@
+{
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.699999999999999,
+				0.699999999999999
+			],
+			"position": [
+				-1484,
+				-773
+			],
+			"file_Name": "sky",
+			"scale": 2.7
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"position": [
+				-1315,
+				-391
+			],
+			"file_Name": "city",
+			"scale": 2.5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-262,
+				632
+			],
+			"file_Name": "platform",
+			"scale": 1.6
+		}
+	],
+	"character_Positions": [
+		[
+			1247,
+			885
+		],
+		[
+			257,
+			862
+		],
+		[
+			2873,
+			-775
+		]
+	],
+	"camera_Zoom": 0.4
+}

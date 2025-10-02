@@ -1,0 +1,94 @@
+{
+	"rtxData": {
+		"overlay": "0x000000",
+		"overlayAlpha": 0,
+		"inner": "0x42037E",
+		"innerAlpha": 1,
+		"innerAngle": 218.969072164948,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.536082474226804,
+		"innerDistance": 25.979381443299,
+		"pointLight": false,
+		"satin": "0x962DA0"
+	},
+	"character_Positions": [
+		[
+			450,
+			-350
+		],
+		[
+			-800,
+			-250
+		],
+		[
+			-50,
+			-450
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-2271,
+				-2111
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "sky"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-2271,
+				-2251
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "rocasdeatras"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-2300,
+				-2191
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "aquiestanlospersonajes"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-2251,
+				-2171
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "rocasdealante"
+		}
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.35,
+	"scriptName": "Tricky Stage"
+}

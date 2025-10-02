@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0x2F0000",
+		"overlayAlpha": 0.505154639175258,
+		"inner": "0xBD0032",
+		"innerAlpha": 0.123711340206186,
+		"innerAngle": 278.350515463918,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.443298969072165,
+		"innerDistance": 40,
+		"pointLight": false,
+		"satin": "0xBD0000"
+	},
+	"character_Positions": [
+		[
+			1853,
+			1196
+		],
+		[
+			789,
+			1191
+		],
+		[
+			1333,
+			1104
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				20,
+				4
+			],
+			"scroll_Factor": [
+				0.95,
+				0.95
+			],
+			"antialiased": true,
+			"scale": 1.95,
+			"file_Name": "nevada"
+		}
+	],
+	"camera_Zoom": 0.6,
+	"scriptName": "Nevada"
+}

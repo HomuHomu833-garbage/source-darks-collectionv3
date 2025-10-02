@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0xB05C3F",
+		"overlayAlpha": 0.22680412371134,
+		"inner": "0xED9300",
+		"innerAlpha": 0.670103092783505,
+		"innerAngle": 356.288659793814,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.577319587628866,
+		"innerDistance": 20.6185567010309,
+		"pointLight": false,
+		"satin": "0xFC9E20"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-345,
+				-558
+			],
+			"file_Name": "floor",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1447,
+			567
+		],
+		[
+			620,
+			834
+		],
+		[
+			1000,
+			477
+		]
+	],
+	"camera_Zoom": 0.7,
+	"scriptName": "heatWave"
+}

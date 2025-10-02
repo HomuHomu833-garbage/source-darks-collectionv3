@@ -1,0 +1,75 @@
+{
+	"rtxData": {
+		"overlay": "0x220000",
+		"overlayAlpha": 0.11340206185567,
+		"inner": "0xFF0300",
+		"innerAlpha": 0.134020618556701,
+		"innerAngle": 293.19587628866,
+		"lightX": -23.9969399999987,
+		"lightY": 0,
+		"satinAlpha": 0.45360824742268,
+		"innerDistance": 18.5567010309278,
+		"pointLight": false,
+		"satin": "0xA80005"
+	},
+	"character_Positions": [
+		[
+			2473,
+			863
+		],
+		[
+			1158,
+			843
+		],
+		[
+			1713,
+			683
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-786,
+				-554
+			],
+			"scroll_Factor": [
+				0.3,
+				0.3
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "tommy0003"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				349,
+				-524
+			],
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "tommy0002"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-540,
+				-609
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "tommy0001"
+		}
+	],
+	"camera_Zoom": 0.4,
+	"scriptName": "Corrupted Tommy BG"
+}

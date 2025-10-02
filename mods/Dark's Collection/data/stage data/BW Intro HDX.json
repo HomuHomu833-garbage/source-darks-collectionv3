@@ -1,0 +1,62 @@
+{
+	"character_Positions": [
+		[
+			1803,
+			1224
+		],
+		[
+			363,
+			1124
+		],
+		[
+			1300,
+			1060
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-775,
+				-1325
+			],
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "background"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-815,
+				-1385
+			],
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "redbuildings"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1495,
+				864
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 2.2,
+			"file_Name": "ground"
+		}
+	],
+	"camera_Zoom": 0.4,
+	"scriptName": "rain HDX"
+}

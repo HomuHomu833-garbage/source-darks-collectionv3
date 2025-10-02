@@ -1,0 +1,80 @@
+{
+	"rtxData": {
+		"overlay": "0x000000",
+		"overlayAlpha": 0,
+		"inner": "0xDF00E2",
+		"innerAlpha": 0.463917525773196,
+		"innerAngle": 285.773195876289,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.536082474226804,
+		"innerDistance": 14.4329896907216,
+		"pointLight": false,
+		"satin": "0xAE00CA"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				-569,
+				-345
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"position": [
+				484,
+				-728
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-985,
+				-785
+			],
+			"file_Name": "Hell",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1473,
+			733
+		],
+		[
+			352,
+			727
+		],
+		[
+			883,
+			639
+		]
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		0.95
+	],
+	"camera_Zoom": 0.45,
+	"scriptName": "VC Hell"
+}

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Phone.png">
+	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="down0000" x="0" y="0" width="104" height="155"/>
+	<SubTexture name="down20000" x="109" y="0" width="104" height="155"/>
+	<SubTexture name="left0000" x="218" y="0" width="173" height="115"/>
+	<SubTexture name="left20000" x="0" y="160" width="173" height="115"/>
+	<SubTexture name="right0000" x="178" y="160" width="175" height="118"/>
+	<SubTexture name="right20000" x="0" y="283" width="175" height="118"/>
+	<SubTexture name="square0000" x="180" y="283" width="103" height="155"/>
+	<SubTexture name="up0000" x="288" y="283" width="104" height="155"/>
+	<SubTexture name="up20000" x="397" y="283" width="104" height="155"/>
+</TextureAtlas>

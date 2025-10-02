@@ -1,0 +1,41 @@
+{
+    "defaultFlipX": false,
+    "cameraOffset": [150, 80],
+    "imagePath": "PSShaggyGOD",
+    "spritesheetType": "SPARROW",
+    "barColor": [41, 76, 163],
+    "graphicSize": 1.08,
+	"offsetsFlipWhenPlayer": true,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle",
+            "fps": 30,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left",
+            "fps": 32,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down",
+            "fps": 30,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up",
+            "fps": 30,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right",
+            "fps": 30,
+            "looped": false
+        }
+    ]
+}

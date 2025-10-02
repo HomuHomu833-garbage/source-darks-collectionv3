@@ -1,0 +1,7 @@
+HEY -34 14
+idle -38 13
+singRIGHT 5 20
+singDOWN -12 -32
+singLEFT -34 12
+singUP -65 43
+dodge -2 -4

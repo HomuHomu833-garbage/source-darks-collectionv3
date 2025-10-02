@@ -1,0 +1,11 @@
+{	
+
+	"outerBorderTop": "#000000",
+	"outerBorderBot": "#000000",
+	"midBorderTop": "#5931df",
+	"midBorderBot": "#d52bd3",
+"innerBorderTop": "#06160b",
+	"innerBorderBot": "#3a0c48",
+
+	"mixGap": 2.5
+}

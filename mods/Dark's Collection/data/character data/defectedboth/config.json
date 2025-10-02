@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [0, -400],
+    "barColor": [120, 76, 135],
+    "healthIcon": "bothdefect",
+    "characters": [
+        {
+            "name": "defected",
+            "positionOffset": [50, -25]
+        },
+        {
+            "name": "bluedefecte",
+            "positionOffset": [-250, 50]
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-700,
+				-365
+			],
+			"file_Name": "gymbg",
+			"scale": 1
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				1338,
+				-401
+			],
+			"file_Name": "leftspeaker",
+			"scale": 1,
+			"start_Animation": "left",
+			"animations": [
+				{
+					"animation_name": "speakerleft0",
+					"name": "left",
+					"looped": true,
+					"fps": 24
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-305,
+				-406
+			],
+			"file_Name": "rightspeaker",
+			"scale": 1,
+			"start_Animation": "right",
+			"animations": [
+				{
+					"animation_name": "speakerright0",
+					"name": "right",
+					"looped": true,
+					"fps": 24
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				853,
+				28
+			],
+			"file_Name": "tvblue",
+			"scale": 0.6,
+			"start_Animation": "tvblue",
+			"animations": [
+				{
+					"animation_name": "tvorange0",
+					"name": "tvblue",
+					"looped": true,
+					"fps": 24
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-65,
+				18
+			],
+			"file_Name": "tvorange",
+			"scale": 0.6,
+			"start_Animation": "tvorange0",
+			"animations": [
+				{
+					"animation_name": "tvorange0",
+					"name": "tvorange0",
+					"looped": true,
+					"fps": 24
+				}
+			]
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-545,
+				-56
+			],
+			"file_Name": "gymbackstage",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-380,
+				408
+			],
+			"file_Name": "gymstage",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-715,
+				-371
+			],
+			"file_Name": "gym overlay",
+			"scale": 1.1
+		}
+	],
+	"character_Positions": [
+		[
+			995,
+			902
+		],
+		[
+			264,
+			906
+		],
+		[
+			626,
+			725
+		]
+	],
+	"camera_Zoom": 0.7
+}

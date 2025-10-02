@@ -1,0 +1,76 @@
+{
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"character_Positions": [
+		[
+			1156,
+			619
+		],
+		[
+			499,
+			609
+		],
+		[
+			770,
+			480
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": true,
+			"position": [
+				-625,
+				-964
+			],
+			"scroll_Factor": [
+				0.1,
+				0.4
+			],
+			"antialiased": true,
+			"scale": 5.5,
+			"file_Name": "BG",
+			"animations": [
+				{
+					"animation_name": "BG",
+					"name": "BG",
+					"fps": 24,
+					"looped": true
+				}
+			],
+			"start_Animation": "BG"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-857,
+				-553
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "isla qla",
+			"alpha": 1
+		}
+	],
+	"rtxData": {
+		"innerAlpha": 0.185567010309278,
+		"overlay": "0x270000",
+		"lightX": 0,
+		"satin": "0xBB0300",
+		"innerDistance": 18.5567010309278,
+		"satinAlpha": 0.505154639175258,
+		"lightY": 0,
+		"innerAngle": 270.927835051546,
+		"pointLight": false,
+		"inner": "0xDD4CB8",
+		"overlayAlpha": 0.474226804123711
+	},
+	"camera_Zoom": 0.55,
+	"scriptName": "Expurgation New"
+}

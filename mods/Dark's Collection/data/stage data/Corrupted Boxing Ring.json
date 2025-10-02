@@ -1,0 +1,62 @@
+{
+	"scriptName": "Corrupted Boxing Ring",
+	"character_Positions": [
+		[
+			1175,
+			807
+		],
+		[
+			406,
+			793
+		],
+		[
+			738,
+			717
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-400,
+				-500
+			],
+			"scroll_Factor": [
+				0.4,
+				0.4
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "oek0003"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-750,
+				-350
+			],
+			"scroll_Factor": [
+				0.75,
+				0.75
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "oek0002"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-750,
+				-350
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "oek0001"
+		}
+	],
+	"camera_Zoom": 0.525
+}

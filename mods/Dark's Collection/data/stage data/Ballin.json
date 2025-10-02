@@ -1,0 +1,112 @@
+{
+	"rtxData": {
+		"overlay": "0x270000",
+		"overlayAlpha": 0.319587628865979,
+		"inner": "0xFF5100",
+		"innerAlpha": 0.123711340206186,
+		"innerAngle": 304.329896907216,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.56701030927835,
+		"innerDistance": 19.7938144329897,
+		"pointLight": false,
+		"satin": "0x710000"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"position": [
+				-400,
+				-300
+			],
+			"file_Name": "Galaxy",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-600,
+				-300
+			],
+			"file_Name": "Ring Back",
+			"scale": 1
+		},
+		{
+			"is_Animated": true,
+			"position": [
+				-600,
+				-300
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "Crowd Bump",
+			"animations": [
+				{
+					"animation_name": "Crowd Bump CrowedDance0",
+					"name": "Start",
+					"fps": 9,
+					"looped": true
+				}
+			],
+			"start_Animation": "Start"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-600,
+				-300
+			],
+			"file_Name": "Arena Ring",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-600,
+				-300
+			],
+			"file_Name": "Stage",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1265,
+			800
+		],
+		[
+			425,
+			800
+		],
+		[
+			925,
+			680
+		]
+	],
+	"camera_Zoom": 0.6,
+	"scriptName": "Ballin"
+}

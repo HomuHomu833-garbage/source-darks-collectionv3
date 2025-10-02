@@ -1,0 +1,42 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "CorruptedMatt4",
+    "healthIcon": "Corrupted Matt 2",
+    "cameraOffset": [-150,50],
+    "spritesheetType": "SPARROW",
+    "barColor": [32, 34, 45],
+    "offsetsFlipWhenPlayer": true,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "idle",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "left",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "down",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "up",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "right",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

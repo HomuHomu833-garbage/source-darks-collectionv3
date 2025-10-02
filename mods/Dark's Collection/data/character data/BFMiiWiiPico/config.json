@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [0, -200],
+    "barColor": [49, 176, 209],
+    "healthIcon": "basketballbf&pico",
+    "characters": [
+        {
+            "name": "BFMIIHEATDAY",
+            "positionOffset": [-50, 100]
+        },
+        {
+            "name": "picobasketball",
+            "positionOffset": [-300, -300]
+        }
+    ]
+}

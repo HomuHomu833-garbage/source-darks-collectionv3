@@ -1,0 +1,61 @@
+{
+	"character_Positions": [
+		[
+			1873,
+			984
+		],
+		[
+			-25,
+			559
+		],
+		[
+			2293,
+			834
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1050,
+				-255
+			],
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-640,
+				-580
+			],
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-975,
+				-700
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.75,
+			"file_Name": "BG"
+		}
+	],
+	"camera_Zoom": 0.55
+}

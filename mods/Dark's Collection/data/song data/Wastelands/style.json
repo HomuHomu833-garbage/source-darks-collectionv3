@@ -1,0 +1,15 @@
+{
+	
+	"outerBorderTop": "#000000",
+	"outerBorderBot": "#000000",
+	"midBorderTop": "#80aea8",
+	"midBorderBot": "#c85da6",
+	"innerBorderTop": "#3f3f3f",
+	"innerBorderBot": "#121617",
+	
+	"mixGap": 2.5,
+
+	"sobelStrength": 0.5,
+	"sobelIntensity": 0.2,
+	"outerBorderSize": 10
+}

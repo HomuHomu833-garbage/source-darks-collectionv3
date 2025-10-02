@@ -1,0 +1,80 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "VCMattWiik4",
+    "healthIcon": "Voiid Matt Wiik 4",
+    "spritesheetType": "SPARROW",
+	"barColor": [73,69,78],
+    "positionOffset": [70, 70],
+    "offsetsFlipWhenEnemy": false,
+    "offsetsFlipWhenPlayer": false,
+    "cameraOffset": [250, -20],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "matt idle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "matt left note0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "matt down note0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "matt up note0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "matt right note0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT-alt",
+            "animation_name": "green matt left note",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN-alt",
+            "animation_name": "green matt down note",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP-alt",
+            "animation_name": "green matt up note",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT-alt",
+            "animation_name": "green matt right note",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "idle-alt",
+            "animation_name": "green matt idle",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "trans",
+            "animation_name": "vuela alto matt0",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

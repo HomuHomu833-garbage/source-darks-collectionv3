@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0x930000",
+		"overlayAlpha": 0.237113402061856,
+		"inner": "0xBB6100",
+		"innerAlpha": 0.711340206185567,
+		"innerAngle": 174.432989690722,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.670103092783505,
+		"innerDistance": 16.0824742268041,
+		"pointLight": false,
+		"satin": "0x4A0000"
+	},
+	"character_Positions": [
+		[
+			1041,
+			1116
+		],
+		[
+			156,
+			986
+		],
+		[
+			566,
+			894
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1077,
+				-315
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.3,
+			"file_Name": "wiik6"
+		}
+	],
+	"camera_Zoom": 0.51,
+	"scriptName": "Pandemonium"
+}

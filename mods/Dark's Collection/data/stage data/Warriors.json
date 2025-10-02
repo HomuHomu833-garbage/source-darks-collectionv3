@@ -1,0 +1,80 @@
+{
+	"rtxData": {
+		"overlay": "0x643737",
+		"overlayAlpha": 0.175257731958763,
+		"inner": "0xB30035",
+		"innerAlpha": 0.577319587628866,
+		"innerAngle": 285.773195876289,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.628865979381443,
+		"innerDistance": 16.9072164948454,
+		"pointLight": false,
+		"satin": "0xBB004F"
+	},
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1525,
+				-1385
+			],
+			"file_Name": "BG",
+			"scale": 0.7
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1520,
+				-1303
+			],
+			"file_Name": "Ring",
+			"scale": 0.7
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-2421,
+				-1966
+			],
+			"file_Name": "GrainFilter",
+			"scale": 2
+		}
+	],
+	"character_Positions": [
+		[
+			914,
+			-78
+		],
+		[
+			-475,
+			-58
+		],
+		[
+			5853,
+			794
+		]
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "smoke"
+}

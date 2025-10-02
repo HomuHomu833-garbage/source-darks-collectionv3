@@ -1,0 +1,35 @@
+change block state~state (look at blockStuff.lua lol)~
+toggle checker bg~alpha~time
+mirror set~zoom,angle,x,y~time for each, use ',' in between each paramater
+mirror no hud~zoom,angle,x,y~time for each, use ',' in between each paramater
+rotate mirror~zoom,angle,x,y~time for each, use ',' in between each paramater
+Camera rotate on~Camera Speed~Camera Range 
+count voiid~duration - must not be float~1 = uno, 2 = dos, 3 = tres, 4 = cuatro
+Hud rotate on~Camera Speed~Camera Range
+cinematics~Start/End of Cinematic Mark this Value with 1 to begin the event or mark this value with 2 to end the event~Cinematic Bar Speed Mark this Value with how fast you would like the bars to move in (Suggested: 0.5) Leave Blank to only fade out the HUD
+black bars~height (0 = default)~type (0 = default, 1 = move strums, 2 = place under hud)
+Line Bars~height (0 = default)~type (0 = default, 1 = move strums, 2 = place under hud)
+the cool trail~player (dad, bf or both)~nothing
+bad apple lol~speed~nothing
+bad apple x1~speed~nothing
+toggle matt echo trail~nothing (only works on wiik 3 songs that have the blocking!!!)~
+toggle bf echo trail~nothing (only works on wiik 3 songs that have the blocking!!!)~
+uno~
+dos~
+tres~
+cuatro~
+matt line~duration - must not be float~1 = Bring In The Ruckus Like
+count~duration - must not be float~1 = uno, 2 = dos, 3 = tres, 4 = cuatro
+count normal~duration - must not be float~1 = uno, 2 = dos, 3 = tres, 4 = cuatro
+gato~
+flashImage~image~time
+punch~count(1-3)~beats inbetween punches
+slash~count(1-3)~beats inbetween slashes
+ca burst~chromatic aberration strength (use small values, < 0.01)~max number to limit it
+colorfill~charRed,charGreen,charBlue,bgRed,bgGreen,bgBlue~time,ease (example: value1 = "255,255,255,0,0,0" value2 = "2,cubeIn"), if theres an already active color fill it will go back to normal
+vignette~strength(default = 1)~size(default = 0, use numbers between 0-1)
+blaster~Nothing~Nothing
+Change Song~Song Name~Difficulty
+Play Video~Video Name~Ext
+hide hud~nothing~nothing
+show hud~nothing~nothing

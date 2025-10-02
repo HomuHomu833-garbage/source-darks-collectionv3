@@ -1,0 +1,76 @@
+{
+	"character_Positions": [
+		[
+			1863,
+			639
+		],
+		[
+			224,
+			759
+		],
+		[
+			2188,
+			-1475
+		]
+	],
+	"scriptName": "7 volando",
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1535,
+				-1215
+			],
+			"scroll_Factor": [
+				0.299999999999999,
+				0.299999999999999
+			],
+			"antialiased": true,
+			"scale": 2.15,
+			"file_Name": "boxingnight1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1525,
+				-1205
+			],
+			"scroll_Factor": [
+				0.25,
+				0.25
+			],
+			"antialiased": true,
+			"scale": 2.15,
+			"file_Name": "boxingnight2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1525,
+				-1045
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 2.15,
+			"file_Name": "boxingnight3"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				2127,
+				444
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.05,
+			"file_Name": "Wea Voladora XD"
+		}
+	],
+	"camera_Zoom": 0.35
+}

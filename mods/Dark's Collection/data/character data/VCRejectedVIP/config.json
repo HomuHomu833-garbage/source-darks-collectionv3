@@ -1,0 +1,51 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "VCRejectedVIP",
+    "spritesheetType": "SPARROW",
+    "barColor": [40,40,43],
+    "offsetsFlipWhenEnemy": false,
+    "offsetsFlipWhenPlayer": false,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left Note0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down Note0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up Note0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right Note0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "shoot",
+            "animation_name": "voiid100 shoot0",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

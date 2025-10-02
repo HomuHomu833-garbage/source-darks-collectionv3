@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Bell Note.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="left0000" x="0" y="0" width="154" height="157"/>
+	<SubTexture name="left hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="left hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="down0000" x="154" y="0" width="157" height="154"/>
+	<SubTexture name="down hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="down hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="up0000" x="0" y="157" width="157" height="154"/>
+	<SubTexture name="up hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="up hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="right0000" x="157" y="157" width="154" height="157"/>
+	<SubTexture name="right hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="right hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="square0000" x="311" y="157" width="169" height="169"/>
+	<SubTexture name="square hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="square hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="left20000" x="0" y="0" width="154" height="157"/>
+	<SubTexture name="left2 hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="left2 hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="down20000" x="154" y="0" width="157" height="154"/>
+	<SubTexture name="down2 hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="down2 hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="up20000" x="0" y="157" width="157" height="154"/>
+	<SubTexture name="up2 hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="up2 hold end0000" x="361" y="0" width="50" height="64"/>
+	<SubTexture name="right20000" x="157" y="157" width="154" height="157"/>
+	<SubTexture name="right2 hold0000" x="311" y="0" width="50" height="44"/>
+	<SubTexture name="right2 hold end0000" x="361" y="0" width="50" height="64"/>
+</TextureAtlas>

@@ -1,0 +1,48 @@
+{
+	"scriptName": "RedMist",
+	"character_Positions": [
+		[
+			1236,
+			640
+		],
+		[
+			251,
+			654
+		],
+		[
+			600,
+			604
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-768,
+				-508
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 0.85,
+			"file_Name": "bg"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1108,
+				-1008
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 5,
+			"file_Name": "bg2"
+		}
+	],
+	"camera_Zoom": 0.7
+}

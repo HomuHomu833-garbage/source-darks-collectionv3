@@ -1,0 +1,47 @@
+{
+	"character_Positions": [
+		[
+			802,
+			923
+		],
+		[
+			-90,
+			873
+		],
+		[
+			359,
+			842
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-875,
+				-625
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 0.5,
+			"file_Name": "Cleverness-RTX"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1419,
+				-919
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 0.7,
+			"file_Name": "Cleverness_fog-RTX"
+		}
+	],
+	"camera_Zoom": 0.55
+}

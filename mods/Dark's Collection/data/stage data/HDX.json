@@ -1,0 +1,89 @@
+{
+	"character_Positions": [
+		[
+			1073,
+			-1621
+		],
+		[
+			-461,
+			-1700
+		],
+		[
+			1443,
+			-1666
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1515,
+				-2226
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "background"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1525,
+				-2346
+			],
+			"scroll_Factor": [
+				0.55,
+				0.55
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "redbuildings"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				353,
+				-1895
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.75,
+			"file_Name": "rocks"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1435,
+				-1996
+			],
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				1603,
+				-2266
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": ""
+		}
+	],
+	"camera_Zoom": 0.4
+}

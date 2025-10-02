@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [0, -300],
+    "barColor": [32, 34, 45],
+    "healthIcon": "Corrupted Akiro & Tommy",
+    "characters": [
+        {
+            "name": "Corrupted Tommy",
+            "positionOffset": [20,-10]
+        },
+        {
+            "name": "Corrupted Akiro",
+            "positionOffset": [-50,0]
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "cameraOffset": [-150, -300],
+    "barColor": [0, 0, 0],
+    "characters": [
+        {
+            "name": "B-Side Shaggy GOD",
+            "positionOffset": [-50,0]
+        },
+        {
+            "name": "B-Side Matt GOD",
+            "positionOffset": [-150,150]
+        },
+        {
+            "name": "B-Side Zardy GOD",
+            "positionOffset": [-400,50]
+        },
+        {
+            "name": "B-Side Tricky GOD",
+            "positionOffset": [-700,100]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Hellpunch2.png">
+	<!-- Created with Adobe Animate version 22.0.8.217 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="DASHER0000" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0001" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0002" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0003" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0004" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0005" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0006" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0007" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0008" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0009" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0010" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER0011" x="0" y="0" width="149" height="155"/>
+	<SubTexture name="DASHER hold0000" x="149" y="0" width="50" height="44"/>
+	<SubTexture name="DASHER hold end0000" x="199" y="0" width="50" height="64"/>
+</TextureAtlas>

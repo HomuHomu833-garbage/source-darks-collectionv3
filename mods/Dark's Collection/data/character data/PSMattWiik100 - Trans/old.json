@@ -1,0 +1,92 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "paper100",
+    "spritesheetType": "SPARROW",
+    "healthIcon" : "Wiik100PaperMatt",
+    "positionOffset": [40, 140],
+    "barColor": [24,86,151],
+    "graphicSize": 1.1,
+    "cameraOffset": [150, -145],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "paper100 idle0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "idle-loop",
+            "animation_name": "paper100 idle0",
+            "fps": 24,
+            "looped": true,
+            "indices": [16,17,18,19]
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "paper100 left0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "paper100 down0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "paper100 up0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "paper100 right0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "trans",
+            "animation_name": "paper100 trans0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "destrans",
+            "animation_name": "paper100 destrans0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "idle-alt",
+            "animation_name": "paper100 idlegod0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT-alt",
+            "animation_name": "paper100 leftgod0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN-alt",
+            "animation_name": "paper100 downgod0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP-alt",
+            "animation_name": "paper100 upgod0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT-alt",
+            "animation_name": "paper100 rightgod0",
+            "fps": 24,
+            "looped": false
+        }
+    ]   
+}

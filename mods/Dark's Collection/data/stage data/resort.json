@@ -1,0 +1,96 @@
+{
+	"character_Positions": [
+		[
+			900,
+			700
+		],
+		[
+			300,
+			800
+		],
+		[
+			625,
+			275
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1000,
+				-900
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"alpha": 1,
+			"scale": 4,
+			"file_Name": "Fsky"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1000,
+				-900
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"alpha": 1,
+			"scale": 4,
+			"file_Name": "ground"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1000,
+				-900
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"alpha": 1,
+			"scale": 4,
+			"file_Name": "sexcatch"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1000,
+				-900
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"alpha": 1,
+			"scale": 4.15,
+			"file_Name": "ggg"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-600,
+				-450
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"alpha": 0.2,
+			"scale": 8,
+			"layer": "foreground",
+			"file_Name": "tint",
+			"setBlendMode": "overlay"
+		}
+	],
+	"camera_Zoom": 0.55
+}

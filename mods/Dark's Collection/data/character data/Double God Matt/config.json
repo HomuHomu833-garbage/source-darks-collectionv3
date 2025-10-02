@@ -1,0 +1,41 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "Double God Matt",
+    "spritesheetType": "SPARROW",
+	"healthIcon": "Double God Matt",
+    "barColor": [255, 140, 0],
+	"cameraOffset": [100, 0],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "matt idle",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "matt left note",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "matt down note",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singUP",
+            "animation_name": "matt up note",
+            "fps": 60,
+            "looped": true
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "matt right note",
+            "fps": 60,
+            "looped": true
+        }
+    ]
+}

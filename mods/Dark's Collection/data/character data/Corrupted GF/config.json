@@ -1,0 +1,16 @@
+{
+    "cameraOffset": [-40, -250],
+    "barColor": [186, 49, 104],
+    "mainCharacterID": 1,
+    "followMainCharacter": true,
+    "characters": [
+        {
+            "name": "Corrupted Speaker",
+            "positionOffset": [0,0]
+        },
+        {
+            "name": "Corrupted GF No Speaker",
+            "positionOffset": [0,-233]
+        }
+    ]
+}

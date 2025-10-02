@@ -1,0 +1,23 @@
+{
+
+	
+	"outerBorderTop": "#000000",
+	"outerBorderBot": "#000000",
+	"midBorderTop": "#ef4c7b",
+	"midBorderBot": "#bd9e96",
+	"innerBorderTop": "#300d14",
+	"innerBorderBot": "#300d14",
+
+	"sobelStrength": 0.5,
+	"sobelIntensity": 1.0,
+
+	"outerBorderTopVIP": "#000000",
+	"outerBorderBotVIP": "#000000",
+	"midBorderTopVIP": "#30101b",
+	"midBorderBotVIP": "#b7518b",
+	"innerBorderTopVIP": "#000000",
+	"innerBorderBotVIP": "#781a51",
+
+	
+	"outerBorderSize": 10
+}

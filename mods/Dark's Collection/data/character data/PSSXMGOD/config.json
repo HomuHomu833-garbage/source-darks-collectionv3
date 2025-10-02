@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [250, -320],
+    "barColor": [35, 34, 34],
+	"healthIcon": "Paper God Shaggy - Matt",
+    "characters": [
+        {
+            "name": "PSShaggyGOD",
+            "positionOffset": [-300,50]
+        },
+        {
+            "name": "PSMattGOD",
+            "positionOffset": [0,25]
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+	"rtxData": {
+		"overlay": "0x1D5C2A",
+		"overlayAlpha": 0.123711340206186,
+		"inner": "0x5CCD2F",
+		"innerAlpha": 0.206185567010309,
+		"innerAngle": 285.773195876289,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.721649484536082,
+		"innerDistance": 18.5567010309278,
+		"pointLight": false,
+		"satin": "0x47A34C"
+	},
+	"character_Positions": [
+		[
+			1306,
+			483
+		],
+		[
+			187,
+			533
+		],
+		[
+			5853,
+			494
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1762,
+				-1586
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.85,
+			"file_Name": "green_moon"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1037,
+				-851
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.85,
+			"file_Name": "gree-pillahs"
+		}
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "smoke"
+}

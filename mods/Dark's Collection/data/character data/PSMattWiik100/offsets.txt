@@ -1,0 +1,8 @@
+trans 100 275
+idle 0 50
+singDOWN -25 15
+singRIGHT -140 0
+idle-loop 0 50
+singUP 25 160
+destrans 18 245
+singLEFT 100 -5

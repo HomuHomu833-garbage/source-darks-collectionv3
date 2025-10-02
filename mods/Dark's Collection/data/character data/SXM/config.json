@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [340, -200],
+    "barColor": [107,57,88],
+    "healthIcon": "Shaggy Matt",
+    "characters": [
+        {
+            "name": "Shaggy",
+            "positionOffset": [-100,0]
+        },
+        {
+            "name": "Matt",
+            "positionOffset": [150,50]
+        }
+    ]
+}

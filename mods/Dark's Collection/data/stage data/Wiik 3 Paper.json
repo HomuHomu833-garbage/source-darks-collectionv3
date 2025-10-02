@@ -1,0 +1,95 @@
+{
+	"rtxData": {
+		"overlay": "0x475476",
+		"overlayAlpha": 0.22680412371134,
+		"inner": "0x08AEFC",
+		"innerAlpha": 0.391752577319588,
+		"innerAngle": 356.288659793814,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.371134020618557,
+		"innerDistance": 19.3814432989691,
+		"pointLight": false,
+		"satin": "0x2AA0A0"
+	},
+	"character_Positions": [
+		[
+			1677,
+			1237
+		],
+		[
+			800,
+			1217
+		],
+		[
+			1710,
+			1067
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				0,
+				-71
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "BG"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-35,
+				-548
+			],
+			"scroll_Factor": [
+				0.5,
+				0,
+				5
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "Moon"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-269,
+				-158
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "Hills and Town"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-3,
+				57
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "Boxing Ring"
+		}
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.6,
+	"scriptName": "Wiik 3 Paper"
+}

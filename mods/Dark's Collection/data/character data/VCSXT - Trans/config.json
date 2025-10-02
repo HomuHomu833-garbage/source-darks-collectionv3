@@ -1,0 +1,19 @@
+{
+    "cameraOffset": [50, -250],
+    "barColor": [40, 40, 43],
+    "healthIcon": "Voiid Shaggy - Voiid Tricky",
+    "layer": "foreground",
+    "characters": [
+        {
+            "name": "VCShaggy - Trans",
+            "positionOffset": [100,0],
+            "layer": "behind"
+        },
+        {
+
+            "name": "VCTricky",
+            "positionOffset": [-500,250],
+             "layer": "front"
+        }
+    ]
+}

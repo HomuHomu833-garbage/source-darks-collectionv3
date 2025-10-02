@@ -1,0 +1,21 @@
+{
+  "defaultFlipX": false,
+  "dancesLeftAndRight": true,
+  "imagePath": "Corrupted Speaker",
+  "animations": [
+    {
+      "name": "danceLeft",
+      "animation_name": "dance left",
+      "fps": 24,
+      "looped": false,
+      "indices": [14, 0, 1, 2, 3, 4, 5, 6]
+    },
+    {
+      "name": "danceRight",
+      "animation_name": "dance left",
+      "fps": 24,
+      "looped": false,
+      "indices": [7, 8, 9, 10, 11, 12, 13]
+    }
+  ]
+}

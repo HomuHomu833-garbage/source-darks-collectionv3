@@ -1,0 +1,46 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "VCShaggy",
+    "spritesheetType": "SPARROW",
+    "barColor": [40,40,43],
+    "cameraOffset": [340, 100],
+    "healthIcon": "Voiid Shaggy",
+
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "ShaggyIdle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "LeftNote0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "DownNote0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "UpNote0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "RightNote0",
+            "fps": 24,
+
+            "looped": false
+        }
+    ]
+}

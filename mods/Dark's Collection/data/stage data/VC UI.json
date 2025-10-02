@@ -1,0 +1,76 @@
+{
+	"rtxData": {
+		"overlay": "0x710044",
+		"overlayAlpha": 0.144329896907216,
+		"inner": "0x740047",
+		"innerAlpha": 0.474226804123711,
+		"innerAngle": 278.350515463918,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.577319587628866,
+		"innerDistance": 34.2268041237113,
+		"pointLight": false,
+		"satin": "0xDF0089"
+	},
+	"character_Positions": [
+		[
+			1063,
+			1504
+		],
+		[
+			-112,
+			1168
+		],
+		[
+			-2761,
+			-1516
+		]
+	],
+	"objects": [
+		{
+			"position": [
+				-1400,
+				-1050
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 3500,
+			"file_Name": "",
+			"object_Name": "vortex"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-735,
+				-415
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "Island"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-1685,
+				-865
+			],
+			"file_Name": "ruido",
+			"scale": 3.1
+		}
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "VC UI"
+}

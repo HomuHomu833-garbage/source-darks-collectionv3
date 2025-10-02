@@ -1,0 +1,73 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"uses_Frame_Width": true,
+			"position": [
+				-826,
+				-745
+			],
+			"scroll_Factor": [
+				0.1,
+				0.4
+			],
+			"antialiased": true,
+			"scale": 1.89999999999999,
+			"file_Name": "BG",
+			"animations": [
+				{
+					"animation_name": "",
+					"name": "",
+					"fps": 24,
+					"looped": true
+				}
+			],
+			"start_Animation": ""
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-435,
+				-215
+			],
+			"file_Name": "Island",
+			"scale": 0.8
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1685,
+				-865
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"layer": "foreground",
+			"antialiased": true,
+			"scale": 3.1,
+			"file_Name": "ruido"
+		}
+	],
+	"character_Positions": [
+		[
+			1563,
+			1604
+		],
+		[
+			612,
+			1558
+		],
+		[
+			-2761,
+			-1516
+		]
+	],
+	"camera_Zoom": 0.4,
+	"scriptName": "Voiid God"
+}

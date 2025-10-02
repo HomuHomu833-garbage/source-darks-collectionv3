@@ -1,0 +1,46 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+        "trail": true,
+    "trailLength": 60,
+    "trailDelay": 10,
+    "trailStalpha": 0.4,
+    "trailDiff": 0.05,
+    "imagePath": "VCMattWiik2VIPGOD",
+    "spritesheetType": "SPARROW",
+    "barColor": [73,69,78],
+    "positionOffset": [70, 70],
+    "graphicSize": 0.87,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "SuperIdle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "superLeft0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "SuperDown0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "superUp0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "SuperRight0",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

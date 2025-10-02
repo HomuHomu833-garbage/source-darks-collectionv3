@@ -1,0 +1,43 @@
+{
+		"rtxData": {
+		"overlay": "0x7C20B5",
+		"overlayAlpha": 0.0309278350515464,
+		"inner": "0xC59BCD",
+		"innerAlpha": 0.45360824742268,
+		"innerAngle": 241.237113402062,
+		"satinAlpha": 0.494845360824742,
+		"innerDistance": 16.0824742268041,
+		"satin": "0x812AA0"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.95,
+				0.95
+			],
+			"position": [
+				-1032,
+				-765
+			],
+			"file_Name": "bg",
+			"scale": 0.85
+		}
+	],
+	"character_Positions": [
+		[
+			983,
+			761
+		],
+		[
+			-89,
+			737
+		],
+		[
+			479,
+			619
+		]
+	],
+	"camera_Zoom": 0.6
+}

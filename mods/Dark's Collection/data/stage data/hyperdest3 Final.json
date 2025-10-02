@@ -1,0 +1,67 @@
+{
+	"character_Positions": [
+		[
+			1198,
+			364
+		],
+		[
+			137,
+			333
+		],
+		[
+			5853,
+			794
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1262,
+				-1586
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.45,
+			"file_Name": "green_moon"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1537,
+				-1351
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 2.35,
+			"file_Name": "gree-pillahs"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1810,
+				-1792
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 2,
+			"file_Name": "ruido"
+		}
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "smoke"
+}

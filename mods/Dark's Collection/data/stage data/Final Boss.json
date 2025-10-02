@@ -1,0 +1,61 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				-569,
+				-345
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1388,
+				-658
+			],
+			"file_Name": "BG",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1060,
+				-650
+			],
+			"file_Name": "roca",
+			"scale": 1.1
+		}
+	],
+	"character_Positions": [
+		[
+			1193,
+			979
+		],
+		[
+			139,
+			929
+		],
+		[
+			714,
+			874
+		]
+	],
+	"camera_Zoom": 0.55
+}

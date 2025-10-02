@@ -1,0 +1,103 @@
+{
+	"rtxData": {
+		"overlay": "0xA62000",
+		"overlayAlpha": 0.0824742268041237,
+		"inner": "0xC09800",
+		"innerAlpha": 0.422680412371134,
+		"innerAngle": 85.360824742268,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.54639175257732,
+		"innerDistance": 13.1958762886598,
+		"pointLight": true,
+		"satin": "0xD29100"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"position": [
+				-2353,
+				-1786
+			],
+			"file_Name": "fondo ql",
+			"scale": 1.5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.55,
+				0.55
+			],
+			"position": [
+				-3968,
+				304
+			],
+			"file_Name": "limites de lava o q wea",
+			"scale": 2.5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"position": [
+				416,
+				49
+			],
+			"file_Name": "pinchos qls del fondo",
+			"scale": 1.75
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-1618,
+				-95
+			],
+			"file_Name": "pinchos nowei",
+			"scale": 1.6
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				1583,
+				543
+			],
+			"file_Name": "piso oooooooooooooooooooooooooooooooooo no me digai",
+			"scale": 1.4
+		}
+	],
+	"character_Positions": [
+		[
+			1918,
+			833
+		],
+		[
+			-79,
+			678
+		],
+		[
+			2278,
+			773
+		]
+	],
+	"camera_Zoom": 0.4,
+	"scriptName": "2 shags"
+}

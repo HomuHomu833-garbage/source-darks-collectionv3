@@ -1,0 +1,33 @@
+{
+	"character_Positions": [
+		[
+			1006,
+			746
+		],
+		[
+			44,
+			769
+		],
+		[
+			1527,
+			717
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1642,
+				-772
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 0.9,
+			"file_Name": "Total Bravery"
+		}
+	],
+	"camera_Zoom": 0.42
+}

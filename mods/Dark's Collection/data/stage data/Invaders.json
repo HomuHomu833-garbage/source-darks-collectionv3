@@ -1,0 +1,89 @@
+{
+	"rtxData": {
+		"overlay": "0x15425F",
+		"overlayAlpha": 0.11340206185567,
+		"inner": "0x036CAB",
+		"innerAlpha": 0.721649484536082,
+		"innerAngle": 252.371134020619,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.54639175257732,
+		"innerDistance": 14.4329896907216,
+		"pointLight": false,
+		"satin": "0x00009B"
+	},
+	"character_Positions": [
+		[
+			2217,
+			701
+		],
+		[
+			1034,
+			729
+		],
+		[
+			3818,
+			-1455
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-790,
+				-628
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "mierda"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-960,
+				-513
+			],
+			"scroll_Factor": [
+				0.2,
+				0.2
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "luna"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-265,
+				474
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.8,
+			"file_Name": "piso shag"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				1850,
+				514
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "piso bf"
+		}
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "Invaders"
+}

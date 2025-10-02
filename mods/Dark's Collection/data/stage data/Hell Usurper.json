@@ -1,0 +1,103 @@
+{
+	"rtxData": {
+		"overlay": "0x371A4F",
+		"overlayAlpha": 0.381443298969072,
+		"inner": "0xBB4CD0",
+		"innerAlpha": 0.783505154639175,
+		"innerAngle": 11.1340206185567,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.896907216494845,
+		"innerDistance": 16.4948453608247,
+		"pointLight": false,
+		"satin": "0xE703D5"
+	},
+	"character_Positions": [
+		[
+			1343,
+			394
+		],
+		[
+			-265,
+			329
+		],
+		[
+			651,
+			243
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-3795,
+				-1505
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 2.15,
+			"file_Name": "BGBG"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-2590,
+				-30
+			],
+			"scroll_Factor": [
+				0.55,
+				0.55
+			],
+			"antialiased": true,
+			"scale": 1.75,
+			"file_Name": "LavaLimits"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1462,
+				-1400
+			],
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"antialiased": true,
+			"scale": 3.99999999999999,
+			"file_Name": "ricos pinchos en el culo 2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1900,
+				-410
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"scale": 1.7,
+			"file_Name": "ricos pinchos en el culo"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1245,
+				14
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.4,
+			"file_Name": "Piso no wei"
+		}
+	],
+	"camera_Zoom": 0.3,
+	"scriptName": "Hell Usurper"
+}

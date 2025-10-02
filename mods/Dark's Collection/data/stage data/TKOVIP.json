@@ -1,0 +1,118 @@
+{
+	"rtxData": {
+		"overlay": "0x000037",
+		"overlayAlpha": 0.474226804123711,
+		"inner": "0x0B0069",
+		"innerAlpha": 0.525773195876289,
+		"innerAngle": 248.659793814433,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.45360824742268,
+		"innerDistance": 21.0309278350515,
+		"pointLight": false,
+		"satin": "0x1003FF"
+	},
+	"character_Positions": [
+		[
+			934,
+			332
+		],
+		[
+			-68,
+			329
+		],
+		[
+			421,
+			272
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-1016,
+				-809
+			],
+			"scale": 5.39999999999999,
+			"antialiased": true,
+			"alpha": 1,
+			"file_Name": "tkoVip",
+			"animations": [
+				{
+					"animation_name": "Símbolo",
+					"looped": true,
+					"fps": 24,
+					"name": "tkoVip"
+				}
+			],
+			"start_Animation": "tkoVip"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				538,
+				-1145
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 2,
+			"file_Name": "rock1",
+			"object_Name": "rock1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-2136,
+				-990
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.65,
+			"file_Name": "rock2",
+			"object_Name": "rock2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1121,
+				-1060
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 2,
+			"file_Name": "floor",
+			"object_Name": "tko-floor"
+		},
+		{
+			"is_Animated": false,
+			"layer": "foreground",
+			"position": [
+				-1179,
+				-1056
+			],
+			"scroll_Factor": [
+				1.2,
+				1
+			],
+			"antialiased": true,
+			"scale": 2.1,
+			"file_Name": "floor2",
+			"object_Name": "rock"
+		}
+	],
+	"camera_Zoom": 0.55,
+	"scriptName": "TKOVIP"
+}

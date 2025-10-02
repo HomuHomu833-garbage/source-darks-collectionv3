@@ -1,0 +1,81 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "Nightmare_Cuphead",
+    "spritesheetType": "SPARROW",
+    "barColor": [255, 0, 0],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down  instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodge",
+            "animation_name": "Dodgez instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "Hadoken",
+            "animation_name": "Hadoken or Roundabout instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "ShootDown",
+            "animation_name": "ShootDown instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "ShootLeft",
+            "animation_name": "ShootLeft instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "ShootRight",
+            "animation_name": "ShootRight instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "ShootUp",
+            "animation_name": "ShootUp instance 1",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "Shoot",
+            "animation_name": "Beamm instance 1",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

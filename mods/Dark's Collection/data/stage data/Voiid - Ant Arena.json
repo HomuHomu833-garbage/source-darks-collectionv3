@@ -1,0 +1,231 @@
+{
+	"character_Positions": [
+		[
+			3350,
+			1950
+		],
+		[
+			1850,
+			2000
+		],
+		[
+			2700,
+			-310
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-200,
+				0
+			],
+			"scroll_Factor": [
+				0.499999999999999,
+				0.499999999999999
+			],
+			"antialiased": true,
+			"scale": 1.35,
+			"file_Name": "sky"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				886,
+				200
+			],
+			"scroll_Factor": [
+				0.499999999999999,
+				0.499999999999999
+			],
+			"antialiased": true,
+			"scale": 0.9,
+			"file_Name": "sea"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-55,
+				324
+			],
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"antialiased": true,
+			"scale": 1.1,
+			"file_Name": "mountain 3"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				230,
+				314
+			],
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "mountain 2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				310,
+				584
+			],
+			"scroll_Factor": [
+				0.7,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "mountain 1"
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				11005,
+				644
+			],
+			"file_Name": "Particulas",
+			"scale": 2,
+			"start_Animation": "particles",
+			"animations": [
+				{
+					"animation_name": "particles",
+					"looped": true,
+					"fps": 28,
+					"name": "particles"
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				12202,
+				637
+			],
+			"file_Name": "Particulas",
+			"scale": 2,
+			"start_Animation": "particles",
+			"animations": [
+				{
+					"animation_name": "particles",
+					"looped": true,
+					"fps": 28,
+					"name": "particles"
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				13382,
+				632
+			],
+			"file_Name": "Particulas",
+			"scale": 2,
+			"start_Animation": "particles",
+			"animations": [
+				{
+					"animation_name": "particles",
+					"looped": true,
+					"fps": 28,
+					"name": "particles"
+				}
+			]
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				762,
+				170
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.4,
+			"file_Name": "trees"
+		},
+
+		{
+			"is_Animated": false,
+			"antialiased": true,
+		
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-1705,
+				-1038
+			],
+			"file_Name": "bglol",
+			"scale": 2.5
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				757,
+				319
+			],
+			"scroll_Factor": [
+				1.05,
+				1.1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "Rocks 2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				782,
+				270
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.4,
+			"file_Name": "Rocks"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				1005,
+				644
+			],
+			"layer": "foreground",
+			"file_Name": "ruido",
+			"scale": 1.35
+		}
+	],
+	"camera_Zoom": 0.48
+}

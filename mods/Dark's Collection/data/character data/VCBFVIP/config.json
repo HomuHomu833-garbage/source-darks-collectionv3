@@ -1,0 +1,99 @@
+{
+    "defaultFlipX": true,
+    "cameraOffset": [-350, -130],
+    "dancesLeftAndRight": false,
+    "imagePath": "VCBFVIP",
+    "healthIcon": "Wiik1BFRTX",
+    "spritesheetType": "SPARROW",
+    "barColor": [255, 175, 175],
+	"offsetsFlipWhenEnemy": true,
+    "offsetsFlipWhenPlayer": false,
+    "graphicSize": 1.1,
+    "positionOffset": [70, 70],
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "BF idle dance0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "BF NOTE RIGHT0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "BF NOTE DOWN0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "BF NOTE UP0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "BF NOTE LEFT0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFTmiss",
+            "animation_name": "BF NOTE RIGHT MISS0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWNmiss",
+            "animation_name": "BF NOTE DOWN MISS0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUPmiss",
+            "animation_name": "BF NOTE UP MISS0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHTmiss",
+            "animation_name": "BF NOTE LEFT MISS0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodge",
+            "animation_name": "dodge UP0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodgeLEFT",
+            "animation_name": "dodge LEFT0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodgeDOWN",
+            "animation_name": "dodge DOWN0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodgeUP",
+            "animation_name": "dodge UP0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "dodgeRIGHT",
+            "animation_name": "dodge RIGHT0",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

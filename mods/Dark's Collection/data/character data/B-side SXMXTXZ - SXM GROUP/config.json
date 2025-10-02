@@ -1,0 +1,30 @@
+{
+    "cameraOffset": [-150, -200],
+    "barColor": [0, 0, 0],
+    "characters": [
+        {
+            "name": "Ron Shaggy",
+            "positionOffset": [200,0]
+        },
+        {
+            "name": "Ron Matt",
+            "positionOffset": [300,25]
+        },
+        {
+            "name": "Luigi Zardy",
+            "positionOffset": [-200,75]
+        },
+        {
+            "name": "Cheeto Tricky",
+            "positionOffset": [-300,50]
+        },
+        {
+            "name": "Blue Matt",
+            "positionOffset": [475,200]
+        },
+        {
+            "name": "Red Shaggy",
+            "positionOffset": [100,200]
+        }
+    ]
+}

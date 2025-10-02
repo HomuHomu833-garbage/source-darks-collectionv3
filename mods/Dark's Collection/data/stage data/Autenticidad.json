@@ -1,0 +1,160 @@
+{
+	"character_Positions": [
+		[
+			1007,
+			938
+		],
+		[
+			204,
+			938
+		],
+		[
+			584,
+			726
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "bg"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "nose"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "p1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "p2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "p3"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "p4"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-820,
+				-139
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.1,
+			"file_Name": "plataforma"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "r1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "r2"
+		},
+		{
+			"is_Animated": false,
+			"layer": "foreground",
+			"position": [
+				-910,
+				-475
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "sas"
+		}
+	],
+	"camera_Zoom": 0.7
+}

@@ -1,0 +1,14 @@
+{
+    "cameraOffset": [0, -310],
+    "barColor": [255, 0, 0],
+    "characters": [
+        {
+            "name": "REVMattWiik2",
+            "positionOffset": [-275,0]
+        },
+        {
+            "name": "REVMattWiik1",
+            "positionOffset": [100,-65]
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "defaultFlipX": false,
+    "cameraOffset": [250, 100],
+    "dancesLeftAndRight": false,
+    "imagePath": "VCTricky",
+    "spritesheetType": "SPARROW",
+    "barColor": [65,44,52],
+    "positionOffset": [70, 70],
+    "graphicSize": 1.0,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "clowni",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "clownl",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "clownd",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "clownu",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "clownr",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

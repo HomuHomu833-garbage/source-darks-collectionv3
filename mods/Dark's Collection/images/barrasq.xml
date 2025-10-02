@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="barrasq.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="wea pa separar0000" x="2" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0001" x="2" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0002" x="2" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0003" x="2" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0004" x="2" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0005" x="1284" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0006" x="1284" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0007" x="1284" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0008" x="1284" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0009" x="1284" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0010" x="2566" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0011" x="2566" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0012" x="2566" y="2" width="1280" height="720"/>
+	<SubTexture name="wea pa separar0013" x="2566" y="2" width="1280" height="720"/>
+</TextureAtlas>

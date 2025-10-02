@@ -1,0 +1,23 @@
+{
+    "cameraOffset": [60, -40],
+    "positionOffset": [0, 460],
+    "defaultFlipX": false,
+    "dancesLeftAndRight": true,
+    "imagePath": "Speaker",
+    "spritesheetType": "SPARROW",
+    "barColor": [226, 190, 32],
+    "animations": [
+        {
+            "name": "danceLeft",
+            "animation_name": "speaker anim0",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "danceRight",
+            "animation_name": "speaker anim 20",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

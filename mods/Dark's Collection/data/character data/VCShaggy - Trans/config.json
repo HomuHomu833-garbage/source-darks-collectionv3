@@ -1,0 +1,47 @@
+{
+    "defaultFlipX": false,
+    "trail": true,
+    "trailLength": 60,
+    "trailDelay": 10,
+    "trailStalpha": 0.4,
+    "trailDiff": 0.05,
+    "cameraOffset": [150, 80],
+    "imagePath": "VCShaggy - Trans",
+    "healthIcon":"VoiidShaggy",
+    "spritesheetType": "SPARROW",
+    "barColor": [114, 56, 91],
+    "graphicSize": 0.96,
+	"offsetsFlipWhenPlayer": true,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

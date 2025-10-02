@@ -1,0 +1,16 @@
+{
+    "cameraOffset": [-40, -250],
+    "barColor": [40, 40, 43],
+    "healthIcon": "Voiid Shaggy - Voiid Tricky",
+    "characters": [
+        {
+            "name": "VCShaggy",
+            "positionOffset": [0,0]
+        },
+        {
+
+            "name": "VCTricky",
+            "positionOffset": [-500,250]
+        }
+    ]
+}

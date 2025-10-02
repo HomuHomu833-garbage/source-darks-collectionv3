@@ -1,0 +1,34 @@
+{
+	"character_Positions": [
+		[
+			1208,
+			1024
+		],
+		[
+			14,
+			1009
+		],
+		[
+			654,
+			894
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1260,
+				-935
+			],
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "spiral dismay",
+			"alpha": 1
+		}
+	],
+	"camera_Zoom": 0.6
+}

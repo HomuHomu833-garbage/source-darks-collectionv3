@@ -1,0 +1,107 @@
+{
+	"character_Positions": [
+		[
+			1525,
+			2117
+		],
+		[
+			395,
+			2123
+		],
+		[
+			995,
+			2017
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1087,
+				140
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 3.6,
+			"file_Name": "CH-RN-00"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1157,
+				42
+			],
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"antialiased": true,
+			"scale": 4.44999999999999,
+			"file_Name": "CH-RN-01"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-524,
+				617
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 3.2,
+			"file_Name": "CH-RN-02"
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-706,
+				378
+			],
+			"layer": "foreground",
+			"file_Name": "NewRAINLayer01",
+			"scale": 1.9,
+			"animations": [
+				{
+					"animation_name": "RainFirstlayer instance",
+					"name": "beatHit",
+					"fps": 18,
+					"looped": true
+				}
+			]
+		},
+		{
+			"is_Animated": true,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-386,
+				193
+			],
+			"layer": "foreground",
+			"file_Name": "NewRAINLayer02",
+			"scale": 1.65,
+			"animations": [
+				{
+					"animation_name": "RainFirstlayer instance",
+					"name": "beatHit",
+					"fps": 18,
+					"looped": true
+				}
+			]
+		}
+	],
+	"camera_Zoom": 0.5
+}

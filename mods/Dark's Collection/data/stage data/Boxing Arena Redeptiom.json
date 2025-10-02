@@ -1,0 +1,161 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1060,
+				-725
+			],
+			"file_Name": "bg",
+			"scale": 5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"position": [
+				-730,
+				18
+			],
+			"file_Name": "Layer 4",
+			"scale": 1.15
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.75,
+				0.75
+			],
+			"position": [
+				-689,
+				80
+			],
+			"file_Name": "Layer 3",
+			"scale": 1.15
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"position": [
+				-701,
+				248
+			],
+			"file_Name": "Layer 2",
+			"scale": 1.15
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-850,
+				100
+			],
+			"file_Name": "Layer 1",
+			"scale": 1.15
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.75,
+				0.75
+			],
+			"position": [
+				471,
+				-435
+			],
+			"file_Name": "Luz2",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-538,
+				-509
+			],
+			"file_Name": "Luz1",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				-200,
+				-500
+			],
+			"file_Name": "blacky",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-904,
+				-595
+			],
+			"file_Name": "filter",
+			"scale": 1.5
+		}
+	],
+	"character_Positions": [
+		[
+			1116,
+			948
+		],
+		[
+			139,
+			963
+		],
+		[
+			624,
+			768
+		]
+	],
+	"rtxData": {
+		"overlay": "0x001AA3",
+		"overlayAlpha": 0.484536082474227,
+		"inner": "0xF2E5ED",
+		"innerAlpha": 0.43298969072165,
+		"innerAngle": 270.927835051546,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.22680412371134,
+		"innerDistance": 14.020618556701,
+		"pointLight": false,
+		"satin": "0x000086"
+	},
+	"camera_Zoom": 0.55,
+	"scriptName": "Boxing Arena Redeptiom"
+}

@@ -1,0 +1,23 @@
+{
+  "defaultFlipX": false,
+  "dancesLeftAndRight": true,
+  "imagePath": "solo GF",
+  "barColor": [186, 49, 104],
+  "healthIcon": "gf",
+  "animations": [
+    {
+      "name": "danceLeft",
+      "animation_name": "dance left0",
+      "fps": 24,
+      "looped": false,
+      "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    },
+    {
+      "name": "danceRight",
+      "animation_name": "dance right0",
+      "fps": 24,
+      "looped": false,
+      "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    }
+  ]
+}

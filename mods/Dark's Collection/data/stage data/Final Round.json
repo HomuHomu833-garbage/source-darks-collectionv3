@@ -1,0 +1,47 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.649999999999999,
+				0.649999999999999
+			],
+			"position": [
+				-1339,
+				-942
+			],
+			"file_Name": "BG",
+			"scale": 1.9
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1344,
+				-812
+			],
+			"file_Name": "Rocks",
+			"scale": 1.4
+		}
+	],
+	"character_Positions": [
+		[
+			865,
+			522
+		],
+		[
+			-486,
+			470
+		],
+		[
+			3298,
+			-515
+		]
+	],
+	"camera_Zoom": 0.5
+}

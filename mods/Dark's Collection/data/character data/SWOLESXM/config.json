@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [340, -200],
+    "barColor": [107,57,88],
+    "healthIcon": "Swole Shaggy Matt",
+    "characters": [
+        {
+            "name": "REVShaggyGOD",
+            "positionOffset": [-100,100]
+        },
+        {
+            "name": "VCMattWiik2GOD",
+            "positionOffset": [150,150]
+        }
+    ]
+}

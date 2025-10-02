@@ -1,0 +1,5 @@
+default
+death
+caution
+hurt
+Punch Paper

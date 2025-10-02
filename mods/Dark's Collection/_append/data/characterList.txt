@@ -1,0 +1,118 @@
+BFMII:BF - GF
+GFMII:BF - GF
+BFMII ALT:BF - GF
+Nightmare_Cuphead:cup
+VCShaggy:VC
+VCShaggy - Trans:VC
+VCMattWiik2:VC
+VCMattWiik3:VC
+VCMattWiik4:VC
+VCMattWiik100:VC
+VCBF:VC
+VCBFWiik3:VC
+VCBFVIP:VC
+VCBFGOD:VC
+VCGF:VC
+VCMattWiik2GOD:VC
+VCMattWiik2VIP:VC
+VCMattWiik4VIP:VC
+VCShaggyVIPGOD:VC
+VCShaggy - Trans GOD:VC
+VCRejected:VC
+VCRejectedVIP:VC
+VCTricky:VC
+VCGFWiik100:VC
+VCPico:VC
+
+Shaggy:SXM
+Super Shaggy:SXM
+Matt:SXM
+Matt Wiik 2:SXM
+Matt Wiik 3:SXM
+Matt Wiik 4:SXM
+PACIO Matt:SXM
+Red Shaggy:SXM
+Blue Matt:SXM
+Blue Matt 2:SXM
+
+SXM:GROUP
+RBSXM:GROUP
+VCSXM:GROUP
+VCSXMGOD:GROUP
+VCSXMVIPGOD:GROUP
+VCSXT:GROUP
+PSSXM:GROUP
+PSSXMGOD:GROUP
+MagSXM:GROUP
+REVSXM:GROUP
+REVSXMGOD:GROUP
+SWOLESXM:GROUP
+Warriors:GROUP
+Rev Ballin:GROUP
+Corrupted Akiro & Tommy:GROUP
+Corrupted Matt & Akiro:GROUP
+
+PSBF:PS
+PSMatt:PS
+PSMattGOD:PS
+PSShaggy:PS
+PSShaggyGOD:PS
+PSMattWiik100:PS
+
+MagShaggy:MAG
+MagMatt:MAG
+
+REVBF:REV
+REVGF:REV
+REVMattWiik1:REV
+REVMattWiik2:REV
+REVMattWiik4:REV
+REVShaggy:REV
+REVShaggyGOD:REV
+
+
+
+Corrupted Matt:Corruption
+Corrupted Matt 2:Corruption
+CorruptedMatt4:Corruption
+Corrupted Akiro:Corruption
+Corrupted Tommy:Corruption
+Corrupted BF:Corruption
+Corrupted GF:Corruption
+Corrupted GF No Speaker:Corruption
+
+DemonMatt:Sported Out
+
+God Shaggy:GOD SXM
+God Matt:GOD SXM
+God Red Shaggy:GOD SXM
+God Blue Matt:GOD SXM
+Double God Shaggy:GOD SXM
+Double God Matt:GOD SXM
+Double God Red Shaggy:GOD SXM
+Double God Blue Matt:GOD SXM
+Triple God Matt:GOD SXM
+Triple God Red Shaggy:GOD SXM
+Triple God Blue Matt:GOD SXM
+God SXM:GOD SXM
+Double God SXM:GOD SXM
+God RBSXM:GOD SXM
+Double God RBSXM:GOD SXM
+Triple God RBSXM:GOD SXM
+
+B-Side Shaggy GOD:GOD SXM
+B-Side Matt GOD:GOD SXM
+B-Side Tricky GOD:GOD SXM
+B-Side Zardy GOD:GOD SXM
+
+God RBSXMVC:GOD SXM
+God RGSXS:GOD SXM
+B-Side SXMXTXZ GOD:GOD SXM
+
+BFMiiWiiPico:RESORT
+defectedboth:RESORT
+speaker:RESORT
+picobasketball:RESORT
+
+perroxd:perroxd
+mat:perroxd

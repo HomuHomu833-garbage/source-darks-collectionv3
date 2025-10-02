@@ -1,0 +1,44 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "imagePath": "VCShaggyGOD",
+    "spritesheetType": "SPARROW",
+    "barColor": [40,40,43],
+    "graphicSize": 0.9,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right0",
+            "fps": 24,
+
+            "looped": false
+        }
+    ]
+}

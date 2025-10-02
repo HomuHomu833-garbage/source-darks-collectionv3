@@ -1,0 +1,120 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.05,
+				0.05
+			],
+			"position": [
+				-950,
+				-500
+			],
+			"file_Name": "akiro6",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.15,
+				0.15
+			],
+			"position": [
+				-750,
+				-475
+			],
+			"file_Name": "akiro5",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"position": [
+				-750,
+				-475
+			],
+			"file_Name": "akiro4",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.75,
+				0.75
+			],
+			"position": [
+				-900,
+				-575
+			],
+			"file_Name": "akiro3",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-900,
+				-475
+			],
+			"file_Name": "akiro2",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				1.25,
+				1.25
+			],
+			"position": [
+				-900,
+				-550
+			],
+			"file_Name": "akiro1",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"layer": "foreground",
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-900,
+				-600
+			],
+			"file_Name": "filter",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			944,
+			623
+		],
+		[
+			250,
+			660
+		],
+		[
+			604,
+			497
+		]
+	],
+	"scriptName": "Corrupted Akiro",
+	"camera_Zoom": 0.534
+}

@@ -1,0 +1,23 @@
+{
+    "cameraOffset": [340, -300],
+    "barColor": [0, 0, 0],
+	"healthIcon": "Voiid - Antarkh - Shaggy - Matt",
+    "characters": [
+        {
+            "name": "God Red Shaggy",
+            "positionOffset": [0,-50]
+        },
+        {
+            "name": "God Blue Matt",
+            "positionOffset": [300,0]
+        },
+        {
+            "name": "VCShaggyGOD",
+            "positionOffset": [-300,100]
+        },
+        {
+            "name": "VCMattWiik2GOD",
+            "positionOffset": [0,110]
+        }
+    ]
+}

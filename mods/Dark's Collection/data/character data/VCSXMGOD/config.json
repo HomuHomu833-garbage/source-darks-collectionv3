@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [340, -170],
+    "barColor": [107,57,88],
+    "healthIcon": "VoiidSXM-god",
+    "characters": [
+        {
+            "name": "VCShaggyGOD",
+            "positionOffset": [-300,0]
+        },
+        {
+            "name": "VCMattWiik2GOD",
+            "positionOffset": [100,50]
+        }
+    ]
+}

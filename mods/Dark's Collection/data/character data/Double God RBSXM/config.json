@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [0, -310],
+    "barColor": [255, 0, 0],
+    "healthIcon": "Double Final",
+    "characters": [
+        {
+            "name": "Double God Red Shaggy",
+            "positionOffset": [0,0]
+        },
+        {
+            "name": "Double God Blue Matt",
+            "positionOffset": [-325,0]
+        }
+    ]
+}

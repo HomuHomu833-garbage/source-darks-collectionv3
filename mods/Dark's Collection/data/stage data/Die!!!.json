@@ -1,0 +1,76 @@
+{
+	"character_Positions": [
+		[
+			2217,
+			701
+		],
+		[
+			833,
+			717
+		],
+		[
+			3818,
+			-1455
+		]
+	],
+        "scriptName": "Die!!!",
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-790,
+				-628
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1.25,
+			"file_Name": "boxingnight1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-960,
+				-513
+			],
+			"scroll_Factor": [
+				0.2,
+				0.2
+			],
+			"antialiased": true,
+			"scale": 1.5,
+			"file_Name": "boxingnight3"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				97,
+				551
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.1,
+			"file_Name": "boxingboulder"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				1717,
+				514
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "boxingboulder"
+		}
+	],
+	"camera_Zoom": 0.5
+}

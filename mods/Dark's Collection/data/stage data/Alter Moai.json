@@ -1,0 +1,89 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-694,
+				-624
+			],
+			"file_Name": "gsky",
+			"scale": 1.3
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.2,
+				0.2
+			],
+			"position": [
+				-149,
+				-54
+			],
+			"file_Name": "nada",
+			"scale": 0.9
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"position": [
+				-294,
+				430
+			],
+			"file_Name": "nada",
+			"scale": 1.3
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-349,
+				-44
+			],
+			"file_Name": "pmountains",
+			"scale": 1.3
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-299,
+				-54
+			],
+			"file_Name": "nada",
+			"scale": 1.3
+		}
+	],
+	"character_Positions": [
+		[
+			1610,
+			1705
+		],
+		[
+			920,
+			1785
+		],
+		[
+			1165,
+			1535
+		]
+	],
+	"camera_Zoom": 0.69
+}

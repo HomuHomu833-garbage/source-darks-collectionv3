@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0x8E008B",
+		"overlayAlpha": 0.0515463917525773,
+		"inner": "0x8600A8",
+		"innerAlpha": 0.494845360824742,
+		"innerAngle": 233.814432989691,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.505154639175258,
+		"innerDistance": 14.020618556701,
+		"pointLight": false,
+		"satin": "0xA300A0"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.95,
+				0.95
+			],
+			"position": [
+				-435,
+				-250
+			],
+			"file_Name": "Castle VC",
+			"scale": 0.8
+		}
+	],
+	"character_Positions": [
+		[
+			1653,
+			1196
+		],
+		[
+			689,
+			1191
+		],
+		[
+			1333,
+			1104
+		]
+	],
+	"camera_Zoom": 0.54,
+	"scriptName": "Castle VC"
+}

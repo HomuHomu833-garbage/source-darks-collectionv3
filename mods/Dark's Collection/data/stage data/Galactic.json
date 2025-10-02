@@ -1,0 +1,47 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-1035,
+				-620
+			],
+			"file_Name": "sky",
+			"scale": 1.8
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1693,
+				-1160
+			],
+			"file_Name": "Rocks",
+			"scale": 2.4
+		}
+	],
+	"character_Positions": [
+		[
+			1903,
+			1038
+		],
+		[
+			23,
+			941
+		],
+		[
+			750,
+			700
+		]
+	],
+	"camera_Zoom": 0.5
+}

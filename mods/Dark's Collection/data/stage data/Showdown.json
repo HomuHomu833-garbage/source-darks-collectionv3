@@ -1,0 +1,35 @@
+{
+	"scriptName": "rejectedStage",
+	"scriptName": "rain",
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-450,
+				-176
+			],
+			"file_Name": "Showdown",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1390,
+			1800
+		],
+		[
+			200,
+			950
+		],
+		[
+			100,
+			1500
+		]
+	],
+	"camera_Zoom": 0.54
+}

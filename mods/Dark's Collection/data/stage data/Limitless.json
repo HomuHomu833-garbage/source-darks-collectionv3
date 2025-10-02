@@ -1,0 +1,75 @@
+{
+	"rtxData": {
+		"overlay": "0xA62000",
+		"overlayAlpha": 0.0824742268041237,
+		"inner": "0xBD1D2F",
+		"innerAlpha": 0.443298969072165,
+		"innerAngle": 89.0721649484536,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.54639175257732,
+		"innerDistance": 16.4948453608247,
+		"pointLight": true,
+		"satin": "0xD20000"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				469,
+				-1065
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"position": [
+				-1164,
+				-1015
+			],
+			"file_Name": "luna",
+			"scale": 1.75
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-1060,
+				-1030
+			],
+			"file_Name": "ring",
+			"scale": 1.65
+		}
+	],
+	"character_Positions": [
+		[
+			1848,
+			784
+		],
+		[
+			375,
+			769
+		],
+		[
+			1978,
+			469
+		]
+	],
+	"camera_Zoom": 0.55,
+	"scriptName": "Limitless"
+}

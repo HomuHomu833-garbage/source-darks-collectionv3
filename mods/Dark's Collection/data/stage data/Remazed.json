@@ -1,0 +1,47 @@
+{
+	"rtxData": {
+		"overlay": "0x765937",
+		"overlayAlpha": 0.257731958762887,
+		"inner": "0xC07C00",
+		"innerAlpha": 0.639175257731959,
+		"innerAngle": 296.907216494845,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.628865979381443,
+		"innerDistance": 14.4329896907216,
+		"pointLight": false,
+		"satin": "0xC8672A"
+	},
+	"character_Positions": [
+		[
+			1198,
+			2049
+		],
+		[
+			524,
+			2024
+		],
+		[
+			938,
+			1889
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-1077,
+				-315
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1.3,
+			"file_Name": "Zardy"
+		}
+	],
+	"camera_Zoom": 0.51,
+	"scriptName": "Remazed"
+}

@@ -1,0 +1,61 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-500,
+				-200
+			],
+			"file_Name": "bg",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-502,
+				-200
+			],
+			"file_Name": "palmera",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"position": [
+				-652,
+				-148
+			],
+			"file_Name": "plataforma",
+			"scale": 1.1
+		}
+	],
+	"character_Positions": [
+		[
+			1122,
+			941
+		],
+		[
+			407,
+			921
+		],
+		[
+			732,
+			781
+		]
+	],
+	"camera_Zoom": 0.7
+}

@@ -1,0 +1,77 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.349999999999999,
+				0.349999999999999
+			],
+			"position": [
+				-1216,
+				-1665
+			],
+			"file_Name": "Blood Sky",
+			"scale": 3.25
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-3013,
+				-1135
+			],
+			"file_Name": "Wall",
+			"scale": 3.5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"position": [
+				-1576,
+				-895
+			],
+			"file_Name": "Blood Lava",
+			"scale": 3.15
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				218,
+				-46
+			],
+			"alpha": 1,
+			"file_Name": "Rock Platform",
+			"scale": 1.7
+		}
+	],
+	"scriptName": "Big Boxing Arena Destroyed",
+	"character_Positions": [
+		[
+			1933,
+			1444
+		],
+		[
+			-701,
+			1053
+		],
+		[
+			2083,
+			-2465
+		]
+	],
+	"camera_Zoom": 0.25
+}

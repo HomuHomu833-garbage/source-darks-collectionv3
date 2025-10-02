@@ -1,0 +1,174 @@
+{
+	"objects": [
+		{
+			"is_Animated": true,
+			"position": [
+				-2336,
+				-2413
+			],
+			"scroll_Factor": [
+				0.1,
+				0.4
+			],
+			"antialiased": true,
+			"scale": 4.95,
+			"file_Name": "vortex",
+			"animations": [
+				{
+					"animation_name": "vortex",
+					"name": "vortex",
+					"fps": 24,
+					"looped": true
+				}
+			],
+			"start_Animation": "vortex"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"position": [
+				-686,
+				-104
+			],
+			"file_Name": "Rayos",
+			"scale": 6.08999999999998
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"position": [
+				-583,
+				245
+			],
+			"file_Name": "island",
+			"scale": 0.65
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				568,
+				190
+			],
+			"scroll_Factor": [
+				0.399999999999999,
+				0.399999999999999
+			],
+			"antialiased": true,
+			"scale": 0.3,
+			"file_Name": "island2"
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				1438,
+				1055
+			],
+			"file_Name": "MiniRock",
+			"scale": 0.75
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-136,
+				650
+			],
+			"file_Name": "Piso",
+			"scale": 0.7
+		},
+		{
+			"is_Animated": true,
+			"position": [
+				1893,
+				-1923
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 3.5,
+			"file_Name": "Aura Matt",
+			"animations": [
+				{
+					"animation_name": "aura",
+					"name": "aura",
+					"fps": 24,
+					"looped": true
+				}
+			],
+			"start_Animation": "aura"
+		},
+		{
+			"is_Animated": true,
+			"position": [
+				1283,
+				-2013
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 4.5,
+			"file_Name": "Aura Shaggy",
+			"animations": [
+				{
+					"animation_name": "aura",
+					"name": "aura",
+					"fps": 24,
+					"looped": true
+				}
+			],
+			"start_Animation": "aura"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-1231,
+				-1008
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"layer": "foreground",
+			"antialiased": true,
+			"scale": 1.8,
+			"file_Name": "ruido"
+		}
+	],
+	"character_Positions": [
+		[
+			1848,
+			1915
+		],
+		[
+			1078,
+			1915
+		],
+		[
+			1488,
+			-329
+		]
+	],
+	"scriptName": "Untold",
+	"camera_Zoom": 0.45
+}

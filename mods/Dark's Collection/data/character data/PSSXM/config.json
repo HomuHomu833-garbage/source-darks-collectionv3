@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [250, -320],
+    "barColor": [35, 34, 34],
+	"healthIcon": "PSSXM",
+    "characters": [
+        {
+            "name": "PSShaggy",
+            "positionOffset": [150,-50]
+        },
+        {
+            "name": "PSMatt",
+            "positionOffset": [-150,50]
+        }
+    ]
+}

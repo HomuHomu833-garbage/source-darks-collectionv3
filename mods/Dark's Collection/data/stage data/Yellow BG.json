@@ -1,0 +1,80 @@
+{
+	"rtxData": {
+		"overlay": "0xB05C3F",
+		"overlayAlpha": 0.22680412371134,
+		"inner": "0xD59300",
+		"innerAlpha": 0.670103092783505,
+		"innerAngle": 356.288659793814,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.577319587628866,
+		"innerDistance": 20.6185567010309,
+		"pointLight": false,
+		"satin": "0xC59E20"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.5,
+				1.5
+			],
+			"position": [
+				-569,
+				-345
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"position": [
+				484,
+				-728
+			],
+			"file_Name": "",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-615,
+				-431
+			],
+			"file_Name": "BG",
+			"scale": 2.3
+		}
+	],
+	"character_Positions": [
+		[
+			1534,
+			1013
+		],
+		[
+			539,
+			998
+		],
+		[
+			1024,
+			913
+		]
+	],
+	"character_Scrolls": [
+		1,
+		1,
+		1
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "Yellow BG"
+}

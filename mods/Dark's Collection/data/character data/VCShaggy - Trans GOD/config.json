@@ -1,0 +1,53 @@
+{
+    "defaultFlipX": false,
+    "dancesLeftAndRight": false,
+    "trail": true,
+    "trailLength": 60,
+    "trailDelay": 10,
+    "trailStalpha": 0.4,
+    "trailDiff": 0.05,
+    "imagePath": "VCShaggy - Trans GOD",
+    "healthIcon": "Voiid Shaggy-god",
+    "spritesheetType": "SPARROW",
+    "barColor": [40,40,43],
+    "offsetsFlipWhenEnemy": false,
+    "offsetsFlipWhenPlayer": false,
+    "positionOffset": [0, 125],
+    "graphicSize": 0.95,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "Idle0",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "Left0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "Down0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "Up0",
+            "fps": 24,
+
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "Right0",
+            "fps": 24,
+
+            "looped": false
+        }
+    ]
+}

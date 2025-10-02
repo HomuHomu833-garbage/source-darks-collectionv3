@@ -1,0 +1,46 @@
+{
+    "defaultFlipX": false,
+    "imagePath": "REVMattWiik4",
+    "spritesheetType": "SPARROW",
+    "healthIcon": "Rev Matt Wiik 4",
+    "barColor": [206,61,118],
+	"offsetsFlipWhenPlayer": true,
+    "animations": [
+        {
+            "name": "idle",
+            "animation_name": "IdleMatt",
+            "fps": 24,
+            "looped": true
+        },
+        {
+            "name": "singLEFT",
+            "animation_name": "matt left",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "animation_name": "downmatt",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "animation_name": "UpMatt",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "animation_name": "matt right",
+            "fps": 24,
+            "looped": false
+        },
+        {
+            "name": "Scream",
+            "animation_name": "MattScream",
+            "fps": 24,
+            "looped": false
+        }
+    ]
+}

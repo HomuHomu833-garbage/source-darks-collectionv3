@@ -1,0 +1,103 @@
+{
+	"rtxData": {
+		"overlay": "0x6C00A6",
+		"overlayAlpha": 0.0721649484536082,
+		"inner": "0x69008E",
+		"innerAlpha": 0.597938144329897,
+		"innerAngle": 267.216494845361,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.371134020618557,
+		"innerDistance": 17.7319587628866,
+		"pointLight": false,
+		"satin": "0x4400A0"
+	},
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.05,
+				0.05
+			],
+			"position": [
+				-1170,
+				-480
+			],
+			"file_Name": "5skyline",
+			"scale": 1.2
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.05,
+				0.05
+			],
+			"position": [
+				-1170,
+				-480
+			],
+			"file_Name": "1overlay",
+			"scale": 1.2
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.15,
+				0.15
+			],
+			"position": [
+				-1092,
+				-480
+			],
+			"file_Name": "4mountains",
+			"scale": 1.2
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.75,
+				0.75
+			],
+			"position": [
+				-630,
+				80
+			],
+			"file_Name": "3castle",
+			"scale": 1.2
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-420,
+				240
+			],
+			"file_Name": "2floor",
+			"scale": 1.2
+		}
+	],
+	"character_Positions": [
+		[
+			1600,
+			1700
+		],
+		[
+			800,
+			1700
+		],
+		[
+			1254,
+			1598
+		]
+	],
+	"camera_Zoom": 0.5,
+	"scriptName": "shagBG"
+}

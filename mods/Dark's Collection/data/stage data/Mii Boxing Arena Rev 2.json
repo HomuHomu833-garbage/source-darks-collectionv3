@@ -1,0 +1,62 @@
+{
+	"character_Positions": [
+		[
+			1303,
+			1364
+		],
+		[
+			-22,
+			1324
+		],
+		[
+			908,
+			-600
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-440,
+				24
+			],
+			"scroll_Factor": [
+				0.5,
+				0.5
+			],
+			"antialiased": true,
+			"scale": 0.9,
+			"file_Name": "BG"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-580,
+				84
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "Arena"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-170,
+				509
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"layer": "foreground",
+			"antialiased": true,
+			"scale": 0.7,
+			"file_Name": "Glow"
+		}
+	],
+	"camera_Zoom": 0.75
+}

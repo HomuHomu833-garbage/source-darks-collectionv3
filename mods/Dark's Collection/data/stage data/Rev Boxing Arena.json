@@ -1,0 +1,89 @@
+{
+	"rtxData": {
+		"overlay": "0xA31200",
+		"overlayAlpha": 0.0618556701030928,
+		"inner": "0xEA8900",
+		"innerAlpha": 0.525773195876289,
+		"innerAngle": 233.814432989691,
+		"lightX": 0,
+		"lightY": 0,
+		"satinAlpha": 0.701030927835051,
+		"innerDistance": 16.0824742268041,
+		"pointLight": false,
+		"satin": "0xAB5100"
+	},
+	"character_Positions": [
+		[
+			1045,
+			1036
+		],
+		[
+			-14,
+			1020
+		],
+		[
+			563,
+			897
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-550,
+				-75
+			],
+			"scroll_Factor": [
+				0.7,
+				0.7
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "BG"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-613,
+				-75
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"scale": 0.8,
+			"file_Name": "Sun"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-673,
+				-75
+			],
+			"scroll_Factor": [
+				0.9,
+				0.9
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "Buildings"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-726,
+				-75
+			],
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "Arena"
+		}
+	],
+	"camera_Zoom": 0.7,
+	"scriptName": "Rev Boxing Arena"
+}

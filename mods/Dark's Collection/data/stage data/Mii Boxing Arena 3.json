@@ -1,0 +1,75 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"position": [
+				-458,
+				-617
+			],
+			"file_Name": "luna qlia",
+			"scale": 1.35
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.2,
+				0.2
+			],
+			"position": [
+				-573,
+				-702
+			],
+			"file_Name": "ring ql",
+			"scale": 1.35
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				4898,
+				-1792
+			],
+			"file_Name": "piso nowei denueo",
+			"scale": 1.5
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				4513,
+				-285
+			],
+			"file_Name": "piso nowei denueo",
+			"scale": 2.5
+		}
+	],
+	"character_Positions": [
+		[
+			1391,
+			232
+		],
+		[
+			36,
+			237
+		],
+		[
+			2031,
+			77
+		]
+	],
+	"camera_Zoom": 0.6
+}

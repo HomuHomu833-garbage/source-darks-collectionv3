@@ -1,0 +1,50 @@
+{
+    "character_Positions":[
+        [1350, 950],
+        [-125, 900],
+        [825, 825]
+    ],
+    "camera_Zoom": 0.56,
+    "objects": [
+        {
+            "position":[-1940, -1112],
+            "scroll_Factor": [0.5, 0.5],
+            "scale": 1,
+            "antialiased": true,
+            "file_Name": "tuneles o lo q sea esa wea",
+            "is_Animated": false
+        },
+        {
+            "position":[-1770, 168],
+            "scroll_Factor": [0.55, 0.55],
+            "scale": 1,
+            "antialiased": true,
+            "file_Name": "lava",
+            "is_Animated": false
+        },
+        {
+            "position":[112, -36],
+            "scroll_Factor": [0.6, 0.6],
+            "scale": 1,
+            "antialiased": true,
+            "file_Name": "pinchos del fondo",
+            "is_Animated": false
+        },
+        {
+            "position":[-1186, -234],
+            "scroll_Factor": [0.8, 0.8],
+            "scale": 1,
+            "antialiased": true,
+            "file_Name": "pinchitos",
+            "is_Animated": false
+        },
+        {
+            "position":[-1320, 590],
+            "scroll_Factor": [1, 1],
+            "scale": 1,
+            "antialiased": true,
+            "file_Name": "piso del infierno",
+            "is_Animated": false
+        }
+    ]
+}

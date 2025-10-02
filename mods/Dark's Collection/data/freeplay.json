@@ -1,0 +1,2181 @@
+{
+	"groups":["VOIID CHRONICLES","PAPER STORIES","REV MIXED","SHAGGY'S STORY","RESORT","CORRUPTION REBORN","SHAGGY X MATT","SHAGGY","MATT","GOD MODES","OTHERS"],
+	"songs": [
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"7k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Wiik2VoiidMatt-icons",
+			"name": "OLD VC SPORTING",
+			"color": "#009FFF",
+			"week": 2,
+			"bgs": "VOIID BOXING RING",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Wiik100VoiidMatt",
+			"name": "GUNPOWDER",
+			"color": "#00ffba",
+			"week": 100,
+			"bgs": "100",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"VOIID"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Wiik100VoiidMatt-icons",
+			"name": "VC VETERAN",
+			"group": 0,
+			"bgs": "100",
+			"color": "#6d6a68",
+			"week": 100,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Matt Wiik 4",
+			"name": "VC DISADVANTAGE",
+			"color": "#C600DC",
+			"week": 4,
+			"bgs": "VOIID CAVE",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Matt Wiik 4",
+			"name": "VC CHAMPION",
+			"color": "#C600DC",
+			"week": 4,
+			"bgs": "VOIID CAVE",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Matt Wiik 4",
+			"name": "VC LAST COMBAT",
+			"color": "#C600DC",
+			"week": 4,
+			"bgs": "VOIID CAVE",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"7k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC COSMIC MEMORIES",
+			"color": "#C600DC",
+			"week": 5,
+			"group": 0,
+			"bgs": "SHAGGY VC",
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"8k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VC INTERVENTION",
+			"color": "#00ff6c",
+			"bgs": "VOIID BOXING RING",
+			"week": 5,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4K",
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VC HAVEN",
+			"color": "#00ff6c",
+			"week": 5,
+			"bgs": "VOIID BOXING RING",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k",
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VC HARSH REALITY",
+			"color": "#00ffba",
+			"week": 5,
+			"bgs": "VOIID BOXING RING",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4K",
+				"9K",
+				"12K"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VC GALACTIC STORM",
+			"color": "#C600DC",
+			"bgs": "VOIID BOXING RING",
+			"week": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9K"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VC Defamation",
+			"name": "DEFAMATION OF REALITY",
+			"color": "#C600DC",
+			"bgs": "VOIID BOXING RING",
+			"week": 5,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Awoken2",
+			"name": "RADICAL SHOWDOWN",
+			"color": "#C600DC",
+			"bgs": "VOIID BOXING RING",
+			"week": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"VOIID",
+				"4k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VC Cosmic Truth",
+			"name": "VC COSMIC TRUTH",
+			"color": "#575551",
+			"bgs": "VOIID BOXING RING",
+			"week": 5,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Godly 6k",
+				"Godly 9k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rejected",
+			"name": "VC REJECTED",
+			"color": "#C600DC",
+			"week": 6,
+			"bgs": "REJECTED",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God",
+				"God Old"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC ULTRA INSTINCT TOMZ",
+			"color": "#5d00ff",
+			"week": 6,
+			"bgs": "ULTRAINSTINCT VC",
+			"render": "GOD VOIID SHAGGY",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid Unfair"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid God Matt",
+			"name": "MATTPURGATION",
+			"color": "#168980",
+			"bgs": "MATTPURGATION",
+			"render": "GOD VOIID MATT",
+			"week": 6,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Final",
+				"NoGod New 9K",
+				"God New 9K"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VC FINAL DESTINATION",
+			"color": "#ff7200",
+			"bgs": "VC GOD MODE",
+			"render": "GOD VOIID SXM VIP",
+			"week": 6,
+			"group":0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Tricky",
+			"name": "WASTELANDS",
+			"color": "#C600DC",
+			"bgs": "VOIID TRICKY",
+			"render": "TRICKY",
+			"week": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Wiik2VoiidMatt-icons",
+			"name": "ALTER EGO VIP",
+			"bgs": "VOIID BOXING RING",
+			"color": "#C600DC",
+			"week": 2,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k",
+				"6k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Wiik3",
+			"name": "TKO VIP",
+			"bgs": "TKO VIP",
+			"render": "TKO VIP",
+			"color": "#C600DC",
+			"week": 3,
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rejected Vip",
+			"name": "REJECTED VIP",
+			"color": "#282828",
+			"week": 6,
+			"bgs": "REJECTED",
+			"render": "REJECTED VIP 2",
+			"group": 0,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Paper Matt",
+			"name": "ALTER EGO PS",
+			"bgs": "PAPERALTEREGO",
+			"week": 2,
+			"group": 1,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9K",
+				"NoGod",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "PS SXM",
+			"name": "FINAL DESTINATION PS",
+			"bgs": "PAPER3",
+			"week": 2,
+			"group": 1,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Paper Matt",
+			"name": "KING HIT PS",
+			"bgs": "PAPER3",
+			"week": 3,
+			"group": 1,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Paper"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Paper Voiid Matt",
+			"name": "VETERAN",
+			"bgs": "PAPER1",
+			"week": 100,
+			"group": 1,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Unt0ld"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "RTX God Paper Matt",
+			"name": "REJECTED PS",
+			"bgs": "PAPER1",
+			"render": "UNT0LD",
+			"week": 6,
+			"group": 1,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rev Matt Wiik 2",
+			"name": "REV SPORTING",
+			"bgs": "REV2",
+			"week": 2,
+			"group": 2,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rev Shaggy Matt Happy",
+			"name": "FIGHT IT UP",
+			"bgs": "REV1",
+			"week": 2,
+			"group": 2,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Old",
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rev Ballin",
+			"name": "REV BALLIN",
+			"bgs": "REV1",
+			"week": 2,
+			"group": 2,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC ERUPTION",
+			"bgs": "MANSION VOIID",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC KAIO KEN",
+			"bgs": "MANSION VOIID",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC DOJO",
+			"bgs": "MANSION VOIID",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC BLAST",
+			"bgs": "MANSION VOIID",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC ASTRAL CALAMITY",
+			"color": "#00ffba",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy",
+			"name": "VC MILD MANIA",
+			"color": "#00ffba",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k",
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Voiid Shaggy - Voiid Tricky",
+			"name": "VC AHP",
+			"color": "#00ffba",
+			"week": 0,
+			"group": 3,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"hard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "none",
+			"name": "D3fect",
+			"color": "",
+			"week": 0,
+			"group": 4,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted",
+			"name": "ALARMIING",
+			"color": "#168980",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Matt 2",
+			"name": "HAXCHI",
+			"color": "#8ab0ff",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Matt 2",
+			"name": "Unbound",
+			"color": "#8ab0ff",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Akiro",
+			"name": "YOUR PERSONAL HELL",
+			"color": "#054e60",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Matt & Akiro",
+			"name": "HATARII",
+			"color": "#054e60",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Tommy",
+			"name": "Zeniith",
+			"color": "#575551",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Akiro & Tommy",
+			"name": "CALAMIITY",
+			"color": "#D51C00",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Akiro & Tommy",
+			"name": "PRIIMUNUS",
+			"color": "#168980",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Corrupted"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Corrupted Akiro & Tommy",
+			"name": "LAST RESORT",
+			"color": "#054e60",
+			"week": 0,
+			"group": 5,
+			"extraData": {}
+		},		
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Shaggy Matt",
+			"name": "HARSH REALITY",
+			"color": "#171717",
+			"week": 0,
+			"group": 6,
+			"extraData": {
+			}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Shaggy Matt",
+			"name": "HAVEN",
+			"color": "#00ffdc",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "limitless",
+			"name": "LIMITLESS REMAKE",
+			"color": "#6b6966",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Hard",
+				"God",
+				"God 2.0"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "SXM",
+			"name": "FINAL DESTINATION",
+			"color": "#5d00ff",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God",
+				"Double God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "SXM",
+			"name": "SXM TARGET PRACTICE",
+			"color": "#FF8C00",
+			"week": 2,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"Old"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Synergy-icons",
+			"name": "SXM SYNERGY",
+			"color": "#FF8C00",
+			"week": 2,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9K",
+				"16k",
+				"God",
+				"Double God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Migthy",
+			"name": "MIGHTY GODS",
+			"color": "#620000",
+			"week": 2,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"8k",
+				"16k",
+				"8k God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Godlike",
+			"name": "ABOVE AND BEYOND",
+			"color": "#575551",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Godly",
+				"Double Godly"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "godlygroup",
+			"name": "MULTIVERSE DESTINATION",
+			"color": "#FF8C00",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "nada",
+			"name": "FINAL MASHUP DESTINATION",
+			"color": "#620000",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "RTX Group",
+			"name": "HYPER DESTINATION 3",
+			"color": "#620000",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "hdx_icons",
+			"name": "HYPER DESTINATION X",
+			"color": "#620000",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"SWOLE"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Swole Shaggy Matt",
+			"name": "FINAL DESTINATION MOAI",
+			"color": "#054e60",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Final Boss",
+			"name": "FINAL BOSS",
+			"color": "#8ab0ff",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"NoGod",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "VoiidSXM",
+			"name": "VS FINAL DESTINATION",
+			"color": "#5d00ff",
+			"week": 2,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "NKGodSXM",
+			"name": "CHEATER SUFFERING",
+			"color": "#5d00ff",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "orangeshaggreenmatt",
+			"name": "UNLEASHED",
+			"color": "#ffb700",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"God",
+				"Double God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "AK & WR",
+			"name": "AK AND WR FD",
+			"color": "#00ffff",
+			"week": 0,
+			"group": 6,
+			"extraData": {}
+		},
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4K Mania",
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Super Shaggy",
+			"name": "SUPER SAIYAN 3",
+			"color": "#00ff00",
+			"week": 1,
+			"group":7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "ssbshaggy",
+			"name": "GOD FURY",
+			"color": "#ff4e00",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God",
+				"Double God",
+				"Remix"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Trip",
+			"name": "TRIP",
+			"color": "#00ffdc",
+			"week": 0,
+			"group":7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"10k",
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Galaxy Demons",
+			"name": "GALAXY DEMONS",
+			"color": "#00fffc",
+			"week": 0,
+			"group":7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon",
+				"9k",
+				"9k God",
+				"God",
+				"Infinite",
+				"Infinite 10k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Andromeda Shaggies",
+			"name": "ANDROMEDA DEVOURER",
+			"color": "#5d00ff",
+			"week": 0,
+			"group":7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"7k",
+				"12k",
+				"13k",
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "godshaggies",
+			"name": "COLSFOOT CATASTROPHE",
+			"color": "#620000",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"5k",
+				"9k",
+				"God 5k",
+				"God 9k",
+				"18k",
+				"18k God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Gray Shaggy",
+			"name": "SEDATE",
+			"color": "#575551",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Immortaly",
+			"name": "IMMORTALY HATRED",
+			"color": "#620000",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon",
+				"9k",
+				"12k",
+				"God 9k",
+				"God 12k",
+				"God 16k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Universe Invaders",
+			"name": "UNIVERSE INVADERS",
+			"color": "#620000",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Infinite"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Infinite Mode Shaggy",
+			"name": "UNLIMITED INSTINCT",
+			"color": "#5d00ff",
+			"week": 0,
+			"group":7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k",
+				"9K God",
+				"12k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "spamton",
+			"name": "HELL USURPER",
+			"color": "#bd09ce",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"9k",
+				"12k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "shaggy_phantom_blue",
+			"name": "GALACTIC CONQUEROR",
+			"color": "#008aff",
+			"week": 0,
+			"group": 7,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"6k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Matt Mad",
+			"name": "GAME OVER",
+			"color": "#6d6df4",
+			"week": 1,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Matt",
+			"name": "FINAL STAND REMIX",
+			"color": "#6b6966",
+			"week": 2,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Unknown"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "matt",
+			"name": "WIND UP",
+			"color": "#8ab0ff",
+			"week": 3,
+			"group": 8,
+			"extraData": {}
+		},
+
+				{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Hard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "matt",
+			"name": "BRUIISER",
+			"color": "#8ab0ff",
+			"week": 0,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"4k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Warriors",
+			"name": "WARRIORS",
+			"color": "#009FFF",
+			"week": 2,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Hard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "matt",
+			"name": "DANCE PARTY",
+			"color": "#168980",
+			"week": 0,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Sported Out"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "matt",
+			"name": "CLEVERNESS",
+			"color": "#00ffba",
+			"week": 0,
+			"group":8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Hard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "matt",
+			"name": "RECONCILED",
+			"color": "#b0ff17",
+			"week": 0,
+			"group":8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Pandemonium Matt",
+			"name": "TOTAL BRAVERY",
+			"color": "#C600DC",
+			"week": 0,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Voiid"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Pandemonium Matt",
+			"name": "PANDEMONIUM",
+			"color": "#C600DC",
+			"week": 1,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Canon"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Final Round Matt",
+			"name": "FINAL ROUND",
+			"color": "#8ab0ff",
+			"week": 0,
+			"group": 8,
+			"extraData": {}
+		},	
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Food Styles"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Rev Matt Wiik 4",
+			"name": "FS REJECTED",
+			"color": "#009FFF",
+			"week": 0,
+			"group": 8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Sported Out"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Demon Matt",
+			"name": "ZAGREUS",
+			"color": "#C600DC",
+			"week": 0,
+			"group":8,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"God 8K",
+				"Double God 8K"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "mart",
+			"name": "FINAL TIMEOUT",
+			"color": "#C600DC",
+			"week": 1,
+			"group": 9,
+			"extraData": {}
+		},
+						
+		
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"God",
+				"Double God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Multi Shaggy",
+			"name": "SPIRAL DISMAY",
+			"color": "#edff00",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "GDDG",
+			"name": "GODIFIED DESTRUCTION DOUBLE GOD",
+			"color": "#5d00ff",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Irreverence",
+			"name": "IRREVERENCE",
+			"color": "#bd09ce",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"God 9k",
+				"Double God 9k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "paradox",
+			"name": "DIVINE PARADOX",
+			"color": "#00ffdc",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "DS",
+			"name": "DS FINAL DESTINATION",
+			"color": "#beff23",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"WTF",
+				"Double Infinite"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "nada",
+			"name": "EVOLVED DESTINATION END Mix",
+			"color": "#5d00ff",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard",
+				"God"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "GDDG",
+			"name": "GODIFIED DESTRUCTION DOUBLE GOD",
+			"color": "#5d00ff",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},		
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Triple God",
+				"triple god no modchart"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Matt Mad",
+			"name": "PURGATORY IMPOSIBLE",
+			"color": "#ff7200",
+			"week": 0,
+			"group": 9,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Zardy",
+			"name": "REMAZED",
+			"color": "#C600DC",
+			"week": 0,
+			"group": 10,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Standard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Mystery",
+			"name": "MYSTERY TERRORS",
+			"color": "#ffff00",
+			"week": 0,
+			"group":10,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"Hard"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "Tricky",
+			"name": "FRENETIC",
+			"color": "#00ffba",
+			"week": 0,
+			"group": 10,
+			"extraData": {}
+		},
+		{
+			"menuConfig": {
+				"showStats": true,
+				"canBeEntered": true
+			},
+			"difficulties": [
+				"1k",
+				"2k",
+				"3k",
+				"4k",
+				"5k",
+				"6k",
+				"7k",
+				"8k",
+				"9k",
+				"10k",
+				"11k",
+				"12k",
+				"13k",
+				"14k",
+				"15k",
+				"16k",
+				"17k",
+				"18k",
+				"19k",
+				"20k",
+				"21k"
+			],
+			"metadata": {
+				"composer": "",
+				"charter": "",
+				"modcharter": ""
+			},
+			"icon": "rev",
+			"name": "Ayuda no puedo parar de escuchar esta parte",
+			"color": "#B72863",
+			"week": 0,
+			"group": 10,
+			"extraData": {}
+		}
+	]
+}

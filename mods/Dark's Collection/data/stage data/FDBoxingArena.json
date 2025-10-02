@@ -1,0 +1,99 @@
+{
+	"character_Positions": [
+		[
+			1100,
+			800
+		],
+		[
+			300,
+			800
+		],
+		[
+			750,
+			700
+		]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"position": [
+				-845,
+				-425
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "boxingnight1"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-915,
+				-630
+			],
+			"scroll_Factor": [
+				1.2,
+				1.2
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "boxingnight2"
+		},
+		{
+			"is_Animated": false,
+			"position": [
+				-910,
+				-530
+			],
+			"scroll_Factor": [
+				0.8,
+				0.8
+			],
+			"antialiased": true,
+			"scale": 1.2,
+			"file_Name": "boxingnight3"
+		},
+		{
+			"is_Animated": true,
+			"layer": "foreground",
+			"position": [
+				-650,
+				-360
+			],
+			"scroll_Factor": [
+				0,
+				0
+			],
+			"antialiased": true,
+			"scale": 1,
+			"file_Name": "funnystatic",
+            "animations": [
+                {
+                    "name": "loop",
+                    "animation_name": "funnystatic funny static0",
+                    "fps": 24,
+                    "looped": true
+                },
+				{
+                    "name": "start",
+                    "animation_name": "funnystatic funny static0",
+                    "fps": 24,
+                    "looped": true
+                },
+				{
+                    "name": "go",
+                    "animation_name": "funnystatic funny static0",
+                    "fps": 24,
+                    "looped": false
+                    
+                }
+            ],
+            "start_Animation": "loop"
+                
+		}
+    ],
+    "camera_Zoom": 0.7
+}

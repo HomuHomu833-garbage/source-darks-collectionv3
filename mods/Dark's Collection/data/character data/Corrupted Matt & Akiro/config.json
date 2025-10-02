@@ -1,0 +1,15 @@
+{
+    "cameraOffset": [0, -350],
+    "barColor": [32, 34, 45],
+    "healthIcon": "Corrupted Matt & Akiro",
+    "characters": [
+        {
+            "name": "Corrupted Akiro",
+            "positionOffset": [20,-10]
+        },
+        {
+            "name": "Corrupted Matt",
+            "positionOffset": [-200,50]
+        }
+    ]
+}

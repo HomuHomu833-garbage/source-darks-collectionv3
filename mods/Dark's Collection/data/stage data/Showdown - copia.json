@@ -1,0 +1,63 @@
+{
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				0.6,
+				0.6
+			],
+			"position": [
+				0,
+				-500
+			],
+			"alpha": 1,
+			"file_Name": "City",
+			"scale": 1
+		},
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				0,
+				-1200
+			],
+			"alpha": 1,
+			"file_Name": "Stage",
+			"scale": 1
+		}
+	],
+	"character_Positions": [
+		[
+			3200,
+			700
+		],
+		[
+			1500,
+			700
+		],
+		[
+			2300,
+			700
+		]
+	],
+	"camera_Zoom": 0.47,
+	"camera_Offsets": [
+		[
+			0,
+			-50
+		],
+		[
+			0,
+			-50
+		],
+		[
+			0,
+			0
+		]
+	]
+}
