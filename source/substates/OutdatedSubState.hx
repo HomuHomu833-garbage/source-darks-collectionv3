@@ -82,33 +82,66 @@ class OutdatedSubState extends MusicBeatState {
 	function updateFromGit(remotePath:String, localBase:String) {
 		var http:Http = new Http("https://api.github.com/repos/darkroft123/source-darks-collectionv3/contents/" + escapeURL(remotePath));
 		http.setHeader("User-Agent", "darkroft123-game");
+
 		http.onData = (data:String) -> {
 			var files:Array<Dynamic> = (Json.parse(data) : Array<Dynamic>);
+
+			// Guardar archivos encontrados en remoto
+			var remoteFiles:Array<String> = [];
 
 			for (file in files) {
 				var localPath = localBase + "/" + file.path.split("/").slice(1).join("/");
 
 				if (file.type == "file") {
+					remoteFiles.push(localPath);
+
 					var needsUpdate = true;
 					if (FileSystem.exists(localPath)) {
 						try {
+							// Comparar tamaño en bytes (simple pero funcional)
 							var localData:Bytes = File.getBytes(localPath);
-							var localHash = Md5.encode(localData.toString());
-							var remoteHash = file.sha;
-							if (remoteHash != null && remoteHash.substr(0,6) == localHash.substr(0,6)) needsUpdate = false;
+							var localSize = localData.length;
+							if (file.size == localSize) {
+								needsUpdate = false;
+							}
 						} catch (_) {}
 					}
-					if (needsUpdate) downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
+
+					if (needsUpdate) {
+						if (FileSystem.exists(localPath)) {
+							trace("[MODIFICADO] " + localPath);
+						} else {
+							trace("[NUEVO] " + localPath);
+						}
+						// Lo añadimos a la cola de descarga
+						downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
+					}
 				} else if (file.type == "dir") {
+					// Recursivo: entrar a la carpeta
 					updateFromGit(file.path, localBase);
 				}
 			}
 
+			// Buscar archivos eliminados (que están en local pero no en remoto)
+			if (FileSystem.exists(localBase)) {
+				for (fileName in FileSystem.readDirectory(localBase)) {
+					var fullPath = localBase + "/" + fileName;
+					if (!remoteFiles.contains(fullPath) && !FileSystem.isDirectory(fullPath)) {
+						trace("[ELIMINADO] " + fullPath);
+						// Si quieres, aquí también puedes hacer FileSystem.deleteFile(fullPath);
+					}
+				}
+			}
+
+			// Cuando termine de analizar, si hay archivos en cola, empieza a bajarlos
 			if (downloadQueue.length > 0) startNextDownload();
 		}
+
 		http.onError = (error:String) -> trace("Error fetching " + remotePath + ": " + error);
 		http.request();
 	}
+
+
 
 	function startNextDownload() {
 		if (downloadQueue.length == 0) {
