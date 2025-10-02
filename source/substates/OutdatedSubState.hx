@@ -11,6 +11,9 @@ import haxe.Http;
 import sys.FileSystem;
 import sys.io.File;
 import haxe.crypto.Md5;
+import StringTools;
+import haxe.Json;
+import haxe.io.Bytes;
 
 class OutdatedSubState extends MusicBeatState {
 	private var version:String = 'vnull';
@@ -18,7 +21,7 @@ class OutdatedSubState extends MusicBeatState {
 	private var changelogTxt:FlxText;
 	private var btnUpdate:FlxButton;
 	private var btnMenu:FlxButton;
-	private var pendingDownloads:Int = 0;
+	private var downloadQueue:Array<{url:String, path:String}> = [];
 
 	public function new(?version:String = 'vnull') {
 		this.version = version;
@@ -27,7 +30,6 @@ class OutdatedSubState extends MusicBeatState {
 
 	override function create() {
 		super.create();
-
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK));
 
 		var txt:FlxText = new FlxText(0, 100, FlxG.width,
@@ -40,14 +42,13 @@ class OutdatedSubState extends MusicBeatState {
 		txt.screenCenter(X);
 		add(txt);
 
-		loadChangelog();
-
 		changelogTxt = new FlxText(50, 250, FlxG.width - 100, changelog, 18);
 		changelogTxt.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.LIME, LEFT);
 		add(changelogTxt);
 
+		loadChangelog();
+
 		btnUpdate = new FlxButton(FlxG.width / 2 - 150, FlxG.height - 100, "Actualizar", () -> {
-			trace("Usuario eligió actualizar.");
 			updateFromGit("assets", "assets");
 			updateFromGit("mods", "mods");
 		});
@@ -55,7 +56,6 @@ class OutdatedSubState extends MusicBeatState {
 		add(btnUpdate);
 
 		btnMenu = new FlxButton(FlxG.width / 2 + 50, FlxG.height - 100, "Menú Principal", () -> {
-			trace("Usuario decidió ignorar/terminó actualización.");
 			FlxG.switchState(() -> new MainMenuState());
 		});
 		btnMenu.scale.set(2, 2);
@@ -68,57 +68,60 @@ class OutdatedSubState extends MusicBeatState {
 		var http:Http = new Http("https://raw.githubusercontent.com/darkroft123/source-darks-collectionv3/main/changelog.txt");
 		http.setHeader("User-Agent", "darkroft123-game");
 		http.onData = (data:String) -> {
-			trace("Changelog cargado correctamente.");
 			changelog = data;
-			changelogTxt.text = changelog;
+			if (changelogTxt != null) changelogTxt.text = changelog;
 		}
 		http.onError = (error:String) -> trace("No se pudo cargar el changelog: " + error);
 		http.request();
 	}
 
+	function escapeURL(path:String):String {
+		return StringTools.replace(path, " ", "%20");
+	}
+
 	function updateFromGit(remotePath:String, localBase:String) {
-		trace("Revisando carpeta remota: " + remotePath);
-		var http:Http = new Http("https://api.github.com/repos/darkroft123/source-darks-collectionv3/contents/" + remotePath);
+		var http:Http = new Http("https://api.github.com/repos/darkroft123/source-darks-collectionv3/contents/" + escapeURL(remotePath));
 		http.setHeader("User-Agent", "darkroft123-game");
+		http.setHeader("Authorization", "token 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");
 		http.onData = (data:String) -> {
-			var files:Array<Dynamic> = (haxe.Json.parse(data) : Array<Dynamic>);
+			var files:Array<Dynamic> = (Json.parse(data) : Array<Dynamic>);
+
 			for (file in files) {
 				var localPath = localBase + "/" + file.path.split("/").slice(1).join("/");
+
 				if (file.type == "file") {
 					var needsUpdate = true;
-
 					if (FileSystem.exists(localPath)) {
 						try {
-							var localData = File.getBytes(localPath);
+							var localData:Bytes = File.getBytes(localPath);
 							var localHash = Md5.encode(localData.toString());
 							var remoteHash = file.sha;
-							if (remoteHash != null && remoteHash.substr(0, 6) == localHash.substr(0, 6)) {
-								needsUpdate = false;
-							}
-						} catch (e:Dynamic) {
-							trace("Error al verificar hash de " + localPath + ": " + e);
-						}
+							if (remoteHash != null && remoteHash.substr(0,6) == localHash.substr(0,6)) needsUpdate = false;
+						} catch (_) {}
 					}
-
-					if (needsUpdate) {
-						trace("Archivo nuevo/cambiado: " + localPath);
-						pendingDownloads++;
-						downloadFile(file.download_url, localPath);
-					}
+					if (needsUpdate) downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
 				} else if (file.type == "dir") {
 					updateFromGit(file.path, localBase);
 				}
 			}
+
+			if (downloadQueue.length > 0) startNextDownload();
 		}
 		http.onError = (error:String) -> trace("Error fetching " + remotePath + ": " + error);
 		http.request();
 	}
 
-	function downloadFile(url:String, savePath:String) {
-		var http:Http = new Http(url);
+	function startNextDownload() {
+		if (downloadQueue.length == 0) {
+			onUpdateFinished();
+			return;
+		}
+		var next = downloadQueue.shift();
+		var http:Http = new Http(next.url);
 		http.setHeader("User-Agent", "darkroft123-game");
+		http.setHeader("Authorization", "token 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");
 		http.onData = (data:String) -> {
-			var parts = savePath.split("/");
+			var parts = next.path.split("/");
 			if (parts.length > 1) {
 				var path = "";
 				for (i in 0...parts.length-1) {
@@ -126,21 +129,10 @@ class OutdatedSubState extends MusicBeatState {
 					if (!FileSystem.exists(path)) FileSystem.createDirectory(path);
 				}
 			}
-			File.saveContent(savePath, data);
-			trace("Archivo descargado: " + savePath);
-
-			pendingDownloads--;
-			if (pendingDownloads <= 0) {
-				onUpdateFinished();
-			}
+			File.saveContent(next.path, data);
+			startNextDownload();
 		}
-		http.onError = (error:String) -> {
-			trace("Error descargando " + savePath + ": " + error);
-			pendingDownloads--;
-			if (pendingDownloads <= 0) {
-				onUpdateFinished();
-			}
-		}
+		http.onError = (error:String) -> startNextDownload();
 		http.request();
 	}
 
