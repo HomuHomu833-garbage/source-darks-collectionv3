@@ -16,8 +16,11 @@ import flixel.math.FlxRect;
 using StringTools;
 
 class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewedSprite #end {
+	/**
+	 * The position of the note (in milliseconds)
+	 */
 	public var strumTime:Float = 0;
-
+	
 	public var mustPress:Bool = false;
 	public var noteData:Int = 0;
 	public var canBeHit:Bool = false;
@@ -69,7 +72,12 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 
 	public var speed(default, set):Float = 1;
 
+	public var originalSpeed(default, null):Float;
+
 	public var playedHitSound:Bool = false;
+
+
+	public var isPunchNote:Bool = false;
 
 	#if MODCHARTING_TOOLS
 	/**
@@ -104,10 +112,9 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 	];
 
 	/**
-	 * @see https://discord.com/channels/929608653173051392/1034954605253107844/1163134784277590056
 	 * @see https://step-mania.fandom.com/wiki/Notes
 	 */
-	public static var beats:Array<Int> = [4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192];
+	public static final beats:Array<Int> = [4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192];
 
 	public static function applyColorQuants(notes:Array<Note>) {
 		if (!Options.getData('colorQuantization')) {
@@ -116,17 +123,29 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 		var col:Array<Int> = [255, 0, 0];
 		for (note in notes) {
 			if (!note.isSustainNote && note.affectedbycolor) {
-				var noteBeat:Int = Math.floor(((note.strumTime / ( Conductor.stepCrochet * 4)) * 48) + 0.5);
+				var noteBeat:Int = Math.round(Conductor.getBeat(note.strumTime) * 48);
 				for (beat in 0...beats.length - 1) {
 					if ((noteBeat % (192 / beats[beat]) == 0)) {
 						col = quantColors[beat];
 						break;
 					}
 				}
+
+				if (!ColorSwap.colorSwapCache.exists(Std.string(col))) {
+					ColorSwap.colorSwapCache.set(Std.string(col), new ColorSwap());
+				}
+				note.colorSwap = ColorSwap.colorSwapCache.get(Std.string(col));
+				if (note.affectedbycolor) {
+					note.shader = note.colorSwap.shader;
+				}
 				note.colorSwap.r = col[0];
 				note.colorSwap.g = col[1];
 				note.colorSwap.b = col[2];
 				for (sustain in note.sustains) {
+					sustain.colorSwap = ColorSwap.colorSwapCache.get(Std.string(col));
+					if (sustain.affectedbycolor) {
+						sustain.shader = sustain.colorSwap.shader;
+					}
 					sustain.colorSwap.r = note.colorSwap.r;
 					sustain.colorSwap.g = note.colorSwap.g;
 					sustain.colorSwap.b = note.colorSwap.b;
@@ -136,25 +155,25 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 	}
 
 	public static function getFrames(note:Note):FlxAtlasFrames {
+		var disallowGPU:Bool = #if MODCHARTING_TOOLS note.song.modchartingTools
+			|| FlxG.state is modcharting.ModchartEditorState #else false #end;
+
 		if (PlayState.instance.types.contains(note.arrow_Type)) {
-			if (Assets.exists(Paths.image('ui skins/' + note.song.ui_Skin + "/arrows/" + note.arrow_Type, 'shared'))) {
-				return Paths.getSparrowAtlas('ui skins/' + note.song.ui_Skin + "/arrows/" + note.arrow_Type,
-					'shared' #if MODCHARTING_TOOLS, note.song.modchartingTools || FlxG.state is modcharting.ModchartEditorState #end);
-			} else {
-				return Paths.getSparrowAtlas('ui skins/${note.song.ui_Skin}/arrows/default',
-					'shared' #if MODCHARTING_TOOLS, note.song.modchartingTools || FlxG.state is modcharting.ModchartEditorState #end);
+			var basePath:String = 'ui skins/${note.song.ui_Skin}/arrows/';
+			if (Assets.exists(Paths.image('$basePath${note.arrow_Type}', 'shared'))) {
+				return Paths.getSparrowAtlas('$basePath${note.arrow_Type}', 'shared', disallowGPU);
+			} else if (Assets.exists(Paths.image('${basePath}default', 'shared'))) {
+				return Paths.getSparrowAtlas('${basePath}default', 'shared', disallowGPU);
 			}
 		} else {
-			if (Assets.exists(Paths.image("ui skins/default/arrows/" + note.arrow_Type, 'shared'))) {
-				return Paths.getSparrowAtlas("ui skins/default/arrows/" + note.arrow_Type,
-					'shared' #if MODCHARTING_TOOLS, note.song.modchartingTools || FlxG.state is modcharting.ModchartEditorState #end);
-			} else {
-				return Paths.getSparrowAtlas('ui skins/${note.song.ui_Skin}/arrows/default',
-					'shared' #if MODCHARTING_TOOLS, note.song.modchartingTools || FlxG.state is modcharting.ModchartEditorState #end);
+			var basePath:String = 'ui skins/default/arrows/';
+			if (Assets.exists(Paths.image('$basePath${note.arrow_Type}', 'shared'))) {
+				return Paths.getSparrowAtlas('$basePath${note.arrow_Type}', 'shared', disallowGPU);
+			} else if (Assets.exists(Paths.image('ui skins/${note.song.ui_Skin}/arrows/default', 'shared'))) {
+				return Paths.getSparrowAtlas('ui skins/${note.song.ui_Skin}/arrows/default', 'shared', disallowGPU);
 			}
 		}
-		return Paths.getSparrowAtlas('ui skins/default/arrows/default',
-			'shared' #if MODCHARTING_TOOLS, note.song.modchartingTools || FlxG.state is modcharting.ModchartEditorState #end);
+		return Paths.getSparrowAtlas('ui skins/default/arrows/default', 'shared', disallowGPU);
 	}
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?character:Int = 0, ?arrowType:String = "default",
@@ -182,6 +201,7 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 
 		this.song = song;
 		speed = song.speed;
+		originalSpeed = speed;
 
 		x += 100;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -231,7 +251,7 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 			PlayState.instance.setupNoteTypeScript(arrow_Type);
 		}
 
-		offset.y += Std.parseFloat(PlayState.instance.arrow_Configs.get(arrow_Type)[0]) * lmaoStuff;
+		offset.y += Std.parseFloat(PlayState.instance.arrow_Configs.get(arrow_Type)[0]) * lmaoStuff * (Options.getData("downscroll") ? -1 : 1);
 
 		shouldHit = PlayState.instance.type_Configs.get(arrow_Type)[0] == "true";
 		hitDamage = Std.parseFloat(PlayState.instance.type_Configs.get(arrow_Type)[1]);
@@ -256,7 +276,6 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 			prevNoteIsSustainNote = prevNote.isSustainNote;
 
 			animation.play("holdend");
-			updateHitbox();
 
 			if (prevNote.isSustainNote) {
 				if (prevNote.animation != null)
@@ -264,19 +283,22 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * speed;
 				prevNote.updateHitbox();
+				prevNote.centerOffsets();
 				prevNote.sustainScaleY = prevNote.scale.y;
 			}
 
+			updateHitbox();
 			centerOffsets();
 
 			sustainScaleY = scale.y;
 		}
 
 
-		if(Options.getData("downscroll") && animation.curAnim.name.endsWith("end")){
-			offset.y -= height * 1.7;
+		if (arrowType.toLowerCase().contains("punch") || arrowType.toLowerCase().contains("bullet") || arrowType.toLowerCase().contains("sword")) {
+			this.isPunchNote = true; 
+		} else {
+			this.isPunchNote = false;
 		}
-
 		if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] != null) {
 			if (PlayState.instance.arrow_Configs.get(arrow_Type)[5] == "true")
 				affectedbycolor = true;
@@ -295,28 +317,40 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 			colorSwap.b = noteColor[2];
 		}
 	}
-
+		@:allow(states.PlayState)
+	private var correctionOffset:Float = 0; // dont mess with this
 	/**
 	 * Calculates the Y value of a note.
 	 * @param note the note to calculate
 	 * @return The Y value. NOTE: Will return the negative value if downscroll is enabled.
 	 */
-	public static inline function calculateY(note:Note):Float {
-		return (Options.getData("downscroll") ? 1 : -1) * (0.45 * (Conductor.songPosition - note.strumTime) * FlxMath.roundDecimal(note.speed, 2));
+	public inline function calculateY(myStrum:StrumNote):Void {
+		var strumY:Float = myStrum.y;
+
+		var posMath:Float = (0.45 * (Conductor.songPosition - strumTime) * FlxMath.roundDecimal(speed, 2));
+
+		if (!Options.getData("downscroll")) {
+			y = strumY - posMath;
+			return;
+		}
+
+		// thanks for this psych engine
+
+		y = strumY + correctionOffset + posMath;
+		if (isSustainNote) {
+			y -= (frameHeight * scale.y) - (Note.swagWidth);
+		}
 	}
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		#if MODCHARTING_TOOLS angle3D.z #else angle #end = modAngle + localAngle;
+			#if MODCHARTING_TOOLS angle3D.z #else angle #end = modAngle + localAngle;
 
 		calculateCanBeHit();
 
-		if (!inEditor) {
-			if (tooLate) {
-				if (alpha > 0.3)
-					alpha = 0.3;
-			}
+		if (!inEditor && tooLate && alpha > 0.3) {
+			alpha = 0.3;
 		}
 	}
 
@@ -344,7 +378,7 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 	 * Override the setter to disable rounding on clipRect
 	 * @author CCobaltDev
 	 */
-	@:noCompletion 
+	@:noCompletion
 	override function set_clipRect(rect:FlxRect):FlxRect {
 		clipRect = rect;
 		if (frames != null)
@@ -352,7 +386,7 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 		return rect;
 	}
 
-	@:noCompletion 
+	@:noCompletion
 	function set_speed(speed:Float):Float {
 		if (Options.getData("useCustomScrollSpeed")) {
 			speed = Options.getData("customScrollSpeed") / PlayState.songMultiplier;

@@ -5,3 +5,7 @@ diamonds
 bars
 lines
 scalable cel
+Resort
+Corrupted
+Corrupted Glitched
+voiid

@@ -49,6 +49,7 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.net.FileReference;
 import flixel.addons.ui.FlxUISlider;
+import game.SoundGroup;
 using StringTools;
 
 class ChartingState extends MusicBeatState
@@ -83,7 +84,7 @@ class ChartingState extends MusicBeatState
 	var curRenderedEvents:FlxTypedGroup<EventSprite>;
 
 	var gridBG:FlxSprite;
-
+		var gridBGNext:FlxSprite;
 	var _song:SongData;
 
 	var difficulty:String = 'normal';
@@ -102,7 +103,7 @@ class ChartingState extends MusicBeatState
 
 	var tempBpm:Float = 0;
 
-	var vocals:FlxSound;
+	var vocals:SoundGroup;
 
 	static var playerHitsounds:Bool = false;
 	static var enemyHitsounds:Bool = false;
@@ -147,6 +148,7 @@ class ChartingState extends MusicBeatState
 	var lilStage:FlxSprite;
 	var lilBf:FlxSprite;
 	var lilOpp:FlxSprite;
+	static var globalSecton:Int = 0;
 	function createStageAndCharacters()
 	{
 		stageCharGroup.clear();
@@ -301,6 +303,11 @@ class ChartingState extends MusicBeatState
 		add(gridBG);
 		gridBG.alpha = 0.6;
 
+		gridBGNext = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
+		gridBGNext.y += gridBG.height;
+		gridBGNext.color = FlxColor.GRAY;
+		add(gridBGNext);
+
 		leftIcon = new HealthIcon('bf');
 		rightIcon = new HealthIcon('bf');
 		leftIcon.scrollFactor.set(1, 1);
@@ -319,10 +326,10 @@ class ChartingState extends MusicBeatState
 		leftIcon.setPosition(0, -45);
 		rightIcon.setPosition(gridBG.width / 2, -45);
 
-		gridBlackLine = new FlxSprite(gridBG.x + gridBG.width / 2).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
+		gridBlackLine = new FlxSprite(gridBG.x + gridBG.width / 2).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridBlackLine);
 
-		gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
+			gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridEventBlackLine);
 
 		lilStage = new FlxSprite(32, 650);
@@ -363,6 +370,11 @@ class ChartingState extends MusicBeatState
 		else
 			_song = SongLoader.loadFromJson("tutorial", "tutorial");
 
+
+		uiSettings = CoolUtil.coolTextFile(Paths.txt("ui skins/" + _song.ui_Skin + "/config"));
+
+		MusicBeatState.windowNameSuffix = " - " + (_song?.song ?? "Unknown Song") + " (Chart Editor)";
+
 		@:privateAccess
 		{
 			for(event in PlayState.instance.baseEvents)
@@ -394,9 +406,15 @@ class ChartingState extends MusicBeatState
 
 		createStageAndCharacters();
 
-		bpmTxt = new FlxText(1000, 50, 0, "", 16);
-		bpmTxt.scrollFactor.set();
-		add(bpmTxt);
+	bpmTxt = new FlxText(1000, 50, 0, "", 16);
+	bpmTxt.scrollFactor.set();
+	bpmTxt.setFormat(null, 16, FlxColor.BLACK);
+	 bpmTxt.borderStyle = FlxTextBorderStyle.OUTLINE;
+        bpmTxt.borderColor = 0xFFFFFFFF;
+        bpmTxt.borderSize = 1.5;
+
+	add(bpmTxt);
+
 
 		strumLine = new FlxSprite(0, 50).makeGraphic(Std.int(gridBG.width), 4);
 		add(strumLine);
@@ -447,7 +465,7 @@ class ChartingState extends MusicBeatState
 		addEventUI();
 		updateHeads();
 		updateGrid();
-
+			changeSection(globalSecton);
 		super.create();
 
 		loadedAutosave = false;
@@ -575,6 +593,14 @@ class ChartingState extends MusicBeatState
 
 		modchart_Input = new FlxUIInputText(10, check_mute_inst.y + check_mute_inst.height + 2, 70, _song.modchartPath, 8);
 
+		var check_modchart_tools:FlxUICheckBox = new FlxUICheckBox(modchart_Input.x + (modchart_Input.width * 2) + 20, modchart_Input.y, null, null,
+			"Modcharting Tools", 100);
+		check_modchart_tools.checked = _song.modchartingTools;
+
+		check_modchart_tools.callback = function() {
+			_song.modchartingTools = check_modchart_tools.checked;
+		};
+
 		cutscene_Input = new FlxUIInputText(modchart_Input.x, modchart_Input.y + modchart_Input.height + 2, 70, _song.cutscene, 8);
 		endCutscene_Input = new FlxUIInputText(cutscene_Input.x, cutscene_Input.y + cutscene_Input.height + 2, 70, _song.endCutscene, 8);
 
@@ -676,6 +702,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(check_mute_voc);
 		tab_group_song.add(check_char_ids);
 		tab_group_song.add(modchart_Input);
+		tab_group_song.add(check_modchart_tools);
 		tab_group_song.add(cutscene_Input);
 		tab_group_song.add(endCutscene_Input);
 		tab_group_song.add(saveButton);
@@ -903,9 +930,11 @@ class ChartingState extends MusicBeatState
 		// dropdown lmao
 		var arrow_Types = CoolUtil.coolTextFile(Paths.txt("arrowTypes"));
 
-		var typeDropDown = new FlxScrollableDropDownMenu(setCharacterLeftSide.x, setCharacterLeftSide.y + setCharacterLeftSide.height, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrow_Types, true), function(type:String)
-		{
-			cur_Note_Type = arrow_Types[Std.parseInt(type)];
+			var arrow_Types = CoolUtil.coolTextFile(Paths.txt("arrowTypes"));
+
+				var typeDropDown:FlxScrollableDropDownMenu = new FlxScrollableDropDownMenu(setCharacterLeftSide.x, setCharacterLeftSide.y + 40,
+			FlxScrollableDropDownMenu.makeStrIdLabelArray(arrow_Types, true), function(type:String) {
+				cur_Note_Type = arrow_Types[Std.parseInt(type)];
 		});
 
 		typeDropDown.selectedLabel = cur_Note_Type;
@@ -1032,6 +1061,7 @@ class ChartingState extends MusicBeatState
 		function(uiSkin:String){
 			_song.ui_Skin = uiSkins[Std.parseInt(uiSkin)];
 
+			uiSettings = CoolUtil.coolTextFile(Paths.txt("ui skins/" + _song.ui_Skin + "/config"));
 			while (curRenderedNotes.members.length > 0)
 			{
 				curRenderedNotes.remove(curRenderedNotes.members[0], true);
@@ -1149,7 +1179,7 @@ class ChartingState extends MusicBeatState
 				_song.notes[section].sectionNotes[noteIndex][1] %= (_song.keyCount + _song.playerKeyCount);
 		}
 	}
-
+	var addedVocals:Array<String> = [];
 	function loadSong(daSong:String):Void
 	{
 		if (FlxG.sound.music != null)
@@ -1158,21 +1188,31 @@ class ChartingState extends MusicBeatState
 		if (vocals != null)
 			vocals.stop();
 
-		if(openfl.Assets.cache.hasSound(Paths.inst(daSong, difficulty.toLowerCase())))
-			openfl.Assets.cache.removeSound(Paths.inst(daSong, difficulty.toLowerCase()));
+		var difficulty_name:String = _song.specialAudioName == null ? difficulty.toLowerCase() : _song.specialAudioName;
 
-		if(openfl.Assets.cache.hasSound(Paths.voices(daSong, difficulty.toLowerCase())))
-			openfl.Assets.cache.removeSound(Paths.voices(daSong, difficulty.toLowerCase()));
+		if (openfl.Assets.cache.hasSound(Paths.inst(daSong, difficulty_name)))
+			openfl.Assets.cache.removeSound(Paths.inst(daSong, difficulty_name));
 
-		FlxG.sound.music = new FlxSound().loadEmbedded(Paths.inst(daSong, difficulty.toLowerCase()));
+		if (openfl.Assets.cache.hasSound(Paths.voices(daSong, difficulty_name)))
+			openfl.Assets.cache.removeSound(Paths.voices(daSong, difficulty_name));
+
+		FlxG.sound.music = new FlxSound().loadEmbedded(Paths.inst(daSong, _song.specialAudioName ?? difficulty_name, _song.player1));
 		FlxG.sound.music.persist = true;
-		
-		if (_song.needsVoices)
-			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong, difficulty.toLowerCase()));
-		else
-			vocals = new FlxSound();
 
-		FlxG.sound.list.add(vocals);
+		
+		vocals = new SoundGroup(2);
+		
+		if (_song.needsVoices) {
+			for (character in ['bf', 'dad', 'player', 'opponent', _song.player1, _song.player2]) {
+				var soundPath:String = Paths.voices(daSong, _song.specialAudioName ?? difficulty_name, character, _song.player1);
+				if (!addedVocals.contains(soundPath)) {
+					vocals.add(FlxG.sound.list.add(new FlxSound().loadEmbedded(soundPath)));
+					addedVocals.push(soundPath);
+				}
+			}
+		}
+
+		//FlxG.sound.list.add(vocals);
 
 		FlxG.sound.music.pause();
 		vocals.pause();
@@ -1208,61 +1248,55 @@ class ChartingState extends MusicBeatState
 		bullshitUI.add(title);
 	}
 
-	override function getEvent(id:String, sender:Dynamic, data:Dynamic, ?params:Array<Dynamic>)
-	{
-		if (id == FlxUICheckBox.CLICK_EVENT)
-		{
+	override function getEvent(id:String, sender:Dynamic, data:Dynamic, ?params:Array<Dynamic>) {
+		if (id == FlxUICheckBox.CLICK_EVENT) {
 			var check:FlxUICheckBox = cast sender;
 			var label = check.getLabel().text;
 
-			switch (label)
-			{
+			switch (label) {
 				case 'Camera points at P1':
 					_song.notes[curSection].mustHitSection = check.checked;
 					updateHeads();
 					updateGrid();
 				case 'Change BPM?':
-					if(_song.notes[curSection].bpm < 0.1)
+					if (_song.notes[curSection].bpm < 0.1)
 						_song.notes[curSection].bpm = 0.1;
 
 					_song.notes[curSection].changeBPM = check.checked;
 
 					Conductor.mapBPMChanges(_song);
 
-					if(_song.notes[curSection].changeBPM)
+					if (_song.notes[curSection].changeBPM)
 						Conductor.changeBPM(_song.notes[curSection].bpm);
 
 					updateGrid();
 				case 'Change Time Signature?':
-					if(_song.notes[curSection].timeScale == null)
+					if (_song.notes[curSection].timeScale == null)
 						_song.notes[curSection].timeScale = Conductor.timeScale;
 
-					if(_song.notes[curSection].timeScale[0] < 1)
+					if (_song.notes[curSection].timeScale[0] < 1)
 						_song.notes[curSection].timeScale[0] = 1;
 
-					if(_song.notes[curSection].timeScale[1] < 1)
+					if (_song.notes[curSection].timeScale[1] < 1)
 						_song.notes[curSection].timeScale[1] = 1;
 
 					_song.notes[curSection].changeTimeScale = check.checked;
 
 					Conductor.mapBPMChanges(_song);
 
-					if(_song.notes[curSection].changeTimeScale)
+					if (_song.notes[curSection].changeTimeScale)
 						Conductor.timeScale = _song.notes[curSection].timeScale;
 
 					updateGrid();
 				case "Enemy Alt Animation":
 					_song.notes[curSection].altAnim = check.checked;
 			}
-		}
-		else if (id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper))
-		{
+		} else if (id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper)) {
 			var nums:FlxUINumericStepper = cast sender;
 			var wname = nums.name;
 			FlxG.log.add(wname);
 
-			switch(wname)
-			{
+			switch (wname) {
 				case 'section_length':
 					_song.notes[curSection].lengthInSteps = Std.int(nums.value);
 					updateGrid();
@@ -1275,7 +1309,7 @@ class ChartingState extends MusicBeatState
 					_song.playerKeyCount = Std.int(nums.value);
 					updateGrid();
 				case 'song_bpm':
-					if(nums.value < 0.1)
+					if (nums.value < 0.1)
 						nums.value = 0.1;
 
 					tempBpm = nums.value;
@@ -1287,7 +1321,7 @@ class ChartingState extends MusicBeatState
 				case 'note_char':
 					current_Note_Character = Std.int(nums.value);
 				case 'section_bpm':
-					if(nums.value < 0.1)
+					if (nums.value < 0.1)
 						nums.value = 0.1;
 
 					_song.notes[curSection].bpm = nums.value;
@@ -1299,10 +1333,10 @@ class ChartingState extends MusicBeatState
 				case 'section_timescale1':
 					var val = Std.int(nums.value);
 
-					if(val < 1)
+					if (val < 1)
 						val = 1;
 
-					//_song.notes[curSection].timeScale[0] = val;
+					// _song.notes[curSection].timeScale[0] = val;
 					_song.timescale[0] = val;
 					Conductor.timeScale = _song.timescale;
 
@@ -1312,10 +1346,10 @@ class ChartingState extends MusicBeatState
 				case 'section_timescale2':
 					var val = Std.int(nums.value);
 
-					if(val < 1)
+					if (val < 1)
 						val = 1;
 
-					//_song.notes[curSection].timeScale[1] = val;
+					// _song.notes[curSection].timeScale[1] = val;
 					_song.timescale[1] = val;
 					Conductor.timeScale = _song.timescale;
 
@@ -1323,7 +1357,6 @@ class ChartingState extends MusicBeatState
 
 					updateGrid();
 			}
-			
 		} else if (id == FlxUISlider.CHANGE_EVENT && (sender is FlxUISlider)) {
 			playbackSpeed = #if FLX_PITCH Std.int(slider_playback_speed.value) #else 1.0 #end;
 		}
@@ -1362,9 +1395,8 @@ class ChartingState extends MusicBeatState
 	{
 		var blockInput:Bool = false;
 
-		for (inputText in blockPressWhileTypingOn)
-		{
-			if(inputText.hasFocus) {
+		for (inputText in blockPressWhileTypingOn) {
+			if (inputText.hasFocus) {
 				FlxG.sound.muteKeys = [];
 				FlxG.sound.volumeDownKeys = [];
 				FlxG.sound.volumeUpKeys = [];
@@ -1373,16 +1405,10 @@ class ChartingState extends MusicBeatState
 			}
 		}
 
-		if(!blockInput)
-		{
-			for (stepper in blockPressWhileTypingOnStepper)
-			{
+		if (!blockInput) {
+			for (stepper in blockPressWhileTypingOnStepper) {
 				@:privateAccess
-				var leText:Dynamic = stepper.text_field;
-				var leText:FlxUIInputText = leText;
-
-				if(leText.hasFocus)
-				{
+				if (cast(stepper.text_field, flixel.addons.ui.FlxInputText).hasFocus) {
 					FlxG.sound.muteKeys = [];
 					FlxG.sound.volumeDownKeys = [];
 					FlxG.sound.volumeUpKeys = [];
@@ -1392,16 +1418,13 @@ class ChartingState extends MusicBeatState
 			}
 		}
 
-		if(!blockInput)
-		{
+		if (!blockInput) {
 			FlxG.sound.muteKeys = [ZERO, NUMPADZERO];
 			FlxG.sound.volumeDownKeys = [MINUS, NUMPADMINUS];
 			FlxG.sound.volumeUpKeys = [PLUS, NUMPADPLUS];
 
-			for (dropDownMenu in blockPressWhileScrolling)
-			{
-				if(dropDownMenu.dropPanel.visible)
-				{
+			for (dropDownMenu in blockPressWhileScrolling) {
+				if (dropDownMenu.dropPanel.visible) {
 					blockInput = true;
 					break;
 				}
@@ -1414,20 +1437,19 @@ class ChartingState extends MusicBeatState
 		eventValue1 = value1.text;
 		eventValue2 = value2.text;
 
-		if(oldValue1 != eventValue1 && curSelectedEvent != null)
+		if (oldValue1 != eventValue1 && curSelectedEvent != null)
 			curSelectedEvent[2] = eventValue1;
 
-		if(oldValue2 != eventValue2 && curSelectedEvent != null)
+		if (oldValue2 != eventValue2 && curSelectedEvent != null)
 			curSelectedEvent[3] = eventValue2;
 
-		if(FlxMath.roundDecimal(tempBpm, 1) < 0.1)
+		if (FlxMath.roundDecimal(tempBpm, 1) < 0.1)
 			tempBpm = 0.1;
 
-		if(FlxMath.roundDecimal(Conductor.bpm, 1) < 0.1)
+		if (FlxMath.roundDecimal(Conductor.bpm, 1) < 0.1)
 			Conductor.bpm = 0.1;
 
-		if(FlxMath.roundDecimal(_song.notes[curSection].bpm, 1) < 0.1)
-		{
+		if (FlxMath.roundDecimal(_song.notes[curSection].bpm, 1) < 0.1) {
 			_song.notes[curSection].bpm = 0.1;
 			Conductor.mapBPMChanges(_song);
 		}
@@ -1452,7 +1474,7 @@ class ChartingState extends MusicBeatState
 		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * Conductor.stepsPerSection));
 		cameraShitThing.y = strumLine.y;
 
-		curRenderedNotes.forEach(function(note:Note)
+				curRenderedNotes.forEach(function(note:Note)
 		{
 			if (FlxG.sound.music.playing)
 			{
@@ -1510,7 +1532,6 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		});
-
 				curRenderedNotes.forEach(function(note:Note) {
 			if (FlxG.sound.music.playing) {
 				FlxG.overlap(strumLine, note, function(_, _) {
@@ -1614,6 +1635,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ENTER)
 			{
 				_song.events = events;
+				globalSecton = curSection;
 				PlayState.SONG = _song;
 				FlxG.sound.music.stop();
 				vocals.stop();
@@ -1742,6 +1764,14 @@ class ChartingState extends MusicBeatState
 						FlxG.sound.music.time += daTime;
 
 					vocals.time = FlxG.sound.music.time;
+
+						if (FlxG.sound.music.time < sectionStartTime()) {
+							changeSection(curSection - 1);
+						}
+
+						if (FlxG.sound.music.time > FlxG.sound.music.length) {
+							changeSection(0);
+						}
 				}
 			}
 
@@ -1750,7 +1780,10 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.pressed.SHIFT)
 				shiftThing = 4;
 			if ((controls.RIGHT_P) && !control)
+				
 				changeSection(curSection + shiftThing);
+				
+
 			if ((controls.LEFT_P) && !control)
 				changeSection(curSection - shiftThing);
 
@@ -2104,10 +2137,11 @@ class ChartingState extends MusicBeatState
 		if (curSelectedNote != null)
 			stepperSusLength.value = curSelectedNote[2];
 	}
+	var uiSettings:Array<String>;
 
 	function updateGrid():Void
 	{
-		var uiSettings:Array<String> = CoolUtil.coolTextFile(Paths.txt("ui skins/" + _song.ui_Skin + "/config"));
+	
 		remove(gridBG);
 		gridBG.kill();
 		gridBG.destroy();
@@ -2116,22 +2150,35 @@ class ChartingState extends MusicBeatState
 		add(gridBG);
 		gridBG.alpha = 0.6;
 
+
+		remove(gridBGNext);
+		gridBGNext.kill();
+		gridBGNext.destroy();
+
+		gridBGNext = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * (_song.keyCount + _song.playerKeyCount + 1),
+			Std.int((GRID_SIZE * Conductor.stepsPerSection) * zoomLevel));
+		gridBGNext.y += gridBG.height;
+		gridBGNext.color = FlxColor.GRAY;
+		add(gridBGNext);
+
 		remove(gridBlackLine);
 		gridBlackLine.kill();
 		gridBlackLine.destroy();
 
-		gridBlackLine = new FlxSprite(gridBG.x + (GRID_SIZE * ((!_song.notes[curSection].mustHitSection ? _song.keyCount : _song.playerKeyCount) + 1))).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
+		gridBlackLine = new FlxSprite(gridBG.x
+			+ (GRID_SIZE * ((!_song.notes[curSection].mustHitSection ? _song.keyCount : _song.playerKeyCount)
+				+ 1))).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridBlackLine);
 
 		remove(gridEventBlackLine);
 		gridEventBlackLine.kill();
 		gridEventBlackLine.destroy();
 
-		gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
+		gridEventBlackLine = new FlxSprite(gridBG.x + GRID_SIZE).makeGraphic(2, Std.int(gridBG.height) * 2, FlxColor.BLACK);
 		add(gridEventBlackLine);
 
 		if(strumLine != null)
-			strumLine.makeGraphic(Std.int(gridBG.width), 4);
+			strumLine?.makeGraphic(Std.int(gridBG.width), 4);
 
 		curRenderedNotes.clear();
 
@@ -2169,6 +2216,10 @@ class ChartingState extends MusicBeatState
 		}, true);
 
 		var sectionInfo:Array<Dynamic> = _song.notes[curSection].sectionNotes;
+
+		if (_song?.notes[curSection + 1]?.sectionNotes != null) {
+			sectionInfo = sectionInfo.concat(_song.notes[curSection + 1].sectionNotes);
+		}
 
 		if (_song.notes[curSection].changeBPM && _song.notes[curSection].bpm > 0)
 			Conductor.changeBPM(_song.notes[curSection].bpm);
@@ -2266,26 +2317,7 @@ class ChartingState extends MusicBeatState
 		}
 
 		if (colorQuantization) {
-			var col:Array<Int> = [255, 0, 0];
-			for (note in curRenderedNotes.members) {
-				if (!note.isSustainNote && note.affectedbycolor) {
-					var noteBeat:Int = Math.floor(((note.strumTime / ( Conductor.stepCrochet * 4)) * 48) + 0.5);
-					for (beat in 0...Note.beats.length - 1) {
-						if ((noteBeat % (192 / Note.beats[beat]) == 0)) {
-							col = Note.quantColors[beat];
-							break;
-						}
-					}
-					note.colorSwap.r = col[0];
-					note.colorSwap.g = col[1];
-					note.colorSwap.b = col[2];
-					for (sustain in note.sustains) {
-						sustain.colorSwap.r = note.colorSwap.r;
-						sustain.colorSwap.g = note.colorSwap.g;
-						sustain.colorSwap.b = note.colorSwap.b;
-					}
-				}
-			}
+			Note.applyColorQuants(curRenderedNotes.members);
 		}
 
 		if (events.length >= 1) {

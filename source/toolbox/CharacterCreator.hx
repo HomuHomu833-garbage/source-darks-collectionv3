@@ -536,22 +536,32 @@ class CharacterCreator extends MusicBeatState {
 		tabGhost.add(ghostBlendCheck);
 
 		var ghostCopyButton:FlxUIButton = new FlxUIButton(220, 15, "Copy\nCharacter", () -> {
-			ghostAnimList = [];
-			var position = stage.getCharacterPos(char.isPlayer ? 0 : 1, char);
-			ghost.setPosition(position[0], position[1]);
-			ghost.animation.destroyAnimations();
-			ghost.loadCharacterConfiguration(char.config);
-			ghost.flipX = char.flipX;
-			for (anim => offsets in char.animOffsets) {
-				ghostAnimList.push(anim);
+		ghostAnimList = [];
+		var position = stage.getCharacterPos(char.isPlayer ? 0 : 1, char);
+		ghost.setPosition(position[0], position[1]);
+		ghost.animation.destroyAnimations();
+		ghost.loadCharacterConfiguration(char.config);
+		ghost.flipX = char.flipX;
+
+		ghost.animOffsets = [];
+		for (anim => offsets in char.animOffsets) {
+			if (ghost.flipX) {
+				ghost.animOffsets.set(anim, [-offsets[0], offsets[1]]);
+			} else {
+				ghost.animOffsets.set(anim, [offsets[0], offsets[1]]);
 			}
-			ghostAnimList = animList;
-			try {
-				ghost.playAnim(ghost.animation.curAnim.name, true);
-			} catch (e) {}
-		});
-		ghostCopyButton.resize(75, ghostCopyButton.height + 5);
-		tabGhost.add(ghostCopyButton);
+			ghostAnimList.push(anim);
+		}
+
+		ghostAnimList = animList;
+		try {
+			ghost.playAnim(ghost.animation.curAnim.name, true);
+		} catch (e) {}
+	});
+	ghostCopyButton.resize(75, ghostCopyButton.height + 5);
+	tabGhost.add(ghostCopyButton);
+
+
 
 		var tabCharacter:FlxUI = new FlxUI(null, tabs);
 		tabCharacter.name = "Character";
@@ -1116,6 +1126,7 @@ class CharacterCreator extends MusicBeatState {
 	function saveConfig() {
 		var config:CharacterConfig = cast {
 			imagePath: char.config.imagePath,
+			graphicsSize: char.config.graphicsSize,
 			extraSheets: char.config.extraSheets,
 			healthIcon: char.icon,
 			barColor: char.config.barColor,

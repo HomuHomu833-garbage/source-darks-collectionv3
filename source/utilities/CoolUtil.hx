@@ -16,6 +16,9 @@ import haxe.EntryPoint;
 import haxe.Log;
 import haxe.Json;
 import haxe.PosInfos;
+import sys.FileSystem;
+import game.FreeplaySong;
+import flixel.tweens.FlxEase;
 
 /**
  * Helper class with lots of utilitiy functions.
@@ -169,6 +172,84 @@ class CoolUtil {
 		}
 
 		return maxKey;
+	}
+	public static function convertFromFreeplaySongList() {
+		final possibleLocations:Array<String> = [
+			"data/freeplaySonglist.txt",
+			"data/freeplaySongList.txt",
+			"_append/data/freeplaySongList.txt",
+			"_append/data/freeplaySonglist.txt"
+		];
+
+		inline function parseFreeplaySongList(list:Array<String>):Array<FreeplaySong> {
+			var songs:Array<FreeplaySong> = [];
+
+			for (i in 0...list.length) {
+				var line = list[i].trim();
+				if (line != "") {
+					var parts:Array<String> = line.split(":");
+
+					var songName:String = parts[0];
+					var icon:String      = parts[1];
+					var week:Int         = Std.parseInt(parts[2]) ?? 0;
+
+					var diffs:Array<String> = ["easy","normal","hard"];
+					if (parts.length > 3 && parts[3] != "")
+						diffs = parts[3].split(",");
+
+					var color:String = parts.length > 4 && parts[4] != ""
+						? parts[4]
+						: "#00FF00";
+
+					var groupIdx:Int = 0;
+					if (parts.length > 5)
+						groupIdx = Std.parseInt(parts[5]) ?? 0;
+
+					// bgs
+					var bgs:String = "";
+					if (parts.length > 6 && parts[6] != "")
+						bgs = parts[6]; 
+
+					// render
+					var render:String = "";
+					if (parts.length > 7 && parts[7] != "")
+						render = parts[7]; 
+
+					songs.push({
+						name:         songName,
+						icon:         icon,
+						week:         week,
+						difficulties: diffs,
+						color:        color,
+						group:        groupIdx,
+						bgs:          bgs,
+						render:       render 
+					});
+				}
+			}
+
+			return songs;
+		}
+
+
+		var curMod:String = Options.getData("curMod");
+
+		if (FileSystem.exists('./mods/$curMod/data/freeplay.json')) {
+			return;
+		}
+
+		for (location in possibleLocations) {
+			var pathToCheck:String = './mods/$curMod/$location';
+			if (FileSystem.exists(pathToCheck)) {
+				if (!FileSystem.exists('./mods/$curMod/data/')) {
+					FileSystem.createDirectory('./mods/$curMod/data');
+				}
+				File.saveContent('./mods/$curMod/data/freeplay.json', Json.stringify({
+					songs: parseFreeplaySongList(coolTextFileSys(pathToCheck)),
+				}, "\t"));
+				break;
+			}
+		}
 	}
 
 	/**
@@ -526,6 +607,86 @@ class CoolUtil {
 		openfl.system.System.gc();
 		#end
 	}
+
+		public static function easeFromString(ease:String = 'linear'):EaseFunction {
+		switch (ease.toLowerCase().trim()) {
+			case 'backin':
+				return FlxEase.backIn;
+			case 'backinout':
+				return FlxEase.backInOut;
+			case 'backout':
+				return FlxEase.backOut;
+			case 'bouncein':
+				return FlxEase.bounceIn;
+			case 'bounceinout':
+				return FlxEase.bounceInOut;
+			case 'bounceout':
+				return FlxEase.bounceOut;
+			case 'circin':
+				return FlxEase.circIn;
+			case 'circinout':
+				return FlxEase.circInOut;
+			case 'circout':
+				return FlxEase.circOut;
+			case 'cubein':
+				return FlxEase.cubeIn;
+			case 'cubeinout':
+				return FlxEase.cubeInOut;
+			case 'cubeout':
+				return FlxEase.cubeOut;
+			case 'elasticin':
+				return FlxEase.elasticIn;
+			case 'elasticinout':
+				return FlxEase.elasticInOut;
+			case 'elasticout':
+				return FlxEase.elasticOut;
+			case 'expoin':
+				return FlxEase.expoIn;
+			case 'expoinout':
+				return FlxEase.expoInOut;
+			case 'expoout':
+				return FlxEase.expoOut;
+			case 'quadin':
+				return FlxEase.quadIn;
+			case 'quadinout':
+				return FlxEase.quadInOut;
+			case 'quadout':
+				return FlxEase.quadOut;
+			case 'quartin':
+				return FlxEase.quartIn;
+			case 'quartinout':
+				return FlxEase.quartInOut;
+			case 'quartout':
+				return FlxEase.quartOut;
+			case 'quintin':
+				return FlxEase.quintIn;
+			case 'quintinout':
+				return FlxEase.quintInOut;
+			case 'quintout':
+				return FlxEase.quintOut;
+			case 'sinein':
+				return FlxEase.sineIn;
+			case 'sineinout':
+				return FlxEase.sineInOut;
+			case 'sineout':
+				return FlxEase.sineOut;
+			case 'smoothstepin':
+				return FlxEase.smoothStepIn;
+			case 'smoothstepinout':
+				return FlxEase.smoothStepInOut;
+			case 'smoothstepout':
+				return FlxEase.smoothStepOut;
+			case 'smootherstepin':
+				return FlxEase.smootherStepIn;
+			case 'smootherstepinout':
+				return FlxEase.smootherStepInOut;
+			case 'smootherstepout':
+				return FlxEase.smootherStepOut;
+		}
+
+		return FlxEase.linear;
+	}
+
 }
 
 enum abstract PrintType(String) to String from String {

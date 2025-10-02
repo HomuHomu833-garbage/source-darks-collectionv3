@@ -96,6 +96,10 @@ class RTXDebug extends MusicBeatState
 	var innerSpr:FlxSprite;
 	var innerTxt:FlxText;
 
+
+	var angleSlider:FixedSlider;
+	var distanceSlider:FixedSlider;
+
 	var fakeChar = new Character(0, 0, "");
 
 	var hueSlider:FixedSlider;
@@ -325,15 +329,16 @@ class RTXDebug extends MusicBeatState
 		add(innerTxt);
 
 
-		var angleSlider = new FixedSlider(rtxShader, "innerShadowAngle", 460, 10, 0, 360, 100, 15, 3, 0xFF000000);
+		 angleSlider = new FixedSlider(rtxShader, "innerShadowAngle", 460, 10, 0, 360, 100, 15, 3, 0xFF000000);
 		angleSlider.scrollFactor.set();
 		angleSlider.cameras = [camHUD];
 		add(angleSlider);
 
-		var distanceSlider = new FixedSlider(rtxShader, "innerShadowDistance", 460, 10+40, 0, 40, 100, 15, 3, 0xFF000000);
+		distanceSlider = new FixedSlider(rtxShader, "innerShadowDistance", 460, 50, 0, 40, 100, 15, 3, 0xFF000000);
 		distanceSlider.scrollFactor.set();
 		distanceSlider.cameras = [camHUD];
 		add(distanceSlider);
+
 
 		hueSlider = new FixedSlider(stageGroup.colorSwap, "hue", 460, 10+120, 0, 1, 100, 15, 3, 0xFF000000);
 		hueSlider.scrollFactor.set();
@@ -451,7 +456,6 @@ class RTXDebug extends MusicBeatState
 		rtxShader.innerShadowColor.setRGBFloat(innerR, innerG, innerB, innerA);
 		innerSpr.color = rtxShader.innerShadowColor;
 		innerTxt.text = rtxShader.innerShadowColor.toHexString(false);
-		//rtxShader.update(elapsed);
 
 		rtxShader.lightX = light.x;
 		rtxShader.lightY = light.y;

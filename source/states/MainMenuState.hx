@@ -1,5 +1,7 @@
 package states;
-
+import sys.io.File;
+import sys.FileSystem;
+import haxe.Json;
 #if DISCORD_ALLOWED
 import utilities.DiscordClient;
 #end
@@ -29,10 +31,11 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import openfl.display.BlendMode;
 import states.AwardsState;
-
+import game.FreeplaySong;
 using utilities.BackgroundUtil;
 import states.AwardsState.AwardDisplay;
 import states.AwardsState.AwardManager;
+import ui.DesingText;
 class MainMenuState extends MusicBeatState {
 	/**
 		Current instance of `MainMenuState`.
@@ -344,7 +347,10 @@ class MainMenuState extends MusicBeatState {
 
 	
 	
-	
+	public static var preloadedStyles:Array<Dynamic> = [];
+	public static var keysArray:Array<Int> = [];
+    public static var namesArray:Array<String> = [];
+    public static var groupNames:Array<String> = [];
 	
 	function selectCurrent() {
 		var selectedButton:String = optionShit[curSelected];
@@ -353,9 +359,14 @@ class MainMenuState extends MusicBeatState {
 			case 'story mode':
 				FlxG.switchState(() -> new StoryMenuState());
 
-			case 'FREEPLAY':
-				FlxG.switchState(() -> new FreeplayState());
-
+		case 'FREEPLAY':
+				FlxG.switchState(new GroupSelectState(
+				keysArray,
+				namesArray,
+				function(selectedGroup:Int) {
+					FlxG.switchState(() -> new FreeplayState(selectedGroup));
+				}
+			));
 			case 'OPTIONS':
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;

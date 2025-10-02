@@ -42,7 +42,11 @@ import haxe.Json;
 import flixel.util.FlxStringUtil;
 import openfl.display.ShaderParameter;
 import modcharting.FlxSprite3D;
-
+import flixel.perspective.PerspectiveSprite;
+import flixel.perspective.PerspectiveText;
+import shaders.Shaders.RTXEffect;
+import shaders.Shaders.RTXShader;
+import openfl.display.BitmapData;
 using StringTools;
 
 typedef LuaCamera = {
@@ -118,20 +122,25 @@ class LuaScript extends Script {
 		return lua_Cameras.get("game");
 	}
 
-	public static function killShaders() {
-		for (cam in lua_Cameras) {
-			cam.shaders = [];
-			cam.shaderNames = [];
-		}
-	}
+	public static function killShaders() //dead
+    {
+        FlxG.game.setFilters([]);
+        for (cam in lua_Cameras)
+        {
+            cam.shaders = [];
+            cam.shaderNames = [];
+        }
+
+        lua_Shaders.clear();
+    }
 
 	override public function destroy() {
-		if (lua != null) {
-			trails.clear();
-			Lua.close(lua);
-			lua = null;
+			if (lua != null) {
+				trails.clear();
+				Lua.close(lua);
+				lua = null;
+			}
 		}
-	}
 
 	function getLuaErrorMessage(l) {
 		var v:String = Lua.tostring(l, -1);
@@ -349,7 +358,7 @@ class LuaScript extends Script {
 			trace(str, printType.toUpperCase());
 		});
 
-		setFunction("flashCamera", function(camera:String = "", color:String = "#FFFFFF", time:Float = 1, force:Bool = false) {
+		setFunction("stopFlash", function(camera:String = "", color:String = "#FFFFFF", time:Float = 1, force:Bool = false) {
 			if (Options.getData("flashingLights"))
 				cameraFromString(camera).flash(FlxColor.fromString(color), time, null, force);
 		});
@@ -357,6 +366,11 @@ class LuaScript extends Script {
 		setFunction("fadeCamera", function(camera:String = "", color:String = "#FFFFFF", time:Float = 1, fadeIn:Bool = false, force:Bool = false) {
 			if (Options.getData("flashingLights"))
 				cameraFromString(camera).fade(FlxColor.fromString(color), time, fadeIn, null, force);
+		});
+
+		setFunction("flashCamera", function(camera:String = "", color:String = "#FFFFFF", time:Float = 1, force:Bool = false) {
+			if (Options.getData("flashingLights"))
+				cameraFromString(camera).flash(FlxColor.fromString(color), time, null, force);
 		});
 
 		setFunction("triggerEvent", function(event_name:String, argument_1:Dynamic, argument_2:Dynamic) {
@@ -660,9 +674,22 @@ class LuaScript extends Script {
 				Reflect.setProperty(getActorByName(id), "alignment", align);
 		});
 
+		setFunction("makePerspectiveText", function(id:String, text:String, x:Float, y:Float, size:Int = 32, font:String = "vcr.ttf", fieldWidth:Float = 0) {
+			if (!lua_Sprites.exists(id)) {
+				var Sprite:PerspectiveText = new PerspectiveText(x, y, fieldWidth, text, size);
+				Sprite.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE_FAST, FlxColor.TRANSPARENT);
+				// Sprite.setFormat(Paths.font(font), size);
+				Sprite.font = Paths.font(font);
+
+				lua_Sprites.set(id, Sprite);
+
+				PlayState.instance.add(Sprite);
+			} else
+				CoolUtil.coolError("Sprite " + id + " already exists! Choose a different name!", "Leather Engine Modcharts");
+		});
 		setFunction("makeText", function(id:String, text:String, x:Float, y:Float, size:Int = 32, font:String = "vcr.ttf", fieldWidth:Float = 0) {
 			if (!lua_Sprites.exists(id)) {
-				var Sprite:FlxText = new FlxText(x, y, fieldWidth, text, size);
+				var Sprite:FlxTextFix = new FlxTextFix(x, y, fieldWidth, text, size);
 				Sprite.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE_FAST, FlxColor.TRANSPARENT);
 				// Sprite.setFormat(Paths.font(font), size);
 				Sprite.font = Paths.font(font);
@@ -676,7 +703,7 @@ class LuaScript extends Script {
 
 		setFunction("newText", function(id:String, text:String, x:Float, y:Float, size:Int = 32, font:String = "vcr.ttf", fieldWidth:Float = 0) {
 			if (!lua_Sprites.exists(id)) {
-				var Sprite:FlxText = new FlxText(x, y, fieldWidth, text, size);
+				var Sprite:FlxTextFix = new FlxTextFix(x, y, fieldWidth, text, size);
 				Sprite.font = Paths.font(font);
 
 				lua_Sprites.set(id, Sprite);
@@ -770,6 +797,23 @@ class LuaScript extends Script {
 				} else
 					CoolUtil.coolError("Sprite " + id + " already exists! Choose a different name!", "Leather Engine Modcharts");
 			});
+		setFunction("makePerspectiveSprite", function(id:String, filename:String, x:Float, y:Float, size:Float = 1, ?sizeY:Float = null) {
+			if (!lua_Sprites.exists(id)) {
+				var Sprite:PerspectiveSprite = new PerspectiveSprite(x, y);
+
+				if (filename != null && filename.length > 0)
+					Sprite.loadGraphic(Paths.gpuBitmap(filename));
+
+				Sprite.scale.set(size, sizeY == null ? size : sizeY);
+
+				Sprite.updateHitbox();
+
+				lua_Sprites.set(id, Sprite);
+
+				PlayState.instance.add(Sprite);
+			} else
+				CoolUtil.coolError("Sprite " + id + " already exists! Choose a different name!", "Leather Engine Modcharts");
+		});
 
 		setFunction("makeSprite", function(id:String, filename:String, x:Float, y:Float, size:Float = 1, ?sizeY:Float = null) {
 			if (!lua_Sprites.exists(id)) {
@@ -865,6 +909,24 @@ class LuaScript extends Script {
 				CoolUtil.coolError("Sprite " + id + " already exists! Choose a different name!", "Leather Engine Modcharts");
 		});
 
+		setFunction("makeAnimatedPerspectiveSprite", function(id:String, filename:String, x:Float, y:Float, size:Float = 1, ?sizeY:Float = null) {
+			if (!lua_Sprites.exists(id)) {
+				var Sprite:PerspectiveSprite = new PerspectiveSprite(x, y);
+
+				if (filename != null && filename.length > 0)
+					Sprite.frames = Paths.getSparrowAtlas(filename);
+
+				Sprite.scale.set(size, sizeY == null ? size : sizeY);
+
+				Sprite.updateHitbox();
+
+				lua_Sprites.set(id, Sprite);
+
+				PlayState.instance.add(Sprite);
+			} else
+				CoolUtil.coolError("Sprite " + id + " already exists! Choose a different name!", "Leather Engine Modcharts");
+		});
+
 		setFunction("makeDancingSprite",
 			function(id:String, filename:String, x:Float, y:Float, size:Float = 1, ?oneDanceAnimation:Bool, ?antialiasing:Bool, ?sizeY:Float = null) {
 				if (!lua_Sprites.exists(id)) {
@@ -913,15 +975,24 @@ class LuaScript extends Script {
 		});
 
 		setFunction("addActorTrail", function(id:String, length:Int = 10, delay:Int = 3, alpha:Float = 0.4, diff:Float = 0.05) {
-			if (!trails.exists(id) && getActorByName(id) != null) {
-				var trail = new FlxTrail(getActorByName(id), null, length, delay, alpha, diff);
-
-				PlayState.instance.insert(PlayState.instance.members.indexOf(getActorByName(id)) - 1, trail);
+			var spr = getActorByName(id);
+			if (!trails.exists(id) && spr != null) {
+				var trail = new FlxTrail(spr, null, length, delay, alpha, diff);
+				PlayState.instance.insert(PlayState.instance.members.indexOf(spr) - 1, trail);
+				trail.cameras = spr.cameras;
+				trail.scrollFactor.set(spr.scrollFactor.x, spr.scrollFactor.y);
+				FlxG.signals.postUpdate.add(function() {
+					if (spr != null && trail != null ) {
+						trail.alpha = spr.alpha;
+						trail.cameras = spr.cameras;
+					}
+				});
 
 				trails.set(id, trail);
 			} else
 				trace("Trail " + id + " already exists (or actor is null)!!!");
 		});
+
 
 		setFunction("removeActorTrail", function(id:String) {
 			if (trails.exists(id)) {
@@ -2599,7 +2670,7 @@ class LuaScript extends Script {
 		setFunction("tweenScaleX", function(id:String, toScale:Float, time:Float, easeStr:String = "", onComplete:String = "") {
 			if (getActorByName(id) != null)
 				PlayState.instance.tweenManager.tween(getActorByName(id).scale, {x: toScale}, time, {
-					ease: easeFromString(easeStr),
+					ease: CoolUtil.easeFromString(easeStr),
 					onComplete: function(flxTween:FlxTween) {
 						if (onComplete != '' && onComplete != null) {
 							call(onComplete, [id]);
@@ -2610,7 +2681,7 @@ class LuaScript extends Script {
 		setFunction("tweenScaleY", function(id:String, toScale:Float, time:Float, easeStr:String = "", onComplete:String = "") {
 			if (getActorByName(id) != null)
 				PlayState.instance.tweenManager.tween(getActorByName(id).scale, {y: toScale}, time, {
-					ease: easeFromString(easeStr),
+					ease: CoolUtil.easeFromString(easeStr),
 					onComplete: function(flxTween:FlxTween) {
 						if (onComplete != '' && onComplete != null) {
 							call(onComplete, [id]);
@@ -2639,6 +2710,54 @@ class LuaScript extends Script {
 			}
 		});
 
+		
+        setFunction("setActorRTXShader", function(actorStr:String, shaderName:String) {
+            if (Options.getData("shaders"))
+                return;
+
+            var shad = lua_Shaders.get(shaderName);
+            var actor = getActorByName(actorStr);
+            
+
+
+            if(actor != null && shad != null)
+            {
+                //if (shad is RTXEffect)
+               // {
+                   
+                    var rtx:RTXEffect = cast shad;
+                    rtx.parentSprite = cast actor; //cast to reflected sprite
+
+                    @:privateAccess
+                    var stage_Data = PlayState.instance.stage.stageData;
+                    if (stage_Data.rtxData != null)
+                    {
+                        var overlay = FlxColor.fromString(stage_Data.rtxData.overlay);
+                        var satin = FlxColor.fromString(stage_Data.rtxData.satin);
+                        var inner = FlxColor.fromString(stage_Data.rtxData.inner);
+
+                        rtx.overlayColor = FlxColor.fromRGBFloat(overlay.redFloat, overlay.greenFloat, overlay.blueFloat, stage_Data.rtxData.overlayAlpha);
+                        rtx.satinColor = FlxColor.fromRGBFloat(satin.redFloat, satin.greenFloat, satin.blueFloat, stage_Data.rtxData.satinAlpha);
+                        rtx.innerShadowColor = FlxColor.fromRGBFloat(inner.redFloat, inner.greenFloat, inner.blueFloat, stage_Data.rtxData.innerAlpha);
+            
+                        rtx.innerShadowAngle = stage_Data.rtxData.innerAngle;
+                        rtx.innerShadowDistance = stage_Data.rtxData.innerDistance;
+                        rtx.updateColorShift();
+        
+                        if (stage_Data.rtxData.pointLight != null)
+                        {
+                            rtx.pointLight = stage_Data.rtxData.pointLight;
+                            rtx.lightX = stage_Data.rtxData.lightX;
+                            rtx.lightY = stage_Data.rtxData.lightY;
+                            trace(stage_Data.rtxData);
+                        }
+                            
+                    }
+                //}
+                actor.shader = Reflect.getProperty(shad, 'shader'); //use reflect to workaround compiler errors
+            }
+        });
+
 		// setFunction("tweenAngle3DX", function(id:String, toAngle:Float, duration:Float, ease:String = "linear", ?startDelay:Float = 0.0, ?onComplete:Dynamic) {
 		// 	if (id != null) {
 		// 		FlxTween.tween(id + ".angle3D", {x: toAngle}, duration, {
@@ -2653,6 +2772,100 @@ class LuaScript extends Script {
 		// 		trace('Object named $id doesn\'t exist!', ERROR);
 		// 	}
 		// });
+        // rtx sprites
+		
+	 
+		setFunction("tweenActorRTXColor", 
+			function(character:String, prop:String, value:String, time:Float, easeStr:String = "linear") {
+				if (Options.getData("shaders")) return;
+
+				var ease = easeFromString(easeStr);
+				var char:Character = getCharacterByName(character);
+				if (char != null) {
+					var startVal:FlxColor = Reflect.getProperty(char.rtxShader, prop);
+					var endVal:FlxColor = FlxColor.fromString(value);
+
+					PlayState.instance.tweenManager.color(null, time, startVal, endVal, {
+						onUpdate: function(tween:FlxTween) {
+							var ting = FlxColor.interpolate(startVal, endVal, ease(tween.percent));
+							Reflect.setProperty(char.rtxShader, prop, ting);
+						},
+						ease: ease,
+						onComplete: function(_) {
+							Reflect.setProperty(char.rtxShader, prop, endVal);
+						}
+					});
+				}
+			}
+		);
+
+	
+		setFunction("getActorRTXColor", 
+			function(character:String, prop:String) {
+				var char:Character = getCharacterByName(character);
+				if (char != null) {
+					var col:FlxColor = Reflect.getProperty(char.rtxShader, prop);
+					return col.toHexString();
+				}
+				return null;
+			}
+		);
+
+		setFunction("setActorRTXProperty", 
+			function(character:String, prop:String, value:Dynamic) {
+				if (Options.getData("shaders")) return;
+
+				var char:Character = getCharacterByName(character);
+				if (char != null) {
+					if (char.otherCharacters != null) {
+						for (c in char.otherCharacters) {
+							Reflect.setProperty(c.rtxShader, prop, value);
+						}
+					} else {
+						Reflect.setProperty(char.rtxShader, prop, value);
+					}
+				}
+			}
+		);
+
+		setFunction("tweenActorRTXProperty", 
+			function(character:String, prop:String, value:Dynamic, time:Float, easeStr:String = "linear") {
+				if (Options.getData("shaders")) return;
+
+				var ease = easeFromString(easeStr);
+				var char:Character = getCharacterByName(character);
+				if (char != null) {
+					var startVal = Reflect.getProperty(char.rtxShader, prop);
+
+					if (char.otherCharacters != null) {
+						for (c in char.otherCharacters) {
+							PlayState.instance.tweenManager.num(startVal, value, time, {
+								onUpdate: function(tween:FlxTween) {
+									var ting = FlxMath.lerp(startVal, value, ease(tween.percent));
+									Reflect.setProperty(c.rtxShader, prop, ting);
+								},
+								ease: ease,
+								onComplete: function(_) {
+									Reflect.setProperty(c.rtxShader, prop, value);
+								}
+							});
+						}
+					} else {
+						PlayState.instance.tweenManager.num(startVal, value, time, {
+							onUpdate: function(tween:FlxTween) {
+								var ting = FlxMath.lerp(startVal, value, ease(tween.percent));
+								Reflect.setProperty(char.rtxShader, prop, ting);
+							},
+							ease: ease,
+							onComplete: function(_) {
+								Reflect.setProperty(char.rtxShader, prop, value);
+							}
+						});
+					}
+				}
+			}
+		);
+
 
 		setFunction("setActorProperty", function(id:String, prop:String, value:Dynamic) {
 			var actor = getActorByName(id);
@@ -2977,6 +3190,19 @@ class LuaScript extends Script {
 				actor.shader = null;
 			}
 		});
+
+		 setFunction("makeCameraSpriteClone", function(name:String, cam:String)
+        {
+            var camera = getCameraByName(cam).cam;
+            var sprite = new FlxSprite();
+            @:privateAccess
+            var pixels = camera._flashBitmap.bitmapData;
+            sprite.loadGraphic(pixels);
+            sprite.cameras = [camera];
+
+            lua_Sprites.set(name, sprite);
+            PlayState.instance.add(sprite);
+        });
 
 		setFunction("createCustomShader", function(id:String, frag:String, ?vert:String) {
 			var _vert:String = Assets.exists(Paths.vert(vert)) ? Assets.getText(Paths.vert(vert)) : null;
@@ -3770,3 +3996,81 @@ class LuaScript extends Script {
 	}
 }
 #end
+class FlxTextFix extends FlxText
+{
+	override function regenGraphic()
+	{
+		if (textField == null || !_regen)
+			return;
+
+		var oldWidth:Int = FlxText.VERTICAL_GUTTER;
+		var oldHeight:Int = FlxText.VERTICAL_GUTTER;
+
+		if (graphic != null)
+		{
+			oldWidth = graphic.width;
+			oldHeight = graphic.height;
+		}
+
+		var newWidth:Int = Math.ceil(textField.width) + FlxText.VERTICAL_GUTTER*2;
+		// Account for gutter
+		var newHeight:Int = Math.ceil(textField.textHeight) + FlxText.VERTICAL_GUTTER;
+
+        newWidth += Math.ceil(borderSize*2);
+
+		// prevent text height from shrinking on flash if text == ""
+		if (textField.textHeight == 0)
+		{
+			newHeight = oldHeight;
+		}
+
+		if (oldWidth != newWidth || oldHeight != newHeight)
+		{
+			// Need to generate a new buffer to store the text graphic
+			height = newHeight;
+			var key:String = flixel.FlxG.bitmap.getUniqueKey("text");
+			makeGraphic(newWidth, newHeight, FlxColor.TRANSPARENT, false, key);
+
+			if (_hasBorderAlpha)
+				_borderPixels = graphic.bitmap.clone();
+            frameWidth = newWidth;
+			frameHeight = newHeight;
+			textField.width = width * 1.5;
+			textField.height = height * 1.2;
+			_flashRect.x = 0;
+			_flashRect.y = 0;
+			_flashRect.width = newWidth;
+			_flashRect.height = newHeight;
+		}
+		else // Else just clear the old buffer before redrawing the text
+		{
+			graphic.bitmap.fillRect(_flashRect, FlxColor.TRANSPARENT);
+			if (_hasBorderAlpha)
+			{
+				if (_borderPixels == null)
+					_borderPixels = new BitmapData(frameWidth, frameHeight, true);
+				else
+					_borderPixels.fillRect(_flashRect, FlxColor.TRANSPARENT);
+			}
+		}
+
+		if (textField != null && textField.text != null && textField.text.length > 0)
+		{
+			// Now that we've cleared a buffer, we need to actually render the text to it
+			copyTextFormat(_defaultFormat, _formatAdjusted);
+
+			_matrix.identity();
+			
+			_matrix.translate(borderSize*3, borderSize*2);
+			applyBorderStyle();
+			applyBorderTransparency();
+			applyFormats(_formatAdjusted, false);
+
+			
+			drawTextFieldTo(graphic.bitmap);
+		}
+
+		_regen = false;
+		resetFrame();
+	}
+}

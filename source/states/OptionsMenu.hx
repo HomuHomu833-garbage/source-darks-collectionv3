@@ -86,6 +86,7 @@ class OptionsMenu extends MusicBeatState {
 			new PageOption("Back", "Graphics", "Go back to the graphics menu."),
 			new BoolOption("Antialiasing", "antialiasing",
 				"When toggled, antialiasing will be enabled,\nmaking sprites smoother at the cost of some performance.\n(Should only really matter on really low-end devices)"),
+			new BoolOption("Force Disable Scripts", "forceDisableScripts", "que hace esto pasen tutorial"),
 			new BoolOption("Low Quality", "lowQuality", "When toggled, the game will not load\nunneeded sprites to improve performance.\n(when possible)"),
 			new BoolOption("Health Icons", "healthIcons", "Toggles health icons."),
 			new BoolOption("Health Bar", "healthBar", "Toggles the health bar."),
@@ -112,6 +113,7 @@ class OptionsMenu extends MusicBeatState {
 			new DisplayFontOption("Display Font", [
 				"_sans",
 				Assets.getFont(Paths.font("vcr.ttf")).fontName,
+				Assets.getFont(Paths.font("consola.ttf")).fontName,
 				Assets.getFont(Paths.font("pixel.otf")).fontName
 			],
 				"infoDisplayFont", "Change the font used for the info display."),

@@ -1,5 +1,6 @@
 package ui.logs;
 
+import flixel.system.debug.log.LogStyle;
 import openfl.text.TextField;
 import lime.app.Application;
 import openfl.events.Event;
@@ -8,13 +9,15 @@ import flixel.FlxG;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import openfl.display.BitmapData;
-import flixel.system.debug.log.LogStyle;
+
 class Logs extends Sprite {
 	public var logs:Array<String> = [];
 	public var bg:Bitmap;
 	public var logText:LogText;
 
 	public static var instance:Logs = null;
+
+	public static var errors(default, null) = 0;
 
 	public var texts:Map<PrintType, LogPrint> = [
 		PrintType.LOG => new LogPrint("LOG", FlxColor.CYAN),
@@ -48,6 +51,7 @@ class Logs extends Sprite {
 		else if (FlxG.keys.justPressed.F4) {
 			logs = [];
 			logText.text = '';
+			errors = 0;
 		}
 	}
 
@@ -75,10 +79,10 @@ class Logs extends Sprite {
 	public static inline function error(message:Dynamic) {
 		if (Logs.instance != null)
 			Logs.instance.addLog(message, PrintType.ERROR);
+		errors ++;
 		if (LogStyle.ERROR.throwException) {
 			throw message;
 		}
-
 	}
 
 	public function addLog(message:String, ?logType:PrintType) {

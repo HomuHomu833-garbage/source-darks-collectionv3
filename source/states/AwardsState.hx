@@ -335,7 +335,7 @@ class AwardsState extends MusicBeatState
 
         var pageTabsText = new Alphabet(450, 50, "Awards", true, false);
         //pageTabsText.screenCenter();
-        var pageTabBG = new FlxSprite(0,0).loadGraphic(Paths.image("freeplay/thing"));
+        var pageTabBG = new FlxSprite(0,0).loadGraphic(Paths.image("awards/thing"));
 		pageTabBG.screenCenter();
 		pageTabBG.y = 20;
 		add(pageTabBG);

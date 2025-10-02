@@ -153,7 +153,7 @@ class UISkinSelect extends MusicBeatSubstate
         }
 
         defaultText.alpha = (ui_Skin == "default") ? 1 : 0;
-        notMultiText.alpha = (ui_Skin == "Corrupted" || ui_Skin == "scalable cel") ? 1 : 0;
+        notMultiText.alpha = (ui_Skin == "Corrupted" || ui_Skin == "Corrupted Glitched" || ui_Skin == "Resort" || ui_Skin == "scalable cel") ? 1 : 0;
 
         if(accepted && !leaving)
             Options.setData(ui_Skin, "uiSkin");

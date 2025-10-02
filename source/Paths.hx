@@ -137,11 +137,15 @@ class Paths {
 		var voicesPath:String = 'songs:assets/songs/${song.toLowerCase()}/';
 		var voicesFile:String = 'Voices';
 
-		if(character != null && mix != null && (Assets.exists('$voicesPath$voicesFile-$character.ogg') || Assets.exists('$voicesPath$voicesFile-$character-$mix.ogg'))){
+		
+		if (character != null && mix != null && 
+			(Assets.exists('$voicesPath$voicesFile-$character.ogg') || 
+			Assets.exists('$voicesPath$voicesFile-$character-$mix.ogg')))
+		{
 			voicesFile += '-$character';
 		}
 
-		if(mix != null && Assets.exists('$voicesPath$voicesFile-$mix.ogg')){
+		if (mix != null && Assets.exists('$voicesPath$voicesFile-$mix.ogg')) {
 			voicesFile += '-$mix';
 		}
 
@@ -154,8 +158,12 @@ class Paths {
 				voicesFile += '-$difficulty';
 		}
 
-		return '$voicesPath$voicesFile.ogg';
+		var finalPath:String = '$voicesPath$voicesFile.ogg';
+
+	
+		return Assets.exists(finalPath) ? finalPath : null;
 	}
+
 
 	static public function inst(song:String, ?difficulty:String, ?mix:String):String {
 		var instPath:String = 'songs:assets/songs/${song.toLowerCase()}/';

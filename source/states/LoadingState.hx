@@ -21,14 +21,16 @@ import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 import haxe.Json;
-
+import states.FreeplayState;
 import haxe.io.Path;
 #if sys
 import sys.FileSystem;
 #end
 
 using StringTools;
-
+#if DISCORD_ALLOWED
+import utilities.DiscordClient;
+#end
 class AsyncAssetPreloader
 {
 	var uiSkins:Array<String> = [];
@@ -246,7 +248,7 @@ class AsyncAssetPreloader
 		for (i in uiSkins)
 		{
 			loadedCount++;
-			//new game.StrumNote.UISkin(i);
+			new game.StrumNote(0, 0, 0, i, PlayState.instance.ui_settings, PlayState.instance.mania_size, PlayState.SONG.keyCount, 0);
 		}
 		trace('loaded UI Skins');
 	}
@@ -262,11 +264,11 @@ class LoadingState extends MusicBeatState
 	var target:FlxState;
 	var stopMusic = false;
 	var callbacks:MultiCallback;
-	
+	var currentIndex = 0;
 	var logo:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft = false;
-
+	var songNames:Array<String> = FreeplayState.songs.map(song -> song.name);
 	public static var instance:LoadingState = null;
 	
 	function new(target:FlxState, stopMusic:Bool)
@@ -287,61 +289,64 @@ class LoadingState extends MusicBeatState
 		MusicBeatState.windowNameSuffix = " is loading...";
 
 		instance = this;
-
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Song", null);
+		#end
 		#if PRELOAD_ALL
 		var loadingScreen = new FlxSprite(0, 0);
-		/*var pickedImage = 'load0.png';
+
+
+		var songImageMap:Map<String, String> = new Map();
+		var loadingLines:Array<String> = [];
+
 		#if sys
-		var path = 'assets/images/loading/loadingscreen';
-		#if mobile 
-			path = SUtil.getStorageDirectory() + path;
+		if (sys.FileSystem.exists("mods/" + Options.getData("curMod") + "/data/loadingScreen.txt"))
+			loadingLines = CoolUtil.coolTextFileSys("mods/" + Options.getData("curMod") + "/data/loadingScreen.txt");
+		else if (sys.FileSystem.exists("mods/" + Options.getData("curMod") + "/_append/data/loadingScreen.txt"))
+			loadingLines = CoolUtil.coolTextFileSys("mods/" + Options.getData("curMod") + "/_append/data/loadingScreen.txt");
+		else if (sys.FileSystem.exists("mods/" + Options.getData("curMod") + "/_append/data/LoadingScreen.txt"))
+			loadingLines = CoolUtil.coolTextFileSys("mods/" + Options.getData("curMod") + "/_append/data/LoadingScreen.txt");
+		#else
+		loadingLines = CoolUtil.coolTextFile(Paths.txt('loadingScreen'));
 		#end
-		var list:Array<String> = [];
-		for (file in FileSystem.readDirectory(path))
+
+		for (line in loadingLines)
 		{
-			if (file.endsWith('.png'))
+			var parts = line.split(':');
+			if (parts.length == 2)
 			{
-				list.push(file);
-				//trace(file);
+				var song = StringTools.trim(parts[0].toLowerCase());
+				var image = StringTools.trim(parts[1]);
+				songImageMap.set(song, image);
 			}
 		}
-		var rarelist:Array<String> = [];
-		for (file in FileSystem.readDirectory(path+'rare/'))
-		{
-			if (file.endsWith('.png'))
-			{
-				rarelist.push(file);
-			}
-		}
-		//if (FlxG.random.bool(50)) //doesnt work for some reason
-		//{
-		//	pickedImage = rarelist[FlxG.random.int(0, rarelist.length-1)];
-		//}
-		//else 
-		//{
-			pickedImage = list[FlxG.random.int(0, list.length-1)];
-		//}
-		#end
-		
-		pickedImage = pickedImage.replace('.png', '');
 
-		trace(pickedImage);*/
+		var currentSong:String = PlayState.SONG.song.toLowerCase();
+		var imgName:String = songImageMap.exists(currentSong) ? songImageMap.get(currentSong) : "loadingscreen";
 
-		
-		loadingScreen.loadGraphic(Paths.image('loading/loadingscreen'));
-		loadingScreen.setGraphicSize(1280,720);
-		loadingScreen.antialiasing = true;
+		//trace(currentSong);
+		//trace(imgName);
+		//trace(Paths.image("loading/" + imgName));
+
+		loadingScreen = new FlxSprite(0, 0);
+		loadingScreen.loadGraphic(Paths.image("loading/" + imgName));
+		loadingScreen.setGraphicSize(1280, 720);
 		loadingScreen.updateHitbox();
 		loadingScreen.screenCenter();
+		loadingScreen.antialiasing = true;
 		add(loadingScreen);
+
+
+		loadingText = new FlxText(2, FlxG.height - 100, 0, "");
+		loadingText.setFormat(Paths.font("consola.ttf"), 34, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(loadingText);
 		/*new FlxTimer().start(0.7, function(tmr:FlxTimer)
 		{
 			//FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
 			onLoad(); //once transition has ended
 		});*/
-
-
 
 		loader = new AsyncAssetPreloader(function()
 		{
@@ -351,15 +356,9 @@ class LoadingState extends MusicBeatState
 		});
 		loader.load(true);
 
-		loadingBar = new FlxBar(0, FlxG.height-25, LEFT_TO_RIGHT, FlxG.width, 25, this,
-		'lerpedPercent', 0, 1);
-		loadingBar.scrollFactor.set();
-		loadingBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-		add(loadingBar);
+	var border = new FlxSprite(FlxG.width - 28, -3).makeGraphic(31, FlxG.height + 6, 0xFF000000); border.scrollFactor.set(); add(border);
 
-		loadingText = new FlxText(2, FlxG.height-25-26, 0, "Loading...");
-		loadingText.setFormat(Paths.font("Contb___.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(loadingText);
+	loadingBar = new FlxBar(FlxG.width - 25, 0, BOTTOM_TO_TOP, 25, FlxG.height, this, 'lerpedPercent', 0, 1); loadingBar.scrollFactor.set(); loadingBar.createFilledBar(0x00000000, 0xFFFFFFFF); add(loadingBar);
 
 		#else 
 		logo = new FlxSprite(-150, -100);
@@ -460,19 +459,34 @@ class LoadingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
 		if (loader != null)
 		{
 			loadTime += elapsed;
-			lerpedPercent = FlxMath.lerp(lerpedPercent, loader.percent, elapsed*8);
-			loadingText.text = "Loading... (" + loader.loadedCount + "/" + (loader.totalLoadCount+1) + ")";
+			lerpedPercent = FlxMath.lerp(lerpedPercent, loader.percent, elapsed * 8);
+
+			var currentSong:String = "";
+			#if STORY_MODE
+			if (PlayState.storyPlaylist != null && PlayState.storyPlaylist.length > 0)
+				currentSong = PlayState.storyPlaylist[PlayState.storyPlaylist.length - 1];
+			#else
+			if (PlayState.SONG != null)
+				currentSong = PlayState.SONG.song;
+			#end
+			var dots = Std.int((loadTime * 2) % 4);
+			var dotStr = StringTools.lpad("", ".", dots);
+
+			loadingText.text = "Loading" + dotStr + "\n" + currentSong + " (" + loader.loadedCount + "/" + (loader.totalLoadCount + 1) + ")";
+
+
 		}
-		
+
 		#if debug
 		if (FlxG.keys.justPressed.SPACE)
 			trace('fired: ' + callbacks.getFired() + " unfired:" + callbacks.getUnfired());
 		#end
 	}
-	
+
 	function onLoad()
 	{
 		if (stopMusic && FlxG.sound.music != null)
@@ -526,12 +540,17 @@ class LoadingState extends MusicBeatState
 	}
 	#end
 	
-	override function destroy()
-	{
+	override public function destroy() {
 		super.destroy();
-		
+		instance = null;
+		loader = null;
 		callbacks = null;
+		logo = null;
+		gfDance = null;
+		loadingText = null;
+		loadingBar = null;
 	}
+
 	
 	static function initSongsManifest()
 	{

@@ -141,7 +141,7 @@
 	<haxelib name="fnf-modcharting-tools" if="MODCHARTING_TOOLS" unless="hl" />
 	<haxelib name="funkin.vis" />
 	<haxelib name="grig.audio" />
-
+	<haxelib name="flixel-perspective" />
 	<!-- Compiler Arguments -->
 	<define name="no-deprecation-warnings" />
 	<define name="message.reporting" value="pretty" />

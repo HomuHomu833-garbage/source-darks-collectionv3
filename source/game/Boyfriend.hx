@@ -2,7 +2,7 @@ package game;
 
 import states.PlayState;
 import flixel.FlxG;
-
+import lime.utils.Assets;
 using StringTools;
 
 
@@ -14,9 +14,12 @@ class Boyfriend extends Character
 {
 	public var stunned:Bool = false;
 
-	public function new(x:Float, y:Float, ?char:String = 'bf', ?isDeathCharacter:Bool = false)
+	public function new(x:Float, y:Float, ?char:String = 'bf', ?isDeathCharacter:Bool = false, scaleMult:Float = 1.0)
 	{
-		super(x, y, char, true, isDeathCharacter);
+		if(isDeathCharacter && !Assets.exists(Paths.json('character data/$char/config'))){
+			char = 'bf-dead';
+		}
+		super(x, y, char, true, isDeathCharacter,scaleMult);
 	}
 
 	override function update(elapsed:Float)

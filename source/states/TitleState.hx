@@ -18,9 +18,9 @@ import game.Conductor;
 import ui.Alphabet;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
@@ -74,7 +74,7 @@ class TitleState extends MusicBeatState {
 			NoteVariables.init();
 
 			Options.init();
-			Options.fixBinds();
+			
 			LogStyle.ERROR.throwException = Options.getData("throwExceptionOnError");
 			FlxSprite.defaultAntialiasing = Options.getData("antialiasing");
 
@@ -88,13 +88,20 @@ class TitleState extends MusicBeatState {
 			#if MODDING_ALLOWED
 			ModList.load();
 			PolymodHandler.loadMods();
+			Options.initModOptions();
 			#end
 			MusicBeatState.windowNamePrefix = Options.getData("curMod");
 			CoolUtil.setWindowIcon("mods/" + Options.getData("curMod") + "/_polymod_icon.png");
 			NoteVariables.init();
 			Options.fixBinds();
-			FlxG.drawFramerate = Options.getData("maxFPS");
-
+			var fps:Int = Options.getData("maxFPS");
+			if (fps > FlxG.drawFramerate) {
+				FlxG.updateFramerate = fps;
+				FlxG.drawFramerate = fps;
+			} else {
+				FlxG.drawFramerate = fps;
+				FlxG.updateFramerate = fps;
+			}
 			#if FLX_NO_DEBUG
 			if (Options.getData("flixelStartupScreen") && !doneFlixelSplash) {
 				doneFlixelSplash = true;
@@ -148,20 +155,29 @@ class TitleState extends MusicBeatState {
 		if (!initialized) {
 			call("startIntro");
 
-			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileCircle);
+			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
 			diamond.persist = true;
 			diamond.destroyOnNoUse = false;
 
-			var tileData:TransitionTileData = {asset: diamond, width: 32, height: 32};
-
-			FlxTransitionableState.defaultTransIn = new TransitionData(TILES, FlxColor.BLACK, 1, new FlxPoint(0, -2), tileData,
+			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.5, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
 				new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
-			FlxTransitionableState.defaultTransOut = new TransitionData(TILES, FlxColor.BLACK, 0.7, new FlxPoint(0, -2),
-			tileData, new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
+	
 
-			transIn = FlxTransitionableState.defaultTransIn;
-			transOut = FlxTransitionableState.defaultTransOut;
-			
+		FlxTransitionableState.defaultTransIn = new TransitionData(
+			FADE,
+			FlxColor.BLACK,
+			0.5,
+			null,
+			null,
+			new FlxRect(0,0,FlxG.width,FlxG.height)
+		);
+		
+		
+		transIn = FlxTransitionableState.defaultTransIn;
+		transOut = FlxTransitionableState.defaultTransOut;
+
+
+					
 
 			playTitleMusic();
 			Conductor.changeBPM(102);
@@ -318,48 +334,39 @@ class TitleState extends MusicBeatState {
 
 			call("checkForUpdate");
 			#if CHECK_FOR_UPDATES
-				if (Options.getData("checkForUpdates")) {
-					new FlxTimer().start(2, (tmr:FlxTimer) -> {
-						var http:Http = new Http("https://raw.githubusercontent.com/Vortex2Oblivion/LeatherEngine/main/version.txt");
-						http.onData = (data:String) -> {
-							data = 'v' + data;
-							if (CoolUtil.getCurrentVersion() != data) {
-								trace('Outdated Version Detected! ' + data.trim() + ' != ' + CoolUtil.getCurrentVersion(), WARNING);
-								FlxG.switchState(() -> new OutdatedSubState(data.trim()));
-							} else {
-								if (Options.getData("showDisclaimer")) {
-									FlxG.switchState(() -> new DisclaimerMenu());
-								} else {
-									FlxG.switchState(() -> new MainMenuState());
-								}
-							}
+			if (Options.getData("checkForUpdates")) {
+				new FlxTimer().start(2, (tmr:FlxTimer) -> {
+					var http:Http = new Http("https://raw.githubusercontent.com/darkroft123/source-darks-collectionv3/main/version.txt");
+					http.onData = (data:String) -> {
+						data = 'v' + data;
+						if (CoolUtil.getCurrentVersion() != data) {
+							trace('Outdated Version Detected! ' + data.trim() + ' != ' + CoolUtil.getCurrentVersion(), WARNING);
+							Main.display.version += ' - UPDATE AVALIABLE (${data.trim()})';
+							FlxG.switchState(() -> new OutdatedSubState(data.trim()));
+						} else {
+							FlxG.switchState(() -> new MainMenuState());
 						}
-						http.onError = (error:String) -> {
-							trace('$error', ERROR);
-							if (Options.getData("showDisclaimer")) {
-								FlxG.switchState(() -> new DisclaimerMenu());
-							} else {
-								FlxG.switchState(() -> new MainMenuState());
-							}
-						}
-						http.request();
-					});
-				} else {
-					if (Options.getData("showDisclaimer")) {
-						FlxG.switchState(() -> new DisclaimerMenu());
-					} else {
-						FlxG.switchState(() -> new MainMenuState());
 					}
-				}
-			#else
-				if (Options.getData("showDisclaimer")) {
-					FlxG.switchState(() -> new DisclaimerMenu());
-				} else {
-					FlxG.switchState(() -> new MainMenuState());
-				}
-			#end
 
+					http.onError = (error:String) -> {
+						trace(error, ERROR);
+						FlxG.switchState(() -> new MainMenuState()); // fail so we go anyway
+					}
+
+					http.request();
+				});
+			} else {
+				new FlxTimer().start(2, (tmr:FlxTimer) -> {
+					FlxG.switchState(() -> new MainMenuState());
+				});
+			}
+			#else
+			new FlxTimer().start(2, (tmr:FlxTimer) -> {
+				FlxG.switchState(() -> new MainMenuState());
+			});
+			#end
 		}
+
 
 		if (pressedEnter && !skippedIntro) {
 			skipIntro();

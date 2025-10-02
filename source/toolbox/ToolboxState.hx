@@ -38,7 +38,7 @@ class ToolboxState extends OptionsMenu {
 			]
 		];
 		if (PlayState.instance == null) {
-			pages["Tools"][4] = null;
+			
 			pages["Tools"][1] = null;
 		}
 

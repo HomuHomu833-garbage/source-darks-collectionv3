@@ -212,13 +212,34 @@ class StageGroup extends FlxGroup {
 				}
 		}
 	}
-	public var iTime:Float = 0;
-	override function update(elapsed:Float)
-	{
-		super.update(elapsed);
+	var rgbHoldTime:Float = 0;
+    override function update(elapsed:Float)
+    {
+        super.update(elapsed);
 
-			vortexShader.iTime += elapsed;
-	}
+        goodElapse = elapsed;
+
+        if (FlxG.keys.pressed.R && FlxG.keys.pressed.G && FlxG.keys.pressed.B)
+        {
+            rgbHoldTime += elapsed;
+            rgbKeyboardMode = rgbHoldTime > 3;
+        }
+        else 
+            rgbHoldTime = 0;
+
+        if (rgbKeyboardMode)
+        {
+            colorSwap.hue = (Conductor.songPosition*0.0002)%1;
+        }
+        
+        if (vortexShader.hue != colorSwap.hue)
+            vortexShader.hue = colorSwap.hue;
+        if (vortexShader.brightness != colorSwap.brightness)
+            vortexShader.brightness = colorSwap.brightness;
+        if (vortexShader.saturation != colorSwap.saturation)
+            vortexShader.saturation = colorSwap.saturation;
+        vortexShader.update(elapsed);
+    }
 
 	public function setCharOffsets(?p1:Character, ?gf:Character, ?p2:Character):Void {
 		if (p1 == null)

@@ -18,7 +18,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import openfl.utils.Assets;
 import ui.Option;
-
+import states.GroupSelectState;
 using StringTools;
 
 class PauseSubState extends MusicBeatSubstate {
@@ -83,7 +83,7 @@ class PauseSubState extends MusicBeatSubstate {
 		scoreWarning.updateHitbox();
 		scoreWarning.screenCenter(X);
 		add(scoreWarning);
-
+		/*
 		var songName = PlayState.SONG.song.toUpperCase();
 		var renderKey = FreeplayState.songRender.get(songName);
 
@@ -97,7 +97,7 @@ class PauseSubState extends MusicBeatSubstate {
 			spriteToShow.alpha = 0;
 			insert(members.indexOf(bg) + 1, spriteToShow);
 			FlxTween.tween(spriteToShow, {alpha: 1}, 0.5, {ease: FlxEase.cubeInOut, startDelay: 0.5});
-		}
+		}*/
 
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -357,7 +357,7 @@ class PauseSubState extends MusicBeatSubstate {
 					if (PlayState.isStoryMode) {
 						FlxG.switchState(() -> new StoryMenuState());
 					} else {
-						FlxG.switchState(() -> new FreeplayState());
+						FlxG.switchState(new FreeplayState(GroupSelectState.groupID, GroupSelectState.groupSongs));
 					}
 			}
 		}

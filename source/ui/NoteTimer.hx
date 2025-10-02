@@ -73,23 +73,26 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
     private var timerCircle:FlxSprite;
     private var circleShader:CircleShader = new CircleShader();
     private var skipText:FlxText;
+
     public function new(instance:PlayState)
     {
         super();
         this.instance = instance;
+
 
         timerCircle = new FlxSprite().loadGraphic(Paths.image("circleThing"));
         timerCircle.antialiasing = true;
         timerCircle.shader = circleShader;
         timerCircle.scale *= 0.75;
         timerCircle.updateHitbox();
+      
         add(timerCircle);
         timerText = new FlxText(0,0,0,"");
-        timerText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        timerText.setFormat(Paths.font("consola.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(timerText);
 
-        skipText = new FlxText(0,0,0,"Press SHIFT to Skip Intro");
-        skipText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        skipText = new FlxText(0,0,0,"PRESS SHIFT TO SKIP INTRO");
+        skipText.setFormat(Paths.font("consola.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(skipText);
         skipText.visible = false;
 
@@ -101,14 +104,14 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
 
 
         firstNoteTime = getClosestNote();
-        if (firstNoteTime != FlxMath.MAX_VALUE_FLOAT && firstNoteTime > 5000)
+        if (firstNoteTime != FlxMath.MAX_VALUE_FLOAT && firstNoteTime > 5000 )
         {
             skipped = false;
             skipText.visible = true;
             skipText.alpha = 0;
             PlayState.instance.tweenManager.tween(skipText, {alpha: 1}, 1, {ease:FlxEase.cubeInOut, startDelay: Conductor.crochet*0.001*5, onComplete: function(twn)
             {
-                PlayState.instance.tweenManager.tween(skipText, {alpha: 0}, 1, {ease:FlxEase.linear, startDelay: Conductor.crochet*0.001*5});
+                PlayState.instance.tweenManager.tween(skipText, {alpha: 0}, 1, {ease:FlxEase.cubeIn, startDelay: Conductor.crochet*0.001*5});
             }});
         }
         else 
@@ -212,22 +215,42 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
 
     function updatePosition()
     {
-        timerCircle.screenCenter();
-        timerText.screenCenter();
-        skipText.screenCenter();
-        if (utilities.Options.getData("downscroll"))
+        // skipText siempre en la esquina derecha
+        skipText.x = FlxG.width - skipText.width - 20;
+        skipText.y = utilities.Options.getData("downscroll")
+            ? 20
+            : FlxG.height - skipText.height - 20;
+
+        if (utilities.Options.getData("middlescroll"))
         {
-            timerCircle.y += 260;
-            timerText.y += 260;
-            skipText.y += 260-100;
+           var firstNote = PlayState.playerStrums.members[0];
+
+            var offset = 70; // cámbialo a 50 si prefieres
+
+            timerCircle.x = firstNote.x - timerCircle.width - offset;
+            timerText.x   = timerCircle.x + (timerCircle.width - timerText.width) / 2;
+
+            timerCircle.y = firstNote.y;
+            timerText.y = firstNote.y + 30;
         }
-        else 
+        else
         {
-            timerCircle.y -= 260;
-            timerText.y -= 260;
-            skipText.y -= 260-100;
+            timerCircle.screenCenter();
+            timerText.screenCenter();
+
+            if (utilities.Options.getData("downscroll"))
+            {
+                timerCircle.y += 260;
+                timerText.y += 260;
+            }
+            else
+            {
+                timerCircle.y -= 260;
+                timerText.y -= 260;
+            }
         }
     }
+
 
     public var skipped:Bool = false;
 
