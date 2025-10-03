@@ -12,6 +12,7 @@ import sys.FileSystem;
 import sys.io.File;
 import haxe.Json;
 import haxe.io.Bytes;
+import haxe.crypto.Sha1;
 
 class OutdatedSubState extends MusicBeatState {
 	private var version:String = 'vnull';
@@ -20,7 +21,7 @@ class OutdatedSubState extends MusicBeatState {
 	private var btnUpdate:FlxButton;
 	private var btnMenu:FlxButton;
 	private var downloadQueue:Array<{url:String, path:String}> = [];
-	private var token:String = "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"; 
+	private var token:String = "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";
 
 	public function new(?version:String = 'vnull') {
 		this.version = version;
@@ -85,7 +86,6 @@ class OutdatedSubState extends MusicBeatState {
 		http.setHeader("User-Agent", "darkroft123-game");
 		http.setHeader("Authorization", "token " + token);
 
-
 		http.onData = (data:String) -> {
 			var files:Array<Dynamic> = (Json.parse(data) : Array<Dynamic>);
 			var remoteFiles:Array<String> = [];
@@ -96,11 +96,14 @@ class OutdatedSubState extends MusicBeatState {
 				if (file.type == "file") {
 					remoteFiles.push(localPath);
 					var needsUpdate = true;
+
 					if (FileSystem.exists(localPath)) {
 						try {
 							var localData:Bytes = File.getBytes(localPath);
-							var localSize = localData.length;
-							if (file.size == localSize) needsUpdate = false;
+							var localSha = haxe.crypto.Sha1.make(localData).toHex();
+							if (file.sha == localSha) {
+								needsUpdate = false;
+							}
 						} catch (_) {}
 					}
 
@@ -112,8 +115,6 @@ class OutdatedSubState extends MusicBeatState {
 						}
 						downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
 					}
-				} else if (file.type == "dir") {
-					updateFromGit(file.path, localBase);
 				}
 			}
 
