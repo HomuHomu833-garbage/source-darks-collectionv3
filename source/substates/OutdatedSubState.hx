@@ -21,7 +21,7 @@ class OutdatedSubState extends MusicBeatState {
 	private var btnUpdate:FlxButton;
 	private var btnMenu:FlxButton;
 	private var downloadQueue:Array<{url:String, path:String}> = [];
-	private var token:String = "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";
+	private var token:String = "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";
 
 	public function new(?version:String = 'vnull') {
 		this.version = version;
@@ -164,5 +164,9 @@ class OutdatedSubState extends MusicBeatState {
 		changelogTxt.text = "¡Juego actualizado correctamente!";
 		btnUpdate.visible = false;
 		btnMenu.x = FlxG.width / 2 - 100;
+
+		File.saveContent("version.txt", version);
+		Main.display.version = version;
 	}
+
 }
