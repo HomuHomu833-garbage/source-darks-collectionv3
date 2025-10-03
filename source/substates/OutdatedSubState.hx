@@ -21,7 +21,7 @@ class OutdatedSubState extends MusicBeatState {
 	private var btnUpdate:FlxButton;
 	private var btnMenu:FlxButton;
 	private var downloadQueue:Array<{url:String, path:String}> = [];
-	private var token:String = "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";
+	//private var token:String = "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";
 
 	public function new(?version:String = 'vnull') {
 		this.version = version;
@@ -67,7 +67,7 @@ class OutdatedSubState extends MusicBeatState {
 	function loadChangelog() {
 		var http:Http = new Http("https://raw.githubusercontent.com/darkroft123/source-darks-collectionv3/main/changelog.txt");
 		http.setHeader("User-Agent", "darkroft123-game");
-		http.setHeader("Authorization", "token " + token);
+		//http.setHeader("Authorization", "token " + token);
 
 		http.onData = (data:String) -> {
 			changelog = data;
@@ -84,7 +84,7 @@ class OutdatedSubState extends MusicBeatState {
 	function updateFromGit(remotePath:String, localBase:String) {
 		var http:Http = new Http("https://api.github.com/repos/darkroft123/source-darks-collectionv3/contents/" + escapeURL(remotePath));
 		http.setHeader("User-Agent", "darkroft123-game");
-		http.setHeader("Authorization", "token " + token);
+		//http.setHeader("Authorization", "token " + token);
 
 		http.onData = (data:String) -> {
 			var files:Array<Dynamic> = (Json.parse(data) : Array<Dynamic>);
@@ -142,7 +142,7 @@ class OutdatedSubState extends MusicBeatState {
 		var next = downloadQueue.shift();
 		var http:Http = new Http(next.url);
 		http.setHeader("User-Agent", "darkroft123-game");
-		http.setHeader("Authorization", "token " + token);
+		//http.setHeader("Authorization", "token " + token);
 
 		http.onData = (data:String) -> {
 			var parts = next.path.split("/");
