@@ -50,8 +50,9 @@ class ABotVis extends FlxSpriteGroup {
 		#if desktop
 		@:privateAccess
 		analyzer = new SpectralAnalyzer(FlxG.sound.music._channel.__audioSource, 7, 0.1, 40);
-		#end
 		analyzer.fftN = 256;
+		#end
+
 
 		// analyzer.maxDb = -35;
 	}

@@ -9,9 +9,10 @@ import openfl.text.TextFormat;
 import external.memory.Memory;
 import macros.GithubCommitHash;
 import haxe.macro.Compiler;
-
+#if DISCORD_ALLOWED
 import hxdiscord_rpc.Discord;
 import hxdiscord_rpc.Types;
+#end
 import cpp.RawConstPointer;
 import cpp.ConstCharStar;
 import ui.logs.Logs;

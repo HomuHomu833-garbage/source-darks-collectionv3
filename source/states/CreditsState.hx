@@ -4,7 +4,9 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import openfl.display.BlendMode;
 import game.Conductor;
+#if DISCORD_ALLOWED
 import utilities.DiscordClient;
+#end
 import ui.HealthIcon;
 import ui.FreeplayTxt;
 import flixel.sound.FlxSound;
@@ -189,9 +191,9 @@ class CreditsState extends MusicBeatState {
             }
         });
         #end
-
+        #if DISCORD_ALLOWED
         DiscordClient.changePresence("In the Credits Menu", null);
-
+        #end
 		
         VCRSHADER = new VCR();
         var vignettelol = new FlxSprite(0,0);

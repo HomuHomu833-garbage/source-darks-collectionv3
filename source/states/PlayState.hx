@@ -1601,6 +1601,8 @@ class PlayState extends MusicBeatState {
 
 					ready.screenCenter();
 					ready.zIndex = FlxMath.MAX_VALUE_INT;
+					ready.cameras = [camOther];
+
 					add(ready);
 
 					FlxTween.tween(ready, {y: ready.y += 100, alpha: 0}, Conductor.crochet / 1000, {
@@ -1620,6 +1622,7 @@ class PlayState extends MusicBeatState {
 
 					set.screenCenter();
 					set.zIndex = FlxMath.MAX_VALUE_INT;
+					set.cameras = [camOther];
 					add(set);
 			
 					FlxTween.tween(set, {y: set.y += 100, alpha: 0}, Conductor.crochet / 1000, {
@@ -1639,6 +1642,7 @@ class PlayState extends MusicBeatState {
 
 					go.screenCenter();
 					go.zIndex = FlxMath.MAX_VALUE_INT;
+					go.cameras = [camOther];
 					add(go);
 
 					FlxTween.tween(go, {y: go.y += 100, alpha: 0}, Conductor.crochet / 1000, {
@@ -2402,7 +2406,9 @@ class PlayState extends MusicBeatState {
 			if (!paused && health > minHealth) {
 				var accuracyStr = Std.string(accuracy) + "%";
 				var statusText = '${SONG.song} (${storyDifficultyStr}) Acc: ${accuracyStr}';
+				#if DISCORD_ALLOWED
 				DiscordClient.changePresence(detailsText + ', Misses: ${misses}', statusText, curPortrait, true, songLength / songMultiplier, curImage);
+				#end
 			}
 
 			discordUpdateTimer = 0;

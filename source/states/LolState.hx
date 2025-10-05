@@ -13,7 +13,9 @@ import utilities.MusicUtilities;
 class LolState extends MusicBeatState { // ????????????????? soon ☠️👀
     override public function create():Void {
         MusicBeatState.windowNameSuffix = " ???";
+        #if DISCORD_ALLOWED
         DiscordClient.changePresence("???", null);
+        #end
         var comingSoon:FlxText = new FlxText(0, 0, FlxG.width, "COMING SOON");
         comingSoon.setFormat(Paths.font("freeplaytext.ttf"), 48, FlxColor.WHITE, "center");
         comingSoon.screenCenter(FlxAxes.Y);

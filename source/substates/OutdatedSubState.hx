@@ -12,6 +12,7 @@ import sys.FileSystem;
 import sys.io.File;
 import haxe.Json;
 import haxe.io.Bytes;
+import haxe.crypto.Sha1;
 
 class OutdatedSubState extends MusicBeatState {
 	private var version:String = 'vnull';
@@ -20,6 +21,7 @@ class OutdatedSubState extends MusicBeatState {
 	private var btnUpdate:FlxButton;
 	private var btnMenu:FlxButton;
 	private var downloadQueue:Array<{url:String, path:String}> = [];
+	//private var token:String = "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";
 
 	public function new(?version:String = 'vnull') {
 		this.version = version;
@@ -65,6 +67,7 @@ class OutdatedSubState extends MusicBeatState {
 	function loadChangelog() {
 		var http:Http = new Http("https://raw.githubusercontent.com/darkroft123/source-darks-collectionv3/main/changelog.txt");
 		http.setHeader("User-Agent", "darkroft123-game");
+		//http.setHeader("Authorization", "token " + token);
 
 		http.onData = (data:String) -> {
 			changelog = data;
@@ -96,8 +99,8 @@ class OutdatedSubState extends MusicBeatState {
 					if (FileSystem.exists(localPath)) {
 						try {
 							var localData:Bytes = File.getBytes(localPath);
-							// ✅ comparación por tamaño, no por SHA
-							if (file.size == localData.length) {
+							var localSha = haxe.crypto.Sha1.make(localData).toHex();
+							if (file.sha == localSha) {
 								needsUpdate = false;
 							}
 						} catch (_) {}
@@ -112,12 +115,11 @@ class OutdatedSubState extends MusicBeatState {
 						downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
 					}
 				} else if (file.type == "dir") {
-					// recursivo para carpetas
+					// 👇 si es carpeta, volvemos a llamar updateFromGit
 					updateFromGit(file.path, localBase);
 				}
 			}
 
-			// Buscar archivos eliminados localmente
 			if (FileSystem.exists(localBase)) {
 				for (fileName in FileSystem.readDirectory(localBase)) {
 					var fullPath = localBase + "/" + fileName;
@@ -134,6 +136,7 @@ class OutdatedSubState extends MusicBeatState {
 		http.request();
 	}
 
+
 	function startNextDownload() {
 		if (downloadQueue.length == 0) {
 			onUpdateFinished();
@@ -142,9 +145,9 @@ class OutdatedSubState extends MusicBeatState {
 		var next = downloadQueue.shift();
 		var http:Http = new Http(next.url);
 		http.setHeader("User-Agent", "darkroft123-game");
+		//http.setHeader("Authorization", "token " + token);
 
 		http.onData = (data:String) -> {
-			// crear directorios si no existen
 			var parts = next.path.split("/");
 			if (parts.length > 1) {
 				var path = "";
@@ -156,10 +159,7 @@ class OutdatedSubState extends MusicBeatState {
 			File.saveContent(next.path, data);
 			startNextDownload();
 		}
-		http.onError = (error:String) -> {
-			trace("Error descargando: " + next.url + " -> " + error);
-			startNextDownload();
-		}
+		http.onError = (error:String) -> startNextDownload();
 		http.request();
 	}
 
@@ -171,4 +171,5 @@ class OutdatedSubState extends MusicBeatState {
 		File.saveContent("version.txt", version);
 		Main.display.version = version;
 	}
+
 }
