@@ -1,7 +1,9 @@
 #pragma header
 
 uniform float iTime;
-uniform float transparency;  
+uniform float Size;  
+uniform float Size2;
+uniform float transparency; 
 uniform float transparency2;
 uniform float money; 
 uniform float colorraro; 
@@ -14,11 +16,17 @@ float noise(vec2 n) {
     const vec2 d = vec2(0.0, 1.0);
     vec2 b = floor(n);
     vec2 f = mix(vec2(0.0), vec2(1.0), fract(n));
-    return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);
+    return mix(
+        mix(rand(b), rand(b + d.yx), f.x),
+        mix(rand(b + d.xy), rand(b + d.yy), f.x),
+        f.y
+    );
 }
 
 vec3 ramp(float t) {
-    return t <= 0.5 ? vec3(1.0 - t * 1.4, 0.2, 1.05) / max(t, 0.01) : vec3(0.3 * (1.0 - t) * 2.0, 0.2, 1.05) / max(t, 0.01);
+    return t <= 0.5 
+        ? vec3(1.0 - t * 1.4, 0.2, 1.05) / max(t, 0.01) 
+        : vec3(0.3 * (1.0 - t) * 2.0, 0.2, 1.05) / max(t, 0.01);
 }
 
 float fire(vec2 n) {
@@ -47,6 +55,7 @@ void main() {
 
     float q = fire(uv - t * 0.013) / 3.0;
     vec2 r = vec2(fire(uv + q / 2.0 + t - uv.x - uv.y), fire(uv + q - t));
+
     vec3 colorX = vec3(0.0);
     vec3 colorY = vec3(0.0);
 
@@ -57,11 +66,13 @@ void main() {
 
     colorX = ramp(grad3) + ramp(grad4);
     colorX /= (1.50 + max(vec3(0.0), colorX));
-    colorX = clamp(colorX - transparency, 0.0, 1.0);
+    colorX = clamp(colorX - Size, 0.0, 1.0);
+    colorX *= transparency;
 
     colorY = ramp(grad) + ramp(grad2);
     colorY /= (1.50 + max(vec3(0.0), colorY));
-    colorY = clamp(colorY - transparency2, 0.0, 1.0);
+    colorY = clamp(colorY - Size2, 0.0, 1.0);
+    colorY *= transparency2;
 
     vec3 finalColor = colorX + colorY;
 
@@ -81,5 +92,5 @@ void main() {
 
     vec3 finalFireColor = hsv2rgb(hsvColor);
 
-    gl_FragColor = flixel_texture2D(bitmap, openfl_TextureCoordv) + vec4(finalFireColor, 0.1);
+    gl_FragColor = flixel_texture2D(bitmap, openfl_TextureCoordv) + vec4(finalFireColor, 1.0);
 }

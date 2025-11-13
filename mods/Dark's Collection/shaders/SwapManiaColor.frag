@@ -25,7 +25,7 @@ vec3 hsv2rgb(vec3 c) {
 
 vec3 blendOverlayFunc(vec3 base, vec3 blend) {
     return mix(
-        2.0 * base * blend,
+        2 * base * blend,
         1.0 - 2.0 * (1.0 - base) * (1.0 - blend),
         step(0.5, base)
     );
@@ -60,9 +60,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         }
     }
 
-    if (blendOverlay) {
-        finalColor.rgb = blendOverlayFunc(color.rgb, finalColor.rgb);
+        if (blendOverlay) {
+        vec3 overlayColor = blendOverlayFunc(color.rgb, finalColor.rgb);
+        finalColor.rgb = mix(color.rgb, overlayColor, 1);
     }
+
 
     fragColor = finalColor;
 }

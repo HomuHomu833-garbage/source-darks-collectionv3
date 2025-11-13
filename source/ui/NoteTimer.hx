@@ -4,65 +4,40 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxG;
 import flixel.system.FlxAssets.FlxShader;
-import openfl.display.BlendMode;
-import openfl.display.BitmapDataChannel;
-import flixel.math.FlxPoint;
-import openfl.display.BitmapData;
 import flixel.math.FlxMath;
 import game.Conductor;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
-import flixel.addons.display.FlxPieDial;
 import states.PlayState;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 
 using flixel.util.FlxSpriteUtil;
 
-class CircleShader extends FlxShader
+class BarShader extends FlxShader
 {
     @:glFragmentSource('
         #pragma header
-
-        float PI = 3.14159265358;
         uniform float percent;
-
-        vec2 rotate(vec2 v, float a) {
-            float s = sin(a);
-            float c = cos(a);
-            mat2 m = mat2(c, -s, s, c);
-            return m * v;
-        }
 
         void main()
         {
             vec2 uv = openfl_TextureCoordv;
-            vec4 spritecolor = flixel_texture2D(bitmap, openfl_TextureCoordv);
+            vec4 color = flixel_texture2D(bitmap, uv);
 
-            //rotate uv so circle matches properly
-            uv -= vec2(0.5, 0.5);
-            uv = rotate(uv, PI*0.5);
-            uv += vec2(0.5, 0.5);
+            float center = 0.5;
+            float halfWidth = max(percent * 0.5, 0.001);
 
-            float percentAngle = (percent*360.0) / (180.0/PI);
+            if (uv.x < center - halfWidth || uv.x > center + halfWidth)
+                discard;
 
-            vec2 center = vec2(0.5, 0.5);
-            float radius = 0.5;
-            float angle = atan(uv.y - center.y, uv.x - center.x);
-            float distance = length(uv - center);
-
-            if ((angle + (PI)) > percentAngle)
-            {
-                spritecolor = vec4(0.0,0.0,0.0,0.0);
-            }
-        
-            gl_FragColor = spritecolor;
+            gl_FragColor = color;
         }
     ')
 
     public function new()
     {
-       super();
+        super();
     }
 }
 
@@ -70,189 +45,187 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
 {
     private var instance:PlayState;
     private var timerText:FlxText;
-    private var timerCircle:FlxSprite;
-    private var circleShader:CircleShader = new CircleShader();
+    private var timerBar:FlxSprite;
+    private var barShader:BarShader = new BarShader();
+    private var barBG:FlxSprite;
     private var skipText:FlxText;
+    private var firstNoteTime:Float = 0;
+    private var lastStartTime:Float = FlxMath.MAX_VALUE_FLOAT;
+    public var skipped:Bool = false;
 
     public function new(instance:PlayState)
     {
         super();
         this.instance = instance;
 
+        if (!Options.getData("noteTimer"))
+        {
+            skipped = true;
+            destroy();
+            return;
+        }
 
-        timerCircle = new FlxSprite().loadGraphic(Paths.image("circleThing"));
-        timerCircle.antialiasing = true;
-        timerCircle.shader = circleShader;
-        timerCircle.scale *= 0.75;
-        timerCircle.updateHitbox();
-      
-        add(timerCircle);
-        timerText = new FlxText(0,0,0,"");
-        timerText.setFormat(Paths.font("consola.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        barBG = new FlxSprite().makeGraphic(240, 14, FlxColor.BLACK);
+        barBG.antialiasing = true;
+        barBG.scale.set(0.65, 1.3);
+        barBG.updateHitbox();
+
+        timerBar = new FlxSprite().makeGraphic(240, 14, FlxColor.WHITE);
+        timerBar.antialiasing = true;
+        timerBar.shader = barShader;
+        timerBar.scale.set(0.65, 0.65);
+        timerBar.updateHitbox();
+
+        add(barBG);
+        add(timerBar);
+
+        timerText = new FlxText(0, 0, 0, "");
+        timerText.setFormat(Paths.font("consola.ttf"), 22, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(timerText);
 
-        skipText = new FlxText(0,0,0,"PRESS SHIFT TO SKIP INTRO");
+        skipText = new FlxText(0, 0, 0, "PRESS SHIFT TO SKIP INTRO");
         skipText.setFormat(Paths.font("consola.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(skipText);
         skipText.visible = false;
 
-        timerCircle.screenCenter();
-        timerText.screenCenter();
+        timerBar.alpha = 0;
+        barBG.alpha = 0;
+        timerText.alpha = 0;
 
-        circleShader.percent.value = [0.0];
 
+       updatePosition();
 
+        barShader.percent.value = [0.0];
 
         firstNoteTime = getClosestNote();
-        if (firstNoteTime != FlxMath.MAX_VALUE_FLOAT && firstNoteTime > 5000 )
+
+        if (Options.getData("skipTimer") && firstNoteTime != FlxMath.MAX_VALUE_FLOAT && firstNoteTime > 5000)
         {
             skipped = false;
             skipText.visible = true;
             skipText.alpha = 0;
-            PlayState.instance.tweenManager.tween(skipText, {alpha: 1}, 1, {ease:FlxEase.cubeInOut, startDelay: Conductor.crochet*0.001*5, onComplete: function(twn)
-            {
-                PlayState.instance.tweenManager.tween(skipText, {alpha: 0}, 1, {ease:FlxEase.cubeIn, startDelay: Conductor.crochet*0.001*5});
-            }});
-        }
-        else 
-            skipped = true;
 
-        //alpha = 0;
+            PlayState.instance.tweenManager.tween(skipText, {alpha: 1}, 1, {
+                ease: FlxEase.cubeInOut,
+                startDelay: Conductor.crochet * 0.001 * 5,
+                onComplete: function(twn)
+                {
+                    PlayState.instance.tweenManager.tween(skipText, {alpha: 0}, 1, {
+                        ease: FlxEase.cubeIn,
+                        startDelay: Conductor.crochet * 0.001 * 5
+                    });
+                }
+            });
+        }
+        else
+            skipped = true;
     }
 
-    private var firstNoteTime:Float = 0;
-
-    private var lastStartTime:Float = FlxMath.MAX_VALUE_FLOAT;
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
-        var timeTillNextNote:Float = FlxMath.MAX_VALUE_FLOAT;
 
         if (skipped)
             skipText.visible = false;
 
+        var timeTillNextNote:Float = FlxMath.MAX_VALUE_FLOAT;
+        var targetAlpha:Float = 0.0;
+
         if (instance != null)
         {
-            var show:Bool = false;
             if (Conductor.songPosition > 0)
             {
                 for (daNote in instance.notes)
-                    if (daNote.mustPress == (PlayState.characterPlayingAs == 0)) //check notes for closest
+                    if (daNote.mustPress == (PlayState.characterPlayingAs == 0))
                     {
-                        var timeDiff = daNote.strumTime-Conductor.songPosition;
+                        var timeDiff = daNote.strumTime - Conductor.songPosition;
                         if (timeDiff < timeTillNextNote)
                             timeTillNextNote = timeDiff;
                     }
 
-                if (timeTillNextNote == FlxMath.MAX_VALUE_FLOAT) //now check unspawnNotes if not found anything
+                if (timeTillNextNote == FlxMath.MAX_VALUE_FLOAT)
                 {
                     for (daNote in instance.unspawnNotes)
                         if (daNote.mustPress == (PlayState.characterPlayingAs == 0))
                         {
-                            var timeDiff = daNote.strumTime-Conductor.songPosition;
+                            var timeDiff = daNote.strumTime - Conductor.songPosition;
                             if (timeDiff < timeTillNextNote)
                             {
                                 timeTillNextNote = timeDiff;
                                 break;
                             }
-                                
                         }
                 }
-                show = timeTillNextNote != FlxMath.MAX_VALUE_FLOAT; //if found a note and time is larger than 2 secs
-            }
 
-            //visible = false;
-            var targetAlpha:Float = 0.0;
-            if (show)
-            {
-                //trace('show timer');
-                if (lastStartTime == FlxMath.MAX_VALUE_FLOAT && timeTillNextNote > 3000)
-                    lastStartTime = timeTillNextNote;
+                var show:Bool = (timeTillNextNote != FlxMath.MAX_VALUE_FLOAT);
 
-                //trace(timeTillNextNote);
-
-                if (lastStartTime != FlxMath.MAX_VALUE_FLOAT)
+                if (show)
                 {
-                    var secsLeft:Float = Math.ceil(timeTillNextNote*0.001);
-                    var percent:Float = timeTillNextNote/lastStartTime;
-                    //timerCircle.amount = percent;
-                    // trace(percent);
-                    if (percent <= 0.0)
-                    {
-                        lastStartTime = FlxMath.MAX_VALUE_FLOAT; //reset
-                        timerText.text = "";
-                        circleShader.percent.value = [0.0];
-                    }
-                    else
-                    {
-                        circleShader.percent.value = [percent];
-                        timerText.text = ""+secsLeft;
-                    }
-                    updatePosition();
-                    
-                }
-                if (timeTillNextNote > 1000)
-                {
-                    //visible = true;
-                    targetAlpha = 1.0;
+                    if (lastStartTime == FlxMath.MAX_VALUE_FLOAT && timeTillNextNote > 3000)
+                        lastStartTime = timeTillNextNote;
 
-                    if (FlxG.keys.justPressed.SHIFT)
+                    if (lastStartTime != FlxMath.MAX_VALUE_FLOAT)
                     {
-                        if (!skipped)
+                        var secsLeft:Float = Math.ceil(timeTillNextNote * 0.001);
+                        var percent:Float = FlxMath.bound(timeTillNextNote / lastStartTime, 0, 1);
+
+                        if (percent <= 0)
                         {
-                            if (Conductor.songPosition < firstNoteTime-1000)
-                                skipToTime(firstNoteTime-1000);
+                            lastStartTime = FlxMath.MAX_VALUE_FLOAT;
+                            barShader.percent.value = [0.0];
+                            timerText.text = "";
+                            targetAlpha = 0.0;
                         }
+                        else
+                        {
+                            barShader.percent.value = [percent];
+                            timerText.text = "" + secsLeft;
+
+                            if (timeTillNextNote <= 1000)
+                                targetAlpha = 0.0;
+                            else
+                                targetAlpha = 1.0;
+                        }
+
+                        updatePosition();
                     }
 
+                    if (FlxG.keys.justPressed.SHIFT && !skipped && Conductor.songPosition < firstNoteTime - 1000)
+                        skipToTime(firstNoteTime - 1000);
                 }
-            }
+                else
+                {
+                    barShader.percent.value = [0.0];
+                    timerText.text = "";
+                    targetAlpha = 0.0;
+                }
 
-            timerText.alpha = FlxMath.lerp(timerText.alpha, targetAlpha, elapsed*5);
-            timerCircle.alpha = timerText.alpha;
+                timerText.alpha = FlxMath.lerp(timerText.alpha, targetAlpha, elapsed * 4);
+                timerBar.alpha = timerText.alpha;
+                barBG.alpha = timerText.alpha;
+            }
         }
     }
 
     function updatePosition()
     {
-        // skipText siempre en la esquina derecha
         skipText.x = FlxG.width - skipText.width - 20;
         skipText.y = utilities.Options.getData("downscroll")
             ? 20
             : FlxG.height - skipText.height - 20;
 
-        if (utilities.Options.getData("middlescroll"))
-        {
-           var firstNote = PlayState.playerStrums.members[0];
+        timerBar.x = (FlxG.width - timerBar.width) / 2;
+        timerBar.y = utilities.Options.getData("downscroll")
+            ? (FlxG.height - timerBar.height - 80)
+            : 80;
 
-            var offset = 70; // cámbialo a 50 si prefieres
+        barBG.x = timerBar.x;
+        barBG.y = timerBar.y + (timerBar.height - barBG.height) / 2;
 
-            timerCircle.x = firstNote.x - timerCircle.width - offset;
-            timerText.x   = timerCircle.x + (timerCircle.width - timerText.width) / 2;
-
-            timerCircle.y = firstNote.y;
-            timerText.y = firstNote.y + 30;
-        }
-        else
-        {
-            timerCircle.screenCenter();
-            timerText.screenCenter();
-
-            if (utilities.Options.getData("downscroll"))
-            {
-                timerCircle.y += 260;
-                timerText.y += 260;
-            }
-            else
-            {
-                timerCircle.y -= 260;
-                timerText.y -= 260;
-            }
-        }
+        timerText.x = timerBar.x + (timerBar.width - timerText.width) / 2;
+        timerText.y = timerBar.y + (timerBar.height - timerText.height) / 2;
     }
 
-
-    public var skipped:Bool = false;
 
     public function getClosestNote()
     {
@@ -264,18 +237,12 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
                 t = timeDiff;
         }
 
-        //if (t == FlxMath.MAX_VALUE_FLOAT) //now check unspawnNotes if not found anything
-        //{
-            for (daNote in instance.unspawnNotes)
-            {
-                var timeDiff = daNote.strumTime;
-                if (timeDiff < t)
-                {
-                    t = timeDiff;
-                    //break;
-                }
-            }
-        //}
+        for (daNote in instance.unspawnNotes)
+        {
+            var timeDiff = daNote.strumTime;
+            if (timeDiff < t)
+                t = timeDiff;
+        }
         return t;
     }
 
@@ -284,25 +251,22 @@ class NoteTimer extends FlxTypedSpriteGroup<FlxSprite>
         if (skipped)
             return;
         skipped = true;
-        var timeDiff = time-Conductor.songPosition;
+        var timeDiff = time - Conductor.songPosition;
         var addedTime = Conductor.songPosition;
 
-        while(timeDiff > 0)
+        while (timeDiff > 0)
         {
             var timeToAdd = Conductor.stepCrochet;
             var ending:Bool = false;
             if (timeDiff <= timeToAdd)
             {
-                timeToAdd = timeDiff; //less than a step left so just takeaway the rest
+                timeToAdd = timeDiff;
                 ending = true;
             }
             timeDiff -= timeToAdd;
-            //trace('time left: ' + timeDiff);
-            //trace('song pos: ' + Conductor.songPosition);
-            FlxG.state.update(timeToAdd*0.001); //advance time
-            
-            addedTime += timeToAdd; //need to do it like this because the songpos gets updated with FlxG.elapsed which wouldnt change
-            Conductor.songPosition = addedTime; //make sure it updates the step correctly
+            FlxG.state.update(timeToAdd * 0.001);
+            addedTime += timeToAdd;
+            Conductor.songPosition = addedTime;
             if (ending)
             {
                 timeDiff = 0;

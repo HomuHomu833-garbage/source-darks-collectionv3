@@ -1,0 +1,9 @@
+singRIGHTmiss 8 -218
+singDOWN 5 -219
+singLEFTmiss 3 -219
+singUP 9 -221
+idle 8 -220
+singDOWNmiss 8 -218
+singRIGHT 11 -218
+singLEFT 8 -218
+singUPmiss 10 -221

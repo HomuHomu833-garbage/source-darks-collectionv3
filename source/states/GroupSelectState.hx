@@ -19,7 +19,7 @@ import utilities.FiltersBG;
 class GroupSelectState extends MusicBeatState {
     public var groupList:Array<Int>;
     public var onGroupSelected:Int->Void;
-   public static var groupID:Int = 0;
+    public static var groupID:Int = 0;
     public static var groupSongs:Array<FreeplaySong> = [];
     
     var vortexEffect:ChesslolEffect;
@@ -37,6 +37,7 @@ class GroupSelectState extends MusicBeatState {
 
     public static var groupImages:Map<Int, String> = new Map();
     public static var groupFonts:Map<Int, String> = new Map();
+    public static var groupTextSizes:Map<Int, Int> = new Map();
 
 	public static var groupNames:Array<String>;
 	public var songs:Array<FreeplaySong>;
@@ -46,13 +47,14 @@ class GroupSelectState extends MusicBeatState {
         groupNames = names;
         onGroupSelected = onSelect;
         this.selectedGroup = selectedGroup;
-
+        visibleStart = Math.floor(selectedGroup / VISIBLE_COUNT) * VISIBLE_COUNT;
         curSelected = selectedGroup;
         if (curSelected < 0 || curSelected >= groupList.length)
             curSelected = 0;
     }
 	override function create() {
 		super.create();
+        
 		
 		var path:String = #if MODDING_ALLOWED 'mods/${Options.getData("curMod")}/data/freeplay.json'; #else 'assets/data/freeplay.json'; #end
 
@@ -75,6 +77,9 @@ class GroupSelectState extends MusicBeatState {
 			if (gID == selectedGroup) groupSongs.push(song);
 		}
 
+
+        visibleStart = Std.int(Math.min(visibleStart, Math.max(0, groupList.length - VISIBLE_COUNT)));
+        curSelected = selectedGroup % VISIBLE_COUNT;
 
 		vortexSprite = new FlxSprite(0, 0);//buenvortex
 		vortexSprite.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
@@ -114,10 +119,15 @@ class GroupSelectState extends MusicBeatState {
                         groupImages.set(id, parts[1].trim());
                     if (parts.length > 2 && parts[2].trim() != "")
                         groupFonts.set(id, parts[2].trim());
+                    if (parts.length > 3 && parts[3].trim() != "") {
+                        var size = Std.parseInt(parts[3].trim());
+                        if (size != null) groupTextSizes.set(id, size);
+                    }
                 }
             }
         }
     }
+
 
 
     function createVisibleGroups() {

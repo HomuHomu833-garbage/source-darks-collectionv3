@@ -341,18 +341,57 @@ class Note extends #if MODCHARTING_TOOLS modcharting.FlxSprite3D #else FlxSkewed
 			y -= (frameHeight * scale.y) - (Note.swagWidth);
 		}
 	}
+	override function update(elapsed:Float)
+{
+	super.update(elapsed);
 
-	override function update(elapsed:Float) {
-		super.update(elapsed);
+	calculateCanBeHit();
 
-			#if MODCHARTING_TOOLS angle3D.z #else angle #end = modAngle + localAngle;
+	// Evita crasheos en Modchart Editor o si las strumLineNotes no están inicializadas
+	if (!inEditor 
+		&& (FlxG.state is states.PlayState) 
+		&& PlayState.strumLineNotes != null 
+		&& PlayState.strumLineNotes.members != null)
+	{
+		var strumIndex = noteData;
+		if (mustPress)
+			strumIndex += PlayState.SONG.keyCount;
 
-		calculateCanBeHit();
+		if (strumIndex >= 0 && strumIndex < PlayState.strumLineNotes.members.length)
+		{
+			var strum = PlayState.strumLineNotes.members[strumIndex];
+			if (strum != null)
+			{
+				#if MODCHARTING_TOOLS
+				angle3D.z = strum.modAngle;
+				#else
+				angle = strum.modAngle;
+				#end
 
-		if (!inEditor && tooLate && alpha > 0.3) {
-			alpha = 0.3;
+				// Aplica la escala del strum si no es nota hold
+				if (!isSustainNote)
+				{
+					scale.x = strum.scale.x;
+					scale.y = strum.scale.y;
+				}
+			}
 		}
 	}
+
+	updateHitbox();
+
+	if (!isSustainNote)
+	{
+		centerOrigin();
+		centerOffsets();
+	}
+
+	if (!inEditor && tooLate && alpha > 0.3)
+		alpha = 0.3;
+}
+
+
+
 
 	public function calculateCanBeHit() {
 		if (mustPress) {

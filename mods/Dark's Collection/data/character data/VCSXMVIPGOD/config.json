@@ -2,6 +2,7 @@
     "cameraOffset": [340, -320],
     "barColor": [107, 57, 88],
     "healthIcon": "VoiidSXM-god",
+    "followAllCharacter": true,
     "characters": [
         {
             "name": "VCShaggyVIPGOD",

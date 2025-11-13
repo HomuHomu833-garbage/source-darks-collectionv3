@@ -1,0 +1,68 @@
+{
+  "defaultFlipX": true,
+  "cameraOffset": [-50, 150],
+  "dancesLeftAndRight": false,
+  "imagePath": "TaroVIP",
+  "healthIcon": "Tarovip-icons", 
+  "barColor": [65, 5, 216],
+  "offsetsFlipWhenEnemy": true,
+  "offsetsFlipWhenPlayer": true,
+   "graphicSize": 0.94,
+   "positionOffset": [0, -100],
+  "animations": [
+    {
+      "name": "idle",
+      "animation_name": "BF idle dance0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singLEFT",
+      "animation_name": "BF SING RIGHT0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singDOWN",
+      "animation_name": "BF SING DOWN0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singUP",
+      "animation_name": "BF SING UP0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singRIGHT",
+      "animation_name": "BF SING LEFT0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singLEFTmiss",
+      "animation_name": "BF RIGHT MISS0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singDOWNmiss",
+      "animation_name": "BF DOWN MISS0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singUPmiss",
+      "animation_name": "BF UP MISS0",
+      "fps": 24,
+      "looped": false
+    },
+    {
+      "name": "singRIGHTmiss",
+      "animation_name": "BF LEFT MISS0",
+      "fps": 24,
+      "looped": false
+    }
+  ]
+}

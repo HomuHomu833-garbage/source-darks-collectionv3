@@ -1,0 +1,39 @@
+{
+	"camera_Offsets":[
+		[250,0],
+		[-250,-50]
+	],
+	"objects": [
+		{
+			"is_Animated": false,
+			"antialiased": true,
+			"scroll_Factor": [
+				1,
+				1
+			],
+			"position": [
+				-845,
+				50
+			],
+			"file_Name": "bg",
+			"scale": 1.5,
+			"alpha": 1
+		}
+	],
+	"character_Positions": [
+		[
+			1057,
+			1387
+		],
+		[
+			89,
+			1353
+		],
+		[
+			803,
+			1258
+		]
+	],
+	"scriptName": "CosmicVIP",
+	"camera_Zoom": 0.55
+}

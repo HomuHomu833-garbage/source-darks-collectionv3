@@ -7,6 +7,7 @@ class Highscore {
 	public static var songScores:Map<String, Int> = new Map<String, Int>();
 	public static var songRanks:Map<String, String> = new Map<String, String>();
 	public static var songAccuracies:Map<String, Float> = new Map<String, Float>();
+	public static var songMisses:Map<String, Int> = new Map<String, Int>();
 
 	public static function resetSong(song:String, ?diff:String = "easy"):Void {
 		var daSong:String = formatSong(song, diff);
@@ -78,6 +79,24 @@ class Highscore {
 		Options.setData(songAccuracies, "songAccuracies", "scores");
 	}
 
+	static function setMisses(song:String, misses:Int):Void {
+		songMisses.set(song, misses);
+		Options.setData(songMisses, "songMisses", "scores");
+	}
+
+	public static function getMisses(song:String, diff:String, ?formatted:Bool = false):Int {
+		if (!songMisses.exists((!formatted ? formatSong(song, diff) : song)))
+			setMisses((!formatted ? formatSong(song, diff) : song), 0);
+
+		return songMisses.get((!formatted ? formatSong(song, diff) : song));
+	}
+
+	public static function saveMisses(song:String, diff:String, misses:Int):Void {
+		var daSong:String = formatSong(song, diff);
+		setMisses(daSong, misses);
+	}
+
+
 	public static function formatSong(song:String, diff:String, ?mix:String):String {
 		var returnSong:String = song.toLowerCase();
 
@@ -129,6 +148,10 @@ class Highscore {
 
 		if (Options.getData("songAccuracies", "scores") != null)
 			songAccuracies = Options.getData("songAccuracies", "scores");
+
+		if (Options.getData("songMisses", "scores") != null)
+			songMisses = Options.getData("songMisses", "scores");
+
 	}
 
 	public static function importOldData() {

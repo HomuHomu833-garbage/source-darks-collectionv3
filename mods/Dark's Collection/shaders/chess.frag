@@ -11,7 +11,7 @@ uniform float chessSize;
 uniform float fisheyeStrength;
 uniform float borderWidthX;
 uniform float borderWidthY;
-
+uniform float speed;
 #define iChannel0 bitmap
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
@@ -42,8 +42,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float effectStrength = b * fisheyeStrength;
     vec2 distortedCoord = mix(fragCoord, eyefishDistortion(fragCoord, iResolution.xy, 1.0), effectStrength);
 
-    float cx = distortedCoord.x * chessSize + direction * 5.0 * iTime;
-    float cy = distortedCoord.y * chessSize + directionY * 5.0 * iTime;
+    float cx = distortedCoord.x * chessSize + direction * 5.0 * iTime * speed;
+    float cy = distortedCoord.y * chessSize + directionY * 5.0 * iTime * speed;
 
     float checker = mod(floor(cx) + floor(cy), 2.0);
 

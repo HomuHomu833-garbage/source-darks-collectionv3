@@ -341,7 +341,7 @@ class TitleState extends MusicBeatState {
 						data = 'v' + data;
 						if (CoolUtil.getCurrentVersion() != data) {
 							trace('Outdated Version Detected! ' + data.trim() + ' != ' + CoolUtil.getCurrentVersion(), WARNING);
-							Main.display.version += ' - UPDATE AVALIABLE (${data.trim()})';
+							Main.display.version += '\n| UPDATE AVALIABLE (${data.trim()}) |';
 							FlxG.switchState(() -> new OutdatedSubState(data.trim()));
 						} else {
 							FlxG.switchState(() -> new MainMenuState());

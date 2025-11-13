@@ -23,7 +23,6 @@ import flixel.util.FlxAxes;
 import flixel.tweens.FlxTween;
 using utilities.BackgroundUtil;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import shaders.VCR;
 class CreditsState extends MusicBeatState {
     var rightArrow:FlxSprite;
     public var curSelected:Int = 0;
@@ -36,7 +35,6 @@ class CreditsState extends MusicBeatState {
     public var menuBG:FlxSprite;
     public var credits:Array<CreditMetadata> = [];
     public var descriptionText:FlxText;
-    public var VCRSHADER:VCR; 
 
     private var creditBackgrounds:Array<{bg:FlxSprite, text:FreeplayTxt}> = [];
     public var grpCredits:FlxTypedGroup<FreeplayTxt>;
@@ -195,14 +193,6 @@ class CreditsState extends MusicBeatState {
         DiscordClient.changePresence("In the Credits Menu", null);
         #end
 		
-        VCRSHADER = new VCR();
-        var vignettelol = new FlxSprite(0,0);
-        vignettelol.makeGraphic(FlxG.width, FlxG.height); 
-        vignettelol.blend = "multiply"; 
-        //vignettelol.alpha = 0.3;
-        vignettelol.shader = VCRSHADER.shader;
-        vignettelol.scrollFactor.set();
-        add(vignettelol);
         
 
         var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, FlxColor.BLACK);
@@ -224,7 +214,6 @@ class CreditsState extends MusicBeatState {
     override public function update(elapsed:Float):Void {
         super.update(elapsed);
        
-        VCRSHADER.time += elapsed;
 
         if (FlxG.keys.justPressed.TAB) {
 			openSubState(new modding.SwitchModSubstate());

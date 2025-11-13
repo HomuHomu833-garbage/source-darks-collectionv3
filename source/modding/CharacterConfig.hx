@@ -32,6 +32,7 @@ typedef CharacterConfig =
 	var antialiasing:Null<Bool>;
 	var mainCharacterID:Null<Int>;
 	var followMainCharacter:Null<Bool>;
+	var followAllCharacter:Null<Bool>;
 	/**
 	 * Any extra spritesheets to be with the main sheet.
 	 */
@@ -43,6 +44,9 @@ typedef CharacterData =
 {
 	var name:String;
 	var positionOffset:Array<Float>;
+    @:optional var layer:Null<Int>;
+	@:optional var healthIcon:String;
+	@:optional var iconOrder:Array<Float>;
 }
 
 typedef CharacterAnimation =

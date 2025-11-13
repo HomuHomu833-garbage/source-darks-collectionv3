@@ -15,8 +15,7 @@ import utilities.FlxTextFix;
 using StringTools;
 
 class DesingText extends FlxTextFix  {
-	public var textShaderWrapper:TextShader; // referencia al wrapper del shader
-
+	public var textShaderWrapper:TextShader;
 	public var border1Size:Float = 7;
 	public var border1Color:FlxColor = 0xFF0000FF;
 	public  var targetY:Float = 0;
@@ -26,9 +25,7 @@ class DesingText extends FlxTextFix  {
 	public var border2Color:FlxColor = 0xFFFF0000;
 	public var scaleX:Float = 1.0;
 	public var scaleY:Float = 1.0;
-
 	public var borderIterations:Int = 25;
-
 	public var childText:DesingText;
 
 	override function regenGraphic():Void {
@@ -79,20 +76,16 @@ class DesingText extends FlxTextFix  {
 
 		if (textField != null && textField.text != null && textField.text.length > 0) {
 			copyTextFormat(_defaultFormat, _formatAdjusted);
-
 			_matrix.identity();
-
 			borderColor = border1Color;
 			borderSize = border1Size;
 			applyBorderStyle();
 			applyBorderTransparency();
-
 			borderColor = border2Color;
 			borderSize = border2Size;
 			applyBorderStyle();
 			applyBorderTransparency();
 			applyFormats(_formatAdjusted, false);
-
 			drawTextFieldTo(graphic.bitmap);
 		}
 
@@ -112,12 +105,9 @@ class DesingText extends FlxTextFix  {
 			iterations = 1;
 		}
 		var delta:Float = borderSize / iterations;
-
 		applyFormats(_formatAdjusted, true);
-
 		var curDelta:Float = delta;
 		var graphic:BitmapData = _hasBorderAlpha ? _borderPixels : graphic.bitmap;
-
 		iterations = borderIterations;
 		for (i in 0...iterations) {
 			var ang = (360 / iterations) * i * (Math.PI / 180);
@@ -130,36 +120,35 @@ class DesingText extends FlxTextFix  {
 	}
 
 	override public function draw():Void {
-    super.draw();
-    if (childText != null) {
-        childText.cameras = cameras;
-        childText.scale.set(scale.x * 0.75, scale.y * 0.75);
-        childText.updateHitbox();
-        childText.x = x + (width * 0.5) - (childText.width * 0.45);
-        var yOffset = (height * 0.5) - (childText.height * 0.2);
-        if (Options.getData("downscroll")) {
-            yOffset = 0;
-        }
-        childText.y = y + yOffset;
-        childText.draw();
-    }
-}
+		super.draw();
+		if (childText != null) {
+			childText.cameras = cameras;
+			childText.scale.set(scale.x * 0.75, scale.y * 0.75);
+			childText.updateHitbox();
+			childText.x = x + (width * 0.5) - (childText.width * 0.45);
+			var yOffset = (height * 0.5) - (childText.height * 0.2);
+			if (Options.getData("downscroll")) {
+				yOffset = 0;
+			}
+			childText.y = y + yOffset;
+			childText.draw();
+		}
+	}
+
 	public function updateShaderFade(curSelected:Int, index:Int):Void {
 		if (textShaderWrapper == null) return;
-
 		var distance:Int = Std.int(Math.abs(index - curSelected));
-
 		var opacityValues = [1.0, 0.5, 0.25];
-		textShaderWrapper.opacity = (distance < opacityValues.length) ? opacityValues[distance] : 0.0;
-
+		var newOpacity = (distance < opacityValues.length) ? opacityValues[distance] : 0.0;
+		textShaderWrapper.opacity = newOpacity;
 		var scale = Math.max(0.5, 1 - 0.2 * distance);
 		this.scale.set(scale, scale);
-
+		if (childText != null && childText.textShaderWrapper != null) {
+			childText.textShaderWrapper.opacity = newOpacity;
+		}
 		textShaderWrapper.selectedIndex = curSelected;
 		textShaderWrapper.update(FlxG.elapsed);
 	}
-
-	
 
 	static var defaultData:String = '{
 		"outerBorderTop": "#000000",
@@ -176,23 +165,26 @@ class DesingText extends FlxTextFix  {
 			isVIP = true;
 			song = StringTools.replace(song, " VIP", "");
 		}
-
 		if (data == null) {
-			data = Json.parse(defaultData);
+	data = Json.parse(defaultData);
 		}
+
+		if (data.songFontSize != null)
+			size = Std.int(Std.parseFloat(Std.string(data.songFontSize)));
 
 		var songText = new DesingText(0, 0, 0, song.toUpperCase(), size);
 		songText.borderStyle = OUTLINE;
 		songText.letterSpacing = spacing;
 		songText.borderSize = 5;
-
 		if (data.outerBorderSize != null) songText.border1Size = data.outerBorderSize;
 		if (data.midBorderSize != null) songText.border2Size = data.midBorderSize;
 		if (data.innerBorderSize != null) songText.borderSize = data.innerBorderSize;
-
+		if (data.songFont != null)
+			songText.font = Paths.font(data.songFont);
+		else
+			songText.font = Paths.font("dumbnerd.ttf");
 		var shader = new TextShader();
 		songText.shader = shader.shader;
-
 		songText.textShaderWrapper = shader;
 		shader.outerColorTop = getColorArray(data.outerBorderTop, 0);
 		shader.outerColorBot = getColorArray(data.outerBorderBot, 0);
@@ -200,47 +192,47 @@ class DesingText extends FlxTextFix  {
 		shader.midColorBot = getColorArray(data.midBorderBot, 0.1);
 		shader.innerColorTop = getColorArray(data.innerBorderTop, -0.3);
 		shader.innerColorBot = getColorArray(data.innerBorderBot, 0.3);
-		
 		shader.mixGap = (data.mixGap != null) ? data.mixGap : 2.0;
 		shader.strength = (data.sobelStrength != null) ? data.sobelStrength : 0.0;
 		shader.intensity = (data.sobelIntensity != null) ? data.sobelIntensity : 0.0;
-		shader.opacity = ((data.opacity != null) ? data.opacity : 1.0) * alpha; 
-
+		shader.opacity = ((data.opacity != null) ? data.opacity : 1.0) * alpha;
 		songText.screenCenter();
 		songText.color = 0xFF00FF00;
 		songText.antialiasing = true;
-
 		if (isVIP) {
-			var vipText = new DesingText(0, 0, 0, "VIP", size);
+			var vipSize:Int = size;
+			if (data.songFontSizeVIP != null)
+				vipSize = Std.int(Std.parseFloat(Std.string(data.songFontSizeVIP)));
+
+
+			var vipText = new DesingText(0, 0, 0, "VIP", vipSize);
 			vipText.borderStyle = OUTLINE;
 			vipText.letterSpacing = 80;
 			vipText.borderSize = 5;
-			vipText.font = Paths.font("dumbnerd.ttf");
+			if (data.songFontVIP != null)
+				vipText.font = Paths.font(data.songFontVIP);
+			else
+				vipText.font = Paths.font("dumbnerd.ttf");
 			vipText.screenCenter();
 			vipText.color = 0xFF00FF00;
 			vipText.antialiasing = true;
 			songText.childText = vipText;
-
 			var vipShader = new TextShader();
 			vipText.shader = vipShader.shader;
-
+			vipText.textShaderWrapper = vipShader;
 			vipShader.outerColorTop = getColorArray(data.outerBorderTopVIP, 0);
 			vipShader.outerColorBot = getColorArray(data.outerBorderBotVIP, 0);
 			vipShader.midColorTop = getColorArray(data.midBorderTopVIP, -0.1);
 			vipShader.midColorBot = getColorArray(data.midBorderBotVIP, 0.1);
 			vipShader.innerColorTop = getColorArray(data.innerBorderTopVIP, -0.3);
 			vipShader.innerColorBot = getColorArray(data.innerBorderBotVIP, 0.3);
-
 			vipShader.strength = 0;
 			vipShader.intensity = 0;
 			vipShader.mixGap = 2.0;
-			vipShader.opacity = 1.0 * alpha; 
+			vipShader.opacity = 1.0 * shader.opacity;
 		}
-
 		return songText;
 	}
-
-
 
 	override function update(elapsed:Float) {
 		if (isMenuItem) {
@@ -258,5 +250,40 @@ class DesingText extends FlxTextFix  {
 		var green = (col >> 8) & 0xff;
 		var blue = (col) & 0xff;
 		return [red / 255 * (1 + offset), green / 255 * (1 + offset), blue / 255 * (1 + offset)];
+	}
+
+	public function applyStyleData(data:Dynamic):Void {
+		if (data == null) return;
+		if (textShaderWrapper != null) {
+			var s = textShaderWrapper;
+			if (data.outerBorderTop != null) s.outerColorTop = DesingText.getColorArray(data.outerBorderTop, 0);
+			if (data.outerBorderBot != null) s.outerColorBot = DesingText.getColorArray(data.outerBorderBot, 0);
+			if (data.midBorderTop != null) s.midColorTop = DesingText.getColorArray(data.midBorderTop, -0.1);
+			if (data.midBorderBot != null) s.midColorBot = DesingText.getColorArray(data.midBorderBot, 0.1);
+			if (data.innerBorderTop != null) s.innerColorTop = DesingText.getColorArray(data.innerBorderTop, -0.3);
+			if (data.innerBorderBot != null) s.innerColorBot = DesingText.getColorArray(data.innerBorderBot, 0.3);
+			if (data.mixGap != null) s.mixGap = data.mixGap;
+			if (data.sobelStrength != null) s.strength = data.sobelStrength;
+			if (data.sobelIntensity != null) s.intensity = data.sobelIntensity;
+			if (data.opacity != null) s.opacity = data.opacity;
+			s.update(0);
+		}
+		if (data.outerBorderSize != null) border1Size = data.outerBorderSize;
+		if (data.midBorderSize != null) border2Size = data.midBorderSize;
+		if (data.innerBorderSize != null) borderSize = data.innerBorderSize;
+		if (data.textColor != null) color = FlxColor.fromString(data.textColor);
+		if (childText != null && childText.textShaderWrapper != null) {
+			var vs = childText.textShaderWrapper;
+			if (data.outerBorderTopVIP != null) vs.outerColorTop = DesingText.getColorArray(data.outerBorderTopVIP, 0);
+			if (data.outerBorderBotVIP != null) vs.outerColorBot = DesingText.getColorArray(data.outerBorderBotVIP, 0);
+			if (data.midBorderTopVIP != null) vs.midColorTop = DesingText.getColorArray(data.midBorderTopVIP, -0.1);
+			if (data.midBorderBotVIP != null) vs.midColorBot = DesingText.getColorArray(data.midBorderBotVIP, 0.1);
+			if (data.innerBorderTopVIP != null) vs.innerColorTop = DesingText.getColorArray(data.innerBorderTopVIP, -0.3);
+			if (data.innerBorderBotVIP != null) vs.innerColorBot = DesingText.getColorArray(data.innerBorderBotVIP, 0.3);
+			vs.update(0);
+		}
+		_regen = true;
+		regenGraphic();
+		updateHitbox();
 	}
 }

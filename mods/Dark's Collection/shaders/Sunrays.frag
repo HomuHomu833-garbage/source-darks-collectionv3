@@ -1,7 +1,7 @@
 #pragma header
 
 #define PI 3.14159265359
-const float num_samples = 50.0;
+const float num_samples = 30.0;
 const float hh = 0.4;
 const float kstep = 0.1;
 const float ksum = 1.0;
@@ -9,6 +9,7 @@ const float eatt = 1.0;
 
 uniform float iTime;
 uniform float strength;
+uniform float brightness;
 
 vec3 attenuation(vec3 c, float d)
 {
@@ -58,5 +59,8 @@ void main()
     vec4 col = texture2D(bitmap, pt);
     vec2 mouse = vec2(0.5 + 0.1 * sin(iTime * 2.0), 0.25 + 0.1 * cos(iTime * 1.25));
     col.rgb = radial_blur_filter(mouse, pt);
+
+    col.rgb *= brightness;
+
     gl_FragColor = col;
 }

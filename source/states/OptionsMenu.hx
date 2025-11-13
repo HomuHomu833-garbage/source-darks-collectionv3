@@ -177,6 +177,9 @@ class OptionsMenu extends MusicBeatState {
 		"DC Options" => [
 			new PageOption("Back", "Categories", "Go back to the main menu."),
 			//new BoolOption("Mechanics", "mechanics"),
+			new BoolOption("Trail", "trails", "When toggled, disable trail in sprites"),
+			new BoolOption("NoteTimer", "noteTimer", "When toggled, disables the circular note timer UI."),
+			new BoolOption("SkipTimer", "skipTimer", "When toggled, disables the 'PRESS SHIFT TO SKIP INTRO' message."),
 			new BoolOption("Disclaimer", "showDisclaimer","Disable the Disclaimer menu"),
 			new BoolOption("DarkHeader (WIP)", "darkHeader","Windows Header Black"),
 			new BoolOption("Shaders", "shaders","Disable Shaders"),

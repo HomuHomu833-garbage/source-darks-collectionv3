@@ -1,6 +1,6 @@
-0:BG_1:dumbnerd.ttf
-1:BG_2:Schluber.otf
-2:BG_2:Moviecal Demo.ttf
-3:BG_1:dumbnerd.ttf
+0:BG_1:dumbnerd.ttf:90
+1:BG_2:Schluber.otf:90
+2:BG_2:Moviecal Demo.ttf:90
+3:BG_1:dumbnerd.ttf:90
 4:BG_2
-6:BG_1:Darkmode demo-Regular.ttf
+6:BG_1:Darkmode demo-Regular.ttf:90

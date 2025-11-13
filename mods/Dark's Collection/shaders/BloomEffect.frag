@@ -11,16 +11,24 @@ void main()
     vec2 uv = openfl_TextureCoordv;
     vec2 iResolution = vec2(1280.0, 720.0);
 
-    vec4 color = flixel_texture2D(bitmap, uv);
+    vec4 color = flixel_texture2D(bitmap,uv);
+    //float brightness = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
+
+    //vec4 newColor = vec4(color.rgb * brightness * strength * color.a, color.a);
+
+    //got some stuff from here: https://github.com/amilajack/gaussian-blur/blob/master/src/9.glsl
+    //this also helped to understand: https://learnopengl.com/Advanced-Lighting/Bloom
+
 
     color.rgb *= contrast;
-    color.rgb += vec3(brightness);
+    color.rgb += vec3(brightness,brightness,brightness);
 
-    if (effect <= 0.0)
+    if (effect <= 0)
     {
         gl_FragColor = color;
         return;
     }
+
 
     vec2 off1 = vec2(1.3846153846) * effect;
     vec2 off2 = vec2(3.2307692308) * effect;

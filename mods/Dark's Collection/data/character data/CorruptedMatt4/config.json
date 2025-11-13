@@ -3,7 +3,7 @@
     "dancesLeftAndRight": false,
     "imagePath": "CorruptedMatt4",
     "healthIcon": "Corrupted Matt 2",
-    "cameraOffset": [-150,50],
+    "cameraOffset": [-150,-250],
     "spritesheetType": "SPARROW",
     "barColor": [32, 34, 45],
     "offsetsFlipWhenPlayer": true,
