@@ -173,6 +173,9 @@ class StageGroup extends FlxGroup {
 							if (object.alpha != null)
 								sprite.alpha = object.alpha;
 
+							if (object.blend != null)
+								sprite.blend = object.blend;
+
 							if (object.zIndex != null)
 								sprite.zIndex = object.zIndex;
 
@@ -454,7 +457,7 @@ typedef StageObject = {
 	var scale:Float;
 	var antialiased:Bool;
 	var scroll_Factor:Array<Float>;
-
+	var blend:Null<String>;
 	var color:Array<Int>;
 	var uses_Frame_Width:Bool;
 	var object_Name:Null<String>;

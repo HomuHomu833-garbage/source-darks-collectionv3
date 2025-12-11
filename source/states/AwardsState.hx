@@ -16,7 +16,6 @@ import utilities.Options;
 import Popup.AwardPopup;
 import flixel.FlxG;
 import utilities.StarLoader;
-import shaders.VCR;
 import substates.StarInfoSubState;
 typedef Award = {
     var name:String;
@@ -284,7 +283,6 @@ class AwardsState extends MusicBeatState
     var listHeight:Float = -400;
 
     var unlockedCount:Int = 0;
-    public var VCRSHADER:VCR;
     override public function create()
     {
         #if DISCORD_ALLOWED
@@ -296,14 +294,13 @@ class AwardsState extends MusicBeatState
             TitleState.playTitleMusic();
 
 
-        VCRSHADER = new VCR();
+    
         var bg = new FlxSprite().loadGraphic(Paths.image('Credits/Credits-BG'));
         bg.setGraphicSize(Std.int(1280));
         bg.updateHitbox();
         bg.screenCenter();
         bg.antialiasing = true;
         bg.scrollFactor.set();
-        bg.shader = VCRSHADER.shader;
         add(bg);
 
         FlxG.mouse.visible = true;
@@ -405,7 +402,6 @@ class AwardsState extends MusicBeatState
 
         super.update(elapsed);
 
-        VCRSHADER.time += elapsed;
     }
 }
 

@@ -26,7 +26,8 @@ import haxe.io.Path;
 #if sys
 import sys.FileSystem;
 #end
-
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 using StringTools;
 #if DISCORD_ALLOWED
 import utilities.DiscordClient;
@@ -291,7 +292,7 @@ class LoadingState extends MusicBeatState
 		instance = this;
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading Song", null);
+		DiscordClient.changePresence("Loading - " + PlayState.SONG.song, null);
 		#end
 		#if PRELOAD_ALL
 		var loadingScreen = new FlxSprite(0, 0);
@@ -336,11 +337,14 @@ class LoadingState extends MusicBeatState
 		loadingScreen.screenCenter();
 		loadingScreen.antialiasing = true;
 		add(loadingScreen);
+		loadingScreen.scale.set(3, 3);
+		FlxTween.tween(loadingScreen.scale, {x: 2, y: 2}, 3, {ease: FlxEase.cubeInOut});
 
-
-		loadingText = new FlxText(2, FlxG.height - 100, 0, "");
+		loadingText = new FlxText(50, FlxG.height - 100, 0, "");
 		loadingText.setFormat(Paths.font("consola.ttf"), 34, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(loadingText);
+
+
 		/*new FlxTimer().start(0.7, function(tmr:FlxTimer)
 		{
 			//FlxTransitionableState.skipNextTransIn = true;
@@ -356,9 +360,19 @@ class LoadingState extends MusicBeatState
 		});
 		loader.load(true);
 
-	var border = new FlxSprite(FlxG.width - 28, -3).makeGraphic(31, FlxG.height + 6, 0xFF000000); border.scrollFactor.set(); add(border);
+		var barWidth = 500;
+		var barHeight = 30;
+		var barX = (FlxG.width / 2) - (barWidth / 2);
+		var barY = FlxG.height - 80;
 
-	loadingBar = new FlxBar(FlxG.width - 25, 0, BOTTOM_TO_TOP, 25, FlxG.height, this, 'lerpedPercent', 0, 1); loadingBar.scrollFactor.set(); loadingBar.createFilledBar(0x00000000, 0xFFFFFFFF); add(loadingBar);
+		var border = new FlxSprite(barX + 240, barY).makeGraphic(barWidth + 15, barHeight + 15, 0xFF000000);
+		border.scrollFactor.set();
+		add(border);
+
+		loadingBar = new FlxBar(barX + 245 , barY+7, LEFT_TO_RIGHT, barWidth, barHeight, this, 'lerpedPercent', 0, 1);
+		loadingBar.scrollFactor.set();
+		loadingBar.createFilledBar(0xFF444444, 0xFFFFFFFF);
+		add(loadingBar);
 
 		#else 
 		logo = new FlxSprite(-150, -100);

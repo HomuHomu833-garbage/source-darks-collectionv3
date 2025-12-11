@@ -45,8 +45,9 @@ typedef SongTextExtraData = {
 
 	
 	@:optional var songFont:String;
-
-	
+	@:optional var songFontVIP:String;
+	@:optional var songFontSize:String;	
+	@:optional var songFontSizeVIP:String;	
 	@:optional var outerBorderTop:String;
 	@:optional var outerBorderBot:String;
 	@:optional var midBorderTop:String;

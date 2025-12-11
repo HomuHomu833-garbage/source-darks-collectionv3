@@ -148,7 +148,7 @@ class ChartingState extends MusicBeatState
 	var lilStage:FlxSprite;
 	var lilBf:FlxSprite;
 	var lilOpp:FlxSprite;
-	static var globalSecton:Int = 0;
+	public static var globalSecton:Int = 0;
 	function createStageAndCharacters()
 	{
 		stageCharGroup.clear();
@@ -998,45 +998,41 @@ class ChartingState extends MusicBeatState
 
 	
 
-	function addNoteUI():Void
-	{
+	function addNoteUI():Void {
 		var tab_group_note = new FlxUI(null, UI_box);
 		tab_group_note.name = 'Art';
 
-		var arrayCharacters = ["bf","gf",""];
+		var arrayCharacters = ["bf", "gf", ""];
 		var tempCharacters = characters.get("default");
 
-		if(tempCharacters != null)
-		{
-			for(Item in tempCharacters)
-			{
+		if (tempCharacters != null) {
+			for (Item in tempCharacters) {
 				arrayCharacters.push(Item);
 			}
 		}
 
-
 		// CHARS
-		var player1DropDown = new FlxScrollableDropDownMenu(10, 30, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true), function(character:String)
-		{
-			_song.player1 = arrayCharacters[Std.parseInt(character)];
-			updateHeads();
-		});
+		var player1DropDown = new FlxScrollableDropDownMenu(10, 30, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true),
+			function(character:String) {
+				_song.player1 = arrayCharacters[Std.parseInt(character)];
+				updateHeads();
+			});
 
 		player1DropDown.selectedLabel = _song.player1;
 
-		var gfDropDown = new FlxScrollableDropDownMenu(10, 50, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true), function(character:String)
-		{
-			_song.gf = arrayCharacters[Std.parseInt(character)];
-		});
+		var gfDropDown = new FlxScrollableDropDownMenu(10, 50, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true),
+			function(character:String) {
+				_song.gf = arrayCharacters[Std.parseInt(character)];
+			});
 
 		gfDropDown.selectedLabel = _song.gf;
 
-		var player2DropDown = new FlxScrollableDropDownMenu(10, 70, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true), function(character:String)
-		{
-			_song.player2 = arrayCharacters[Std.parseInt(character)];
-			updateHeads();
-		});
-		
+		var player2DropDown = new FlxScrollableDropDownMenu(10, 70, FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true),
+			function(character:String) {
+				_song.player2 = arrayCharacters[Std.parseInt(character)];
+				updateHeads();
+			});
+
 		player2DropDown.selectedLabel = _song.player2;
 
 		blockPressWhileScrolling.push(player1DropDown);
@@ -1046,8 +1042,7 @@ class ChartingState extends MusicBeatState
 		// OTHER
 		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 
-		var stageDropDown = new FlxScrollableDropDownMenu(10, 120, FlxScrollableDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
-		{
+		var stageDropDown = new FlxScrollableDropDownMenu(10, 120, FlxScrollableDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String) {
 			_song.stage = stages[Std.parseInt(stage)];
 		});
 
@@ -1058,29 +1053,19 @@ class ChartingState extends MusicBeatState
 		var uiSkins:Array<String> = CoolUtil.coolTextFile(Paths.txt('uiSkinList'));
 
 		var uiSkinDropDown = new FlxScrollableDropDownMenu(10, stageDropDown.y + 20, FlxScrollableDropDownMenu.makeStrIdLabelArray(uiSkins, true),
-		function(uiSkin:String){
-			_song.ui_Skin = uiSkins[Std.parseInt(uiSkin)];
+			function(uiSkin:String) {
+				_song.ui_Skin = uiSkins[Std.parseInt(uiSkin)];
+				uiSettings = CoolUtil.coolTextFile(Paths.txt("ui skins/" + _song.ui_Skin + "/config"));
+				while (curRenderedNotes.members.length > 0) {
+					curRenderedNotes.remove(curRenderedNotes.members[0], true);
+				}
 
-			uiSettings = CoolUtil.coolTextFile(Paths.txt("ui skins/" + _song.ui_Skin + "/config"));
-			while (curRenderedNotes.members.length > 0)
-			{
-				curRenderedNotes.remove(curRenderedNotes.members[0], true);
-			}
-	
-			while (curRenderedSustains.members.length > 0)
-			{
-				curRenderedSustains.remove(curRenderedSustains.members[0], true);
-			}
+				while (curRenderedEvents.members.length > 0) {
+					curRenderedEvents.remove(curRenderedEvents.members[0], true);
+				}
 
-			while (curRenderedEvents.members.length > 0)
-			{
-				curRenderedEvents.remove(curRenderedEvents.members[0], true);
-			}
-
-			//PlayState.instance.uiSkin.arrow_Type_Sprites.clear();
-
-			updateGrid();
-		});
+				updateGrid();
+			});
 
 		uiSkinDropDown.selectedLabel = _song.ui_Skin;
 
@@ -1090,33 +1075,31 @@ class ChartingState extends MusicBeatState
 
 		var iterator = characters.keys();
 
-		for(i in iterator)
-		{
+		for (i in iterator) {
 			mods.push(i);
 		}
 
-		var modDropDown = new FlxScrollableDropDownMenu(uiSkinDropDown.x, uiSkinDropDown.y + 20, FlxScrollableDropDownMenu.makeStrIdLabelArray(mods, true), function(mod:String)
-		{
-			selected_mod = mods[Std.parseInt(mod)];
+		var modDropDown = new FlxScrollableDropDownMenu(uiSkinDropDown.x, uiSkinDropDown.y + 20, FlxScrollableDropDownMenu.makeStrIdLabelArray(mods, true),
+			function(mod:String) {
+				selected_mod = mods[Std.parseInt(mod)];
 
-			arrayCharacters = ["bf","gf",""];
-			tempCharacters = characters.get(selected_mod);
-			
-			for(Item in tempCharacters)
-			{
-				arrayCharacters.push(Item);
-			}
+				arrayCharacters = ["bf", "gf", ""];
+				tempCharacters = characters.get(selected_mod);
 
-			var character_Data_List = FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true);
-			
-			player1DropDown.setData(character_Data_List);
-			gfDropDown.setData(character_Data_List);
-			player2DropDown.setData(character_Data_List);
+				for (Item in tempCharacters) {
+					arrayCharacters.push(Item);
+				}
 
-			player1DropDown.selectedLabel = _song.player1;
-			gfDropDown.selectedLabel = _song.gf;
-			player2DropDown.selectedLabel = _song.player2;
-		});
+				var character_Data_List = FlxScrollableDropDownMenu.makeStrIdLabelArray(arrayCharacters, true);
+
+				player1DropDown.setData(character_Data_List);
+				gfDropDown.setData(character_Data_List);
+				player2DropDown.setData(character_Data_List);
+
+				player1DropDown.selectedLabel = _song.player1;
+				gfDropDown.selectedLabel = _song.gf;
+				player2DropDown.selectedLabel = _song.player2;
+			});
 
 		modDropDown.selectedLabel = selected_mod;
 
@@ -1131,10 +1114,8 @@ class ChartingState extends MusicBeatState
 		var p2Label = new FlxText(12 + player2DropDown.width, player2DropDown.y, 0, "Player 2", 9);
 		var stageLabel = new FlxText(12 + stageDropDown.width, stageDropDown.y, 0, "Stage", 9);
 		var uiSkinLabel = new FlxText(12 + uiSkinDropDown.width, uiSkinDropDown.y, 0, "UI Skin", 9);
-
 		var modLabel = new FlxText(12 + modDropDown.width, modDropDown.y, 0, "Current Character Group", 9);
-
-
+			
 		// adding labels
 		tab_group_note.add(characterLabel);
 		tab_group_note.add(otherLabel);
@@ -1145,8 +1126,6 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(stageLabel);
 		tab_group_note.add(uiSkinLabel);
 		tab_group_note.add(modLabel);
-		
-
 
 		// adding main dropdowns
 		tab_group_note.add(modDropDown);
@@ -1159,7 +1138,6 @@ class ChartingState extends MusicBeatState
 		// final add
 		UI_box.addGroup(tab_group_note);
 	}
-
 	function convertSectionToShaggy(section:Int)
 	{
 		for(noteIndex in 0..._song.notes[section].sectionNotes.length)
@@ -1474,74 +1452,92 @@ class ChartingState extends MusicBeatState
 		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * Conductor.stepsPerSection));
 		cameraShitThing.y = strumLine.y;
 
-				curRenderedNotes.forEach(function(note:Note)
+		curRenderedNotes.forEach(function(note:Note)
+{
+	if (FlxG.sound.music.playing)
+	{
+		if (!claps.contains(note) && note.shouldHit
+			&& note.strumTime <= Conductor.songPosition
+			&& note.strumTime >= Conductor.songPosition - Conductor.safeZoneOffset)
 		{
-			if (FlxG.sound.music.playing)
+			claps.push(note);
+
+			if (!note.isSustainNote || note.prevNote == note)
 			{
-				if (!claps.contains(note) && note.shouldHit 
-					&& note.strumTime <= Conductor.songPosition 
-					&& note.strumTime >= Conductor.songPosition - Conductor.safeZoneOffset)
+				final isPlayerNote = note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.playerKeyCount && _song.notes[curSection].mustHitSection
+					|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection;
+
+				if (isPlayerNote && playerHitsounds)
+					FlxG.sound.play(Paths.sound('CLAP'));
+				else if (!isPlayerNote && enemyHitsounds)
+					FlxG.sound.play(Paths.sound('SNAP'));
+			}
+
+			final isPlayer = note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.playerKeyCount && _song.notes[curSection].mustHitSection
+				|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection;
+
+			final animList = isPlayer
+				? NoteVariables.characterAnimations[_song.playerKeyCount - 1]
+				: NoteVariables.characterAnimations[_song.keyCount - 1];
+			final animSuffix = isPlayer ? "" : altAnim;
+			final baseChar = isPlayer ? bf : dad;
+			final group = isPlayer ? bf.otherCharacters : dad.otherCharacters;
+
+			if (note.characters != null && note.characters.length > 0)
+			{
+				for (charIndex in note.characters)
 				{
-					claps.push(note);
-
-					if (!note.isSustainNote || note.prevNote == note)
+					if (group != null && charIndex < group.length && group[charIndex] != null)
 					{
-						final isPlayerNote = note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.playerKeyCount && _song.notes[curSection].mustHitSection
-							|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection;
-
-						if (isPlayerNote && playerHitsounds)
-							FlxG.sound.play(Paths.sound('CLAP'));
-						else if (!isPlayerNote && enemyHitsounds)
-							FlxG.sound.play(Paths.sound('SNAP'));
+						group[charIndex].playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
+						group[charIndex].holdTimer = -note.sustainLength * 0.001;
 					}
-
-					final isPlayer = note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.playerKeyCount && _song.notes[curSection].mustHitSection
-						|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection;
-
-					final animList = isPlayer 
-						? NoteVariables.characterAnimations[_song.playerKeyCount - 1] 
-						: NoteVariables.characterAnimations[_song.keyCount - 1];
-					final animSuffix = isPlayer ? "" : altAnim;
-					final baseChar = isPlayer ? bf : dad;
-					final group = isPlayer ? bf.otherCharacters : dad.otherCharacters;
-
-					if (group == null || group.length - 1 < note.character)
+					else
 					{
 						baseChar.playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
 						baseChar.holdTimer = -note.sustainLength * 0.001;
 					}
-					else
-					{
-						if (note.characters.length <= 1)
-						{
-							group[note.character].playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
-							group[note.character].holdTimer = -note.sustainLength * 0.001;
-						}
-						else
-						{
-							for (character in note.characters)
-							{
-								if (group.length - 1 >= character)
-								{
-									group[character].playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
-									group[character].holdTimer = -note.sustainLength * 0.001;
-								}
-							}
-						}
-					}
 				}
 			}
-		});
-				curRenderedNotes.forEach(function(note:Note) {
-			if (FlxG.sound.music.playing) {
-				FlxG.overlap(strumLine, note, function(_, _) {
-					if (note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.keyCount
-						&& _song.notes[curSection].mustHitSection
-						|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection) {
-						lilBf.animation.play(NoteVariables.animationDirections[_song.keyCount - 1][note.noteData], true);
-					} else {
-						lilOpp.animation.play(NoteVariables.animationDirections[_song.keyCount - 1][note.noteData], true);
+			else if (group != null && group.length > 0)
+			{
+				for (char in group)
+				{
+					if (char != null)
+					{
+						char.playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
+						char.holdTimer = -note.sustainLength * 0.001;
 					}
+				}
+				baseChar.playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
+				baseChar.holdTimer = -note.sustainLength * 0.001;
+			}
+			else
+			{
+				baseChar.playAnim(animList[Std.int(Math.abs(note.noteData))] + animSuffix, true);
+				baseChar.holdTimer = -note.sustainLength * 0.001;
+			}
+		}
+	}
+});
+
+
+		curRenderedNotes.forEach(function(note:Note)
+		{
+			if (FlxG.sound.music.playing)
+			{
+				FlxG.overlap(strumLine, note, function(_, _)
+				{
+					final isPlayerSide = note.rawNoteData % (_song.keyCount + _song.playerKeyCount) < _song.keyCount
+						&& _song.notes[curSection].mustHitSection
+						|| note.rawNoteData % (_song.keyCount + _song.playerKeyCount) >= _song.keyCount && !_song.notes[curSection].mustHitSection;
+
+					final animDir = NoteVariables.animationDirections[_song.keyCount - 1][note.noteData];
+
+					if (isPlayerSide)
+						lilBf.animation.play(animDir, true);
+					else
+						lilOpp.animation.play(animDir, true);
 				});
 			}
 		});

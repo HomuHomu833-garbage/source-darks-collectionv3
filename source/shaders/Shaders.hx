@@ -649,9 +649,9 @@ class ChesslolShader extends FlxShader {
 	}
 }
 
-
 class CutBitmapEffect extends ShaderEffect {
     public var shader(default,null):CutBitmapShader = new CutBitmapShader();
+
     public var side(default,set):Float = 1.0;
     public var topX(default,set):Float = 1.0;
     public var bottomX(default,set):Float = 1.0;
@@ -660,6 +660,9 @@ class CutBitmapEffect extends ShaderEffect {
     public var time(default,set):Float = 0.0;
     public var hue(default,set):Float = 0.0;
     public var brightness(default,set):Float = 1.0;
+
+    public var strength(default,set):Float = 0.0;
+    public var strengthChrom(default,set):Float = 0.0;
 
     private function set_time(value:Float):Float {
         time = value;
@@ -703,7 +706,18 @@ class CutBitmapEffect extends ShaderEffect {
         return borderWidth;
     }
 
-    
+    private function set_strength(value:Float):Float {
+        strength = value;
+        shader.strength.value[0] = strength;
+        return strength;
+    }
+
+    private function set_strengthChrom(value:Float):Float {
+        strengthChrom = value;
+        shader.strengthChrom.value[0] = strengthChrom;
+        return strengthChrom;
+    }
+
     override public function update(elapsed:Float):Void {
         time += elapsed;
         shader.iTime.value[0] = time;
@@ -717,9 +731,11 @@ class CutBitmapEffect extends ShaderEffect {
         shader.iTime.value = [0];
         shader.hue.value = [0];
         shader.brightness.value = [1];
+        shader.strength.value = [0];
+        shader.strengthChrom.value = [0];
     }
-
 }
+
 
 
 
@@ -731,29 +747,37 @@ class CutBitmapShader extends FlxShader {
 #define iChannel0 bitmap
 #define texture flixel_texture2D
 
-uniform float side;       
-uniform float topX;       
-uniform float bottomX;    
+uniform float side;
+uniform float topX;
+uniform float bottomX;
 uniform float borderWidth;
 
 uniform float iTime;
 uniform float brightness;
 uniform float hue;
 
-float hash2(vec2 p) {
+uniform float strength;
+
+uniform float strengthChrom;
+
+float hash2(vec2 p)
+{
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
 }
 
-float hash3(vec2 p, float t) {
-    return fract(sin(dot(p, vec2(269.5, 183.3)) + t*17.13) * 43758.5453);
+float hash3(vec2 p, float t)
+{
+    return fract(sin(dot(p, vec2(269.5, 183.3)) + t * 17.13) * 43758.5453);
 }
 
-vec2 mask_coord(vec2 coord, int shift) {
+vec2 mask_coord(vec2 coord, int shift)
+{
     float m = exp2(float(shift));
     return floor(coord / m) * m;
 }
 
-float get_sample(vec2 coord, int shift) {
+float get_sample(vec2 coord, int shift)
+{
     coord = mask_coord(coord, shift);
     vec2 uv = coord / iResolution.xy;
     uv.y = 1.0 - uv.y;
@@ -765,7 +789,8 @@ float get_sample(vec2 coord, int shift) {
     return (c - 0.5) * 2.5 / (1.5 + float(shift)) + 0.5;
 }
 
-float get_sample_t(vec2 coord, float time) {
+float get_sample_t(vec2 coord, float time)
+{
     int shift = 0;
     for (int s = 10; s >= 0; s--) {
         vec2 xy = mask_coord(coord, s) / iResolution.xy;
@@ -778,14 +803,16 @@ float get_sample_t(vec2 coord, float time) {
     return (get_sample(coord, shift) + get_sample(coord, shift + 1)) * 0.4;
 }
 
-vec3 hueToRGB(float h) {
+vec3 hueToRGB(float h)
+{
     float r = abs(h * 6.0 - 3.0) - 1.0;
     float g = 2.0 - abs(h * 6.0 - 2.0);
     float b = 2.0 - abs(h * 6.0 - 4.0);
     return clamp(vec3(r, g, b), 0.0, 1.0);
 }
 
-vec4 specialShader(vec2 fragCoord) {
+vec4 specialShader(vec2 fragCoord)
+{
     float tf = 0.3 * iTime;
     float c = mix(
         get_sample_t(fragCoord, floor(tf)),
@@ -793,15 +820,40 @@ vec4 specialShader(vec2 fragCoord) {
         tf - floor(tf)
     );
     vec3 col = hueToRGB(hue) * (c * brightness);
-    return vec4(vec3(1.0) * col, 1.0); 
+    return vec4(vec3(1.0) * col, 1.0);
 }
 
-vec2 barDistFlat(vec2 uv, vec2 pos, float angleRad, float barLen) {
+vec2 barDistFlat(vec2 uv, vec2 pos, float angleRad, float barLen)
+{
     vec2 dir = vec2(cos(angleRad), sin(angleRad));
     vec2 pa = uv - pos;
-    float t = clamp(dot(pa, dir) / barLen, 0.0, 1.0); 
+    float t = clamp(dot(pa, dir) / barLen, 0.0, 1.0);
     float d = length(pa - dir * (t * barLen)) * iResolution.x;
     return vec2(d, t);
+}
+
+vec2 PincushionDistortion(vec2 uv, float strengthArg)
+{
+    vec2 st = uv - 0.5;
+    float uvD = dot(st, st);
+    float uvA = atan(st.x, st.y);
+    return 0.5 + vec2(sin(uvA), cos(uvA)) * sqrt(uvD) * (1.0 - strengthArg * uvD);
+}
+
+vec3 ChromaticAbberationFull(vec3 col, vec2 uv)
+{
+    vec3 c;
+    c.r = texture(iChannel0, vec2(uv.x + strengthChrom, uv.y)).r;
+    c.g = texture(iChannel0, vec2(uv.x - strengthChrom, uv.y)).g;
+    c.b = col.b;
+    return mix(col, c, strengthChrom);
+}
+
+vec4 grayscaleBitmap(vec2 uv)
+{
+    vec4 c = texture(iChannel0, uv);
+    float grey = dot(c.rgb, vec3(0.299, 0.587, 0.114));
+    return mix(c, vec4(grey, grey, grey, c.a), strength);
 }
 
 void main() {
@@ -816,83 +868,105 @@ void main() {
     vec2 pa = uv - p1;
     vec2 ba = p2 - p1;
     float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
-    float dist = length(pa - ba * h) * iResolution.x; 
+    float dist = length(pa - ba * h) * iResolution.x;
 
     float bwOuter = borderWidth;
     float bwMiddle = borderWidth * 0.66;
     float bwInner = borderWidth * 0.33;
 
     vec4 col;
-    if (cutSide) col = specialShader(openfl_TextureCoordv * openfl_TextureSize);  
-    else if (dist < bwInner) col = vec4(0.0,0.0,0.0,1.0);        
-    else if (dist < bwMiddle) col = vec4(1.0,1.0,1.0,1.0); 
-    else if (dist < bwOuter) col = vec4(0.0,0.0,0.0,1.0);  
-    else {
-    vec4 tex = texture(iChannel0, uv);
 
-    if(uv.y < 0.08) {  
+    if (cutSide)
+        col = specialShader(openfl_TextureCoordv * openfl_TextureSize);
+    else if (dist < bwInner)
         col = vec4(0.0, 0.0, 0.0, 1.0);
-    } 
-    else if(uv.y > 0.08 && uv.y < 0.1659 && uv.x > 0.108 && uv.x < 0.314) {
+    else if (dist < bwMiddle)
+        col = vec4(1.0, 1.0, 1.0, 1.0);
+    else if (dist < bwOuter)
         col = vec4(0.0, 0.0, 0.0, 1.0);
-    }
-    else if(uv.x > 0.0787 && uv.x < 0.108) {
-        float yMax = 0.08 + (uv.x - 0.0787) * tan(radians(70.0));
-        if(uv.y > 0.08 && uv.y < yMax) {
+    else {
+        vec4 tex = grayscaleBitmap(uv);
+
+        if (uv.y < 0.08) {
             col = vec4(0.0, 0.0, 0.0, 1.0);
-        } else {
+        }
+        else if (uv.y > 0.08 && uv.y < 0.1659 && uv.x > 0.108 && uv.x < 0.314) {
+            col = vec4(0.0, 0.0, 0.0, 1.0);
+        }
+        else if (uv.x > 0.0787 && uv.x < 0.108) {
+            float yMax = 0.08 + (uv.x - 0.0787) * tan(radians(70.0));
+            if (uv.y > 0.08 && uv.y < yMax) {
+                col = vec4(0.0, 0.0, 0.0, 1.0);
+            } else {
+                col = tex;
+            }
+        }
+        else if (uv.x > 0.314 && uv.x < 0.344095) {
+            float yMax = 0.1659 - (uv.x - 0.314) * tan(radians(70.0));
+            if (uv.y > 0.08 && uv.y < yMax) {
+                col = vec4(0.0, 0.0, 0.0, 1.0);
+            } else {
+                col = tex;
+            }
+        }
+        else {
             col = tex;
         }
     }
-    else if(uv.x > 0.314 && uv.x < 0.344095) {
-        float yMax = 0.1659 - (uv.x - 0.314) * tan(radians(70.0));
-        if(uv.y > 0.08 && uv.y < yMax) {
-            col = vec4(0.0, 0.0, 0.0, 1.0);
-        } else {
-            col = tex;
-        }
-    }
-    else {
-        col = tex;       
-    }
-}
 
-    vec2 d1 = barDistFlat(uv, vec2(0.0,0.08), radians(0.0), 0.08);
-    vec2 d2 = barDistFlat(uv, vec2(0.0787,0.082), radians(70.0), 0.09);
-    vec2 d3 = barDistFlat(uv, vec2(0.344095,0.08), radians(0.0), 0.1077);
-    vec2 d4 = barDistFlat(uv, vec2(0.314,0.1659), radians(-70.0), 0.09);
-    vec2 d5 = barDistFlat(uv, vec2(0.108, 0.161), radians(00.0), 0.208);
+    vec4 specialCol = cutSide ? specialShader(openfl_TextureCoordv * openfl_TextureSize) : col;
 
-    float factor1 = 1.0; 
+    if (cutSide && uv.x > 0.44 && uv.x < 1.0 && uv.y > 0.0 && uv.y < 0.17) {
+        specialCol = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+
+    col = specialCol;
+
+    vec2 d1 = barDistFlat(uv, vec2(0.0, 0.08), radians(0.0), 0.08);
+    vec2 d2 = barDistFlat(uv, vec2(0.0787, 0.082), radians(70.0), 0.09);
+    vec2 d3 = barDistFlat(uv, vec2(0.344095, 0.08), radians(0.0), 0.1077);
+    vec2 d4 = barDistFlat(uv, vec2(0.314, 0.1659), radians(-70.0), 0.09);
+    vec2 d5 = barDistFlat(uv, vec2(0.108, 0.161), radians(0.0), 0.208);
+    vec2 d6 = barDistFlat(uv, vec2(0.4643, 0.170), radians(0.0), 0.62);
+
+    float factor1 = 1.0;
     float factor2 = 0.5;
-    float factor3 = 1.0; 
-    float factor4 = 0.5; 
+    float factor3 = 1.0;
+    float factor4 = 0.5;
     float factor5 = 1.0;
+    float factor6 = 1.0;
 
-if(d2.x < bwOuter*factor2 && d2.y > 0.0 && d2.y < 1.0){
-    if(d2.x < bwInner*factor2) col = vec4(1.0,1.0,1.0,1.0);
-    else col = vec4(0.0,0.0,0.0,1.0);
-}
+    if (d2.x < bwOuter * factor2 && d2.y > 0.0 && d2.y < 1.0) {
+        if (d2.x < bwInner * factor2) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
 
-if(d4.x < bwOuter*factor4 && d4.y > 0.0 && d4.y < 1.0){
-    if(d4.x < bwInner*factor4) col = vec4(1.0,1.0,1.0,1.0);
-    else col = vec4(0.0,0.0,0.0,1.0);
-}
+    if (d4.x < bwOuter * factor4 && d4.y > 0.0 && d4.y < 1.0) {
+        if (d4.x < bwInner * factor4) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
 
-if(d1.x < bwOuter*factor1 && d1.y > 0.0 && d1.y < 1.0){
-    if(d1.x < bwInner*factor1) col = vec4(1.0,1.0,1.0,1.0);
-    else col = vec4(0.0,0.0,0.0,1.0);
-}
+    if (d1.x < bwOuter * factor1 && d1.y > 0.0 && d1.y < 1.0) {
+        if (d1.x < bwInner * factor1) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
 
-if(d3.x < bwOuter*factor3 && d3.y > 0.0 && d3.y < 1.0){
-    if(d3.x < bwInner*factor3) col = vec4(1.0,1.0,1.0,1.0);
-    else col = vec4(0.0,0.0,0.0,1.0);
-}
+    if (d3.x < bwOuter * factor3 && d3.y > 0.0 && d3.y < 1.0) {
+        if (d3.x < bwInner * factor3) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
 
-if(d5.x < bwOuter*factor5 && d5.y > 0.0 && d5.y < 1.0){
-    if(d5.x < bwInner*factor5) col = vec4(1.0,1.0,1.0,1.0);
-    else col = vec4(0.0,0.0,0.0,1.0);
-}
+    if (d5.x < bwOuter * factor5 && d5.y > 0.0 && d5.y < 1.0) {
+        if (d5.x < bwInner * factor5) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+
+    if (d6.x < bwOuter * factor6 && d6.y > 0.0 && d6.y < 1.0) {
+        if (d6.x < bwInner * factor6) col = vec4(1.0);
+        else col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+    
+    col.rgb = ChromaticAbberationFull(col.rgb, uv);
     gl_FragColor = col;
 }')
 	public function new() {
@@ -984,3 +1058,5 @@ class ThreeDShader extends FlxShader {
 		super();
 	}
 }
+
+

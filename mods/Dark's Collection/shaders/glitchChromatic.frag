@@ -78,7 +78,7 @@ vec2 iResolution = openfl_TextureSize;
 	float ofs = 0.05 * r2 * GLITCH ;
 	ofs += 0.5 * pxrnd * ofs;
 
-	uv.y += 0.2 * r3 * GLITCH;
+	//uv.y += 0.2 * r3 * GLITCH;
     
     const float RCP_NUM_SAMPLES_F = 1.0/ float(NUM_SAMPLES);
     

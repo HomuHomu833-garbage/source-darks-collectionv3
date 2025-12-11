@@ -16,6 +16,10 @@
 			"scaleY": 0.7
 		}
 	],
+	"camera_Offsets":[
+		[0,0],
+		[150,-600]
+	],
 	"character_Positions": [
 		[
 			300,

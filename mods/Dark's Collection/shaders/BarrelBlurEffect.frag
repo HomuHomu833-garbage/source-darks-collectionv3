@@ -1,5 +1,9 @@
 #pragma header
 
+#define MAX_STEPS 100
+#define MAX_DIST 100.
+#define SURF_DIST .001
+
 uniform float barrel;
 uniform float zoom;
 uniform bool doChroma;
@@ -12,22 +16,25 @@ uniform float y;
 uniform float warp;
 uniform float dist;
 
-vec2 remap(vec2 t, vec2 a, vec2 b) {
-    return clamp((t - a) / (b - a), 0.0, 1.0);
-}
+uniform float Xdirection;
+uniform float Ydirection;
+uniform vec3 rotation;
+
+#define iResolution vec3(openfl_TextureSize,0.)
+#define texture flixel_texture2D
+#define iChannel0 bitmap
 
 vec4 spectrum_offset_rgb(float t) {
-    if (!doChroma)
-        return vec4(1.0, 1.0, 1.0, 1.0);
+    if (!doChroma) return vec4(1.0);
     float t0 = 3.0 * t - 1.5;
     vec3 ret = clamp(vec3(-t0, 1.0 - abs(t0), t0), 0.0, 1.0);
-    return vec4(ret.r, ret.g, ret.b, 1.0);
+    return vec4(ret, 1.0);
 }
 
-vec2 brownConradyDistortion(vec2 uv, float dist) {
+vec2 brownConradyDistortion(vec2 uv, float distortion) {
     uv = uv * 2.0 - 1.0;
-    float barrelDistortion1 = 0.1 * dist;
-    float barrelDistortion2 = -0.025 * dist;
+    float barrelDistortion1 = 0.1 * distortion;
+    float barrelDistortion2 = -0.025 * distortion;
     float r2 = dot(uv, uv);
     uv *= 1.0 + barrelDistortion1 * r2 + barrelDistortion2 * r2 * r2;
     return uv * 0.5 + 0.5;
@@ -42,87 +49,113 @@ float nrand(vec2 n) {
     return fract(sin(dot(n.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
+vec2 repeat(vec2 uv) {
+    if ((uv.x > 1.0 || uv.x < 0.0) && abs(mod(uv.x, 2.0)) > 1.0) uv.x = (0.0 - uv.x) + 1.0;
+    if ((uv.y > 1.0 || uv.y < 0.0) && abs(mod(uv.y, 2.0)) > 1.0) uv.y = (0.0 - uv.y) + 1.0;
+    uv = clamp(fract(uv), 0.0, 0.998);
+    return uv;
+}
+
 vec4 render(vec2 uv) {
     uv.x += x;
     uv.y += y;
-    if ((uv.x > 1.0 || uv.x < 0.0) && abs(mod(uv.x, 2.0)) > 1.0)
-        uv.x = (0.0 - uv.x) + 1.0;
-    if ((uv.y > 1.0 || uv.y < 0.0) && abs(mod(uv.y, 2.0)) > 1.0)
-        uv.y = (0.0 - uv.y) + 1.0;
-    return flixel_texture2D(bitmap, vec2(abs(mod(uv.x, 1.0)), abs(mod(uv.y, 1.0))));
+    return texture(iChannel0, repeat(uv));
+}
+
+mat3 rotateX(float a){float c=cos(a),s=sin(a);return mat3(1,0,0,0,c,-s,0,s,c);}
+mat3 rotateY(float a){float c=cos(a),s=sin(a);return mat3(c,0,s,0,1,0,-s,0,c);}
+mat3 rotateZ(float a){float c=cos(a),s=sin(a);return mat3(c,-s,0,s,c,0,0,0,1);}
+
+float plane(vec3 p, vec3 offset){return p.z;}
+float GetDist(vec3 p){return plane(p, vec3(0.));}
+
+float RayMarch(vec3 ro, vec3 rd){
+    float dO=0.;
+    for(int i=0;i<MAX_STEPS;i++){
+        vec3 p=ro+rd*dO;
+        float dS=GetDist(p);
+        dO+=dS;
+        if(dO>MAX_DIST||abs(dS)<SURF_DIST) break;
+    }
+    return dO;
+}
+
+vec3 GetRayDir(vec2 uv, vec3 p, vec3 l, float z){
+    vec3 f=normalize(l-p), r=normalize(cross(vec3(0.,1.,0.),f)), u=cross(f,r);
+    vec3 c=f*z, i=c+uv.x*r+uv.y*u;
+    return normalize(i);
 }
 
 void main() {
-    vec2 iResolution = vec2(1280, 720);
-    vec2 center = vec2(0.5, 0.5);
     vec2 uv = openfl_TextureCoordv.xy;
+    float aspect = iResolution.x / iResolution.y;
 
-    mat2 scaling = mat2(zoom, 0.0, 0.0, zoom);
-    float angInRad = radians(angle);
-    mat2 rotation = mat2(cos(angInRad), -sin(angInRad), sin(angInRad), cos(angInRad));
-    mat2 aspectRatioShit = mat2(0.5625, 0.0, 0.0, 1.0);
+    uv -= 0.5;
+    uv.x = -uv.x;
+    uv.y /= aspect;
 
-    vec2 fragCoordShit = iResolution * openfl_TextureCoordv.xy;
-    uv = (fragCoordShit - 0.5 * iResolution.xy) / iResolution.y;
-    uv = uv * scaling;
+    float rad = -radians(angle);
+    mat2 rot = mat2(cos(rad), -sin(rad), sin(rad), cos(rad));
+    uv = rot * uv;
 
+    uv *= zoom;
     float len = length(uv);
     uv += uv * (warp * len * len);
 
-    uv = aspectRatioShit * (rotation * uv);
-    uv = uv + center;
+    uv.y *= aspect;
+    uv += 0.5;
 
-    const float MAX_DIST_PX = 50.0;
-    float max_distort_px = MAX_DIST_PX * barrel;
-    vec2 max_distort = vec2(max_distort_px) / iResolution.xy;
-    vec2 min_distort = 0.5 * max_distort;
+    vec3 ro = vec3(Xdirection, Ydirection, 2.0);
+    ro = ro * rotateX(rotation.x) * rotateY(rotation.y) * rotateZ(rotation.z);
+    vec3 rd = GetRayDir(uv - vec2(0.5), ro, vec3(0.), 1.0);
 
-    vec2 oversiz = distort(vec2(1.0), 1.0, min_distort, max_distort);
-    uv = mix(uv, remap(uv, 1.0 - oversiz, oversiz), 0.0);
+    vec4 col = vec4(0.0);
+    float d = RayMarch(ro, rd);
+    if (d < MAX_DIST) {
+        vec3 p = ro + rd * d;
+        vec2 tuv = vec2(p.x, p.y) * 0.5 + 0.5;
 
-    vec4 finalColor;
+        const float MAX_DIST_PX = 50.0;
+        float max_distort_px = MAX_DIST_PX * barrel;
+        vec2 max_distort = vec2(max_distort_px) / iResolution.xy;
+        vec2 min_distort = 0.5 * max_distort;
 
-if (dist == 0.0) {
-    const int num_iter = 7;
-    const float stepsiz = 1.0 / (float(num_iter) - 1.0);
-    float rnd = nrand(uv + fract(iTime));
-    float t = rnd * stepsiz;
-
-    vec4 sumcol = vec4(0.0);
-    vec3 sumw = vec3(0.0);
-    for (int i = 0; i < num_iter; ++i) {
-        vec4 w = spectrum_offset_rgb(t);
-        sumw += w.rgb;
-        vec2 uvd = distort(uv, t, min_distort, max_distort);
-        sumcol += w * render(uvd);
-        t += stepsiz;
+        if (dist == 0.0) {
+            const int num_iter = 7;
+            const float stepsiz = 1.0 / (float(num_iter) - 1.0);
+            float rnd = nrand(tuv + fract(iTime));
+            float t = rnd * stepsiz;
+            vec4 sumcol = vec4(0.0);
+            vec3 sumw = vec3(0.0);
+            for (int i = 0; i < num_iter; i++) {
+                vec4 w = spectrum_offset_rgb(t);
+                sumw += w.rgb;
+                vec2 uvd = distort(tuv, t, min_distort, max_distort);
+                sumcol += w * render(uvd);
+                t += stepsiz;
+            }
+            sumcol.rgb /= sumw;
+            col = vec4(sumcol.rgb, sumcol.a / float(num_iter));
+        } else {
+            vec2 p2 = (tuv - 0.5) * 2.0;
+            float theta = atan(p2.y, p2.x);
+            float rd2 = length(p2);
+            vec4 channelFactor = vec4(0.9, 1.0, 1.3, 1.0);
+            vec4 strength = dist * channelFactor;
+            vec4 ru = rd2 * (1.0 + strength * rd2 * rd2);
+            vec2 dir = vec2(cos(theta), sin(theta));
+            vec2 qr = dir * ru.x / 2.0 + 0.5;
+            vec2 qg = dir * ru.y / 2.0 + 0.5;
+            vec2 qb = dir * ru.z / 2.0 + 0.5;
+            vec2 qa = dir * ru.w / 2.0 + 0.5;
+            col = vec4(
+                render(qr).x,
+                render(qg).y,
+                render(qb).z,
+                render(qa).w
+            );
+        }
     }
 
-    sumcol.rgb /= sumw;
-    vec3 outcol = sumcol.rgb;
-    outcol += rnd / 255.0;
-    finalColor = vec4(outcol, sumcol.a / float(num_iter));
-
-} else {
-    vec2 p = (uv - 0.5) * 2.0;
-    float theta = atan(p.y, p.x);
-    float rd = length(p);
-    vec4 channelFactor = vec4(0.9, 1.0, 1.3, 1.0);
-    vec4 strength = dist * channelFactor;
-    vec4 ru = rd * (1.0 + strength * rd * rd);
-    vec2 dir = vec2(cos(theta), sin(theta));
-    vec2 qr = dir * ru.x / 2.0 + 0.5;
-    vec2 qg = dir * ru.y / 2.0 + 0.5;
-    vec2 qb = dir * ru.z / 2.0 + 0.5;
-    vec2 qa = dir * ru.w / 2.0 + 0.5;
-
-    finalColor = vec4(
-        render(qr).x,
-        render(qg).y,
-        render(qb).z,
-        render(qa).w
-    );
-}
-
-gl_FragColor = finalColor;
+    gl_FragColor = col;
 }

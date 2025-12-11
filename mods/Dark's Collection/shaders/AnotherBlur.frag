@@ -6,12 +6,13 @@ vec2 iResolution = openfl_TextureSize;
 #define texture texture2D
 #define fragColor gl_FragColor
 
-const int   c_samplesX    = 10;  // must be odd
-const int   c_samplesY    = 10;  // must be odd
+const int   c_samplesX    = 11;  // must be odd
+const int   c_samplesY    = 11;  // must be odd
 const int   c_halfSamplesX = c_samplesX / 2;
 const int   c_halfSamplesY = c_samplesY / 2;
 
 uniform float amt;
+uniform float strength;
 
 float gaussian(float sigma, float x) {
     float s = sigma * sigma;
@@ -60,5 +61,12 @@ vec3 BlurredPixel(in vec2 uv) {
 
 void main() {
     vec2 uv = fragCoord.xy / iResolution.xy;
-    fragColor = vec4(BlurredPixel(uv), 1.0);
+    vec3 original = texture(iChannel0, uv).rgb;
+    vec3 blurred = BlurredPixel(uv);
+
+    vec3 finalColor = mix(original, blurred, clamp(strength, 0.0, 1.0));
+    if (strength > 1.0)
+        finalColor = blurred + (blurred - original) * (strength - 1.0);
+
+    fragColor = vec4(finalColor, 1.0);
 }

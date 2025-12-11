@@ -48,6 +48,9 @@ class Character extends ReflectedSprite {
 	public var otherCharacters:Array<Character>;
 	public var mainCharacterID:Int = 0;
 	public var followMainCharacter:Bool = false;
+	public var followAllCharacter:Bool = false;
+	public var activeCharacterID:Int = 0;
+
 
 	public var offsetsFlipWhenPlayer:Bool = true;
 	public var offsetsFlipWhenEnemy:Bool = false;
@@ -58,7 +61,8 @@ class Character extends ReflectedSprite {
 
 	public var swapLeftAndRightSingPlayer:Bool = true;
 
-	public var icon:String;
+	public var icon:String = "";
+	public var icons:Array<String> = [];
 
 	public var isDeathCharacter:Bool = false;
 
@@ -386,8 +390,6 @@ class Character extends ReflectedSprite {
 
 			if (config.trail || FlxG.state is CharacterCreator) {
 				coolTrail = new FlxTrail(this, null, config.trailLength ?? 10, config.trailDelay ?? 3, config.trailStalpha ?? 0.4, config.trailDiff ?? 0.05);
-				coolTrail.cameras = this.cameras; // seguir la misma cámara que el actor
-				
 			}
 
 
@@ -403,27 +405,46 @@ class Character extends ReflectedSprite {
 			if (config.mainCharacterID != null) {
 				mainCharacterID = config.mainCharacterID;
 			}
+			if (config.followAllCharacter != null)
+    				followAllCharacter = config.followAllCharacter;
+
 			if (config.followMainCharacter != null) {
 				followMainCharacter = config.followMainCharacter;
 			}
 			ignoreDraw = isCharacterGroup = true;
+			var useGlobalIcon:Bool = (config.healthIcon != null);
+			var iconDataList:Array<{ name:String, offset:Array<Float> }> = [];
 
-			for (characterData in config.characters) {
-				var character:Character;
+				for (characterData in config.characters) {
+					var character:Character = isPlayer
+						? new Boyfriend(x, y, characterData.name, isDeathCharacter, scaleMult)
+						: new Character(x, y, characterData.name, isPlayer, isDeathCharacter, scaleMult);
 
-				if (!isPlayer)
-					character = new Character(x, y, characterData.name, isPlayer, isDeathCharacter, scaleMult);
-				else
-					character = new Boyfriend(x, y, characterData.name, isDeathCharacter, scaleMult);
+					if (Reflect.hasField(characterData, "healthIcon") && Reflect.field(characterData, "healthIcon") != null)
+						character.icon = Std.string(Reflect.field(characterData, "healthIcon"));
+					else
+						character.icon = useGlobalIcon ? config.healthIcon : characterData.name;
 
-				if (flipX)
-					characterData.positionOffset[0] = 0 - characterData.positionOffset[0]*scaleMult;
+					if (flipX)
+						characterData.positionOffset[0] = 0 - characterData.positionOffset[0] * scaleMult;
+						character.positioningOffset = [
+							characterData.positionOffset[0] * scaleMult,
+							characterData.positionOffset[1] * scaleMult
+						];
 
-				character.positioningOffset[0] += characterData.positionOffset[0]*scaleMult;
-				character.positioningOffset[1] += characterData.positionOffset[1]*scaleMult;
+					character.zIndex = characterData.layer != null ? characterData.layer : 0;
+					character.visible = true;
+					character.ignoreDraw = false;
 
-				otherCharacters.push(character);
-			}
+					otherCharacters.push(character);
+
+					var iconOffset:Array<Float> = [0, 0];
+					if (Reflect.hasField(characterData, "iconOrder") && characterData.iconOrder != null && characterData.iconOrder.length >= 2)
+						iconOffset = [characterData.iconOrder[0], characterData.iconOrder[1]];
+
+					iconDataList.push({ name: character.icon, offset: iconOffset });
+				}
+				icons = [for (d in iconDataList) d.name];
 		}
 
 		if (config.barColor == null)
@@ -454,6 +475,9 @@ class Character extends ReflectedSprite {
 
 		if (config.healthIcon != null)
 			icon = config.healthIcon;
+
+		if (icon == null || icon == "")
+			icon = curCharacter;
 	}
 
 	public function loadOffsetFile(characterName:String) {
@@ -479,7 +503,6 @@ class Character extends ReflectedSprite {
 
 	public var shouldDance:Bool = true;
 	public var forceAutoDance:Bool = false;
-
 	override function update(elapsed:Float) {
 		if (!debugMode && curCharacter != '' && hasAnims()) {
 			if (curAnimFinished() && hasAnim(curAnimName() + '-loop')) {
@@ -491,7 +514,8 @@ class Character extends ReflectedSprite {
 				preventDanceForAnim = false;
 				dance('');
 			}
-			if (!isPlayer || forceAutoDance) {
+
+			if (!isPlayer) {
 				if (curAnimName().startsWith('sing'))
 					holdTimer += elapsed * (FlxG.state == PlayState.instance ? PlayState.songMultiplier : 1);
 
@@ -512,11 +536,17 @@ class Character extends ReflectedSprite {
 			atlas.update(elapsed);
 		}
 
-				if (FlxG.state == PlayState.instance)
-			{
-				@:privateAccess
-				rtxShader.hue = PlayState.instance.stage.colorSwap.hue;
-			}
+		if (FlxG.state == PlayState.instance) {
+			@:privateAccess
+			rtxShader.hue = PlayState.instance.stage.colorSwap.hue;
+		}
+
+		if (coolTrail != null) {
+			if (coolTrail.cameras != this.cameras)
+				coolTrail.cameras = this.cameras;
+			if (parent != null && parent.members.indexOf(coolTrail) == -1)
+				parent.add(coolTrail);
+		}
 
 		super.update(elapsed);
 	}
@@ -595,112 +625,113 @@ class Character extends ReflectedSprite {
 			}
 		}
 	}
-
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0, ?strumTime:Float):Void {
 		lastAnim = AnimName;
-		if (playFullAnim || !hasAnim(AnimName))
+		if (playFullAnim)
 			return;
 
+		preventDanceForAnim = false;
+
 		if (singAnimPrefix != 'sing' && AnimName.contains('sing')) {
-			var anim:String = AnimName;
+			var anim = AnimName;
 			anim = anim.replace('sing', singAnimPrefix);
-			if (animation.getByName(anim) != null) // check if it exists so no broken anims
+			if (animation.getByName(anim) != null)
 				AnimName = anim;
 		}
 
 		AnimName += extraSuffix;
 
 		color = 0xFFFFFFFF;
-		if (animation.getByName(AnimName) == null)
-		{
-			if (AnimName.contains('dodge'))
-			{
-				color = 0xFF545454;
-				preventDanceForAnim = true;
-				AnimName = AnimName.replace("dodge", singAnimPrefix); //swap back to sing
+
+		if (AnimName.contains("dodge")) {
+			preventDanceForAnim = true;
+			if (hasAnim(AnimName)) {
+				color = 0xFFFFFFFF; // usa color normal
 			}
-			else if (AnimName.contains("miss"))
-			{
+			else {
+	
+				color = 0xFF545454;
+
+				if (AnimName.endsWith("dodge")) {
+					AnimName = AnimName.substr(0, AnimName.length - "dodge".length);
+				}
+			}
+		}
+
+
+		if (animation.getByName(AnimName) == null) {
+			if (AnimName.contains("miss")) {
 				color = 0xFF380045;
 				preventDanceForAnim = true;
-				AnimName = AnimName.replace("miss", ""); //remove miss to just place normal anim
+				AnimName = AnimName.replace("miss", "");
 			}
-			else if (AnimName.contains("parry"))
-			{
-				AnimName = AnimName.replace("parry", singAnimPrefix); //swap back to sing
+			else if (AnimName.contains("parry")) {
+				AnimName = AnimName.replace("parry", "sing");
 			}
-			else if (AnimName.contains("-mic"))
-			{
-				AnimName = AnimName.replace("-mic", ""); //remove -mic if not found
+			else if (AnimName.contains("-mic")) {
+				AnimName = AnimName.replace("-mic", "");
 			}
-			else if (AnimName.contains("-alt"))
-			{
+			else if (AnimName.contains("-alt")) {
 				AnimName = AnimName.replace("-alt", "");
 			}
+			else if (AnimName.contains("block")) {
+				return;
+			}
 		}
-
 
 		if (strumTime != null)
-		{
 			justHitStrumTime = strumTime;
-		}
 		else
 			justHitStrumTime = Conductor.songPosition;
-		
-		if (Math.abs(lastHitStrumTime - justHitStrumTime) < 50 && animation.curAnim != null || holdTimer >= Conductor.stepCrochet * singDuration * 0.001)
-		{
-			//trace('hit double');
 
-			var actor = this;
-			var Sprite:ReflectedSprite = new ReflectedSprite(actor.x, actor.y);
-			Sprite.drawFlipped = this.drawFlipped;
-			//copy sprite
-			Sprite.loadGraphicFromSprite(actor);
-			Sprite.alpha = 0.8 * actor.alpha;
-			Sprite.blend = ADD;
-			Sprite.color = barColor;
-			Sprite.angle = actor.angle;
-			Sprite.offset.x = actor.offset.x;
-			Sprite.offset.y = actor.offset.y;
-			Sprite.origin.x = actor.origin.x;
-			Sprite.origin.y = actor.origin.y;
-			Sprite.scale.x = actor.scale.x;
-			Sprite.scale.y = actor.scale.y;
-			Sprite.active = false;
-			Sprite.animation.frameIndex = actor.animation.frameIndex;
-			Sprite.flipX = actor.flipX;
-			Sprite.flipY = actor.flipY;
-			//Sprite.color = barColor;
-			Sprite.shader = rtxShader.copy().shader;
+		if (Options.getData("trails")) {
+			if (Math.abs(lastHitStrumTime - justHitStrumTime) < 50 && animation.curAnim != null || holdTimer >= Conductor.stepCrochet * singDuration * 0.001)
+			{
+				var actor = this;
+				var Sprite:ReflectedSprite = new ReflectedSprite(actor.x, actor.y);
+				Sprite.drawFlipped = this.drawFlipped;
+				Sprite.loadGraphicFromSprite(actor);
+				Sprite.alpha = 0.8 * actor.alpha;
+				Sprite.blend = ADD;
+				Sprite.color = barColor;
+				Sprite.angle = actor.angle;
+				Sprite.offset.x = actor.offset.x;
+				Sprite.offset.y = actor.offset.y;
+				Sprite.origin.x = actor.origin.x;
+				Sprite.origin.y = actor.origin.y;
+				Sprite.scale.x = actor.scale.x;
+				Sprite.scale.y = actor.scale.y;
+				Sprite.active = false;
+				Sprite.animation.frameIndex = actor.animation.frameIndex;
+				Sprite.flipX = actor.flipX;
+				Sprite.flipY = actor.flipY;
+				Sprite.shader = rtxShader.copy().shader;
+				Sprite.animation.play(animation.curAnim.name, Force, Reversed, Frame);
+				Sprite.offset.set(actor.offset.x, actor.offset.y);
+				Sprite.cameras = this.cameras;
+				(this.parent != null ? this.parent : FlxG.state).insert(FlxG.state.members.indexOf(this)-1, Sprite);
 
-			//play anim
-			Sprite.animation.play(animation.curAnim.name, Force, Reversed, Frame);
-			Sprite.offset.set(actor.offset.x, actor.offset.y);
-
-			//add
-			Sprite.cameras = this.cameras;
-			(this.parent != null ? this.parent : FlxG.state).insert(FlxG.state.members.indexOf(this)-1, Sprite);
-
-			var props:Dynamic = {alpha: 0};
-			switch (AnimName) {
-				case 'singLEFT':
-					props.x = actor.x - 150;
-				case 'singRIGHT':
-					props.x = actor.x + 150;
-				case 'singUP':
-					props.y = actor.y - 150;
-				case 'singDOWN':
-					props.y = actor.y + 150;
-			}
-
-			FlxTween.tween(Sprite, props, Conductor.crochet * 0.0025, {
-				ease: FlxEase.elasticInOut,
-				onComplete: function(twn:FlxTween) {
-					Sprite.destroy();
+				var props:Dynamic = {alpha: 0};
+				switch (AnimName) {
+					case 'singLEFT':
+						props.x = actor.x - 150;
+					case 'singRIGHT':
+						props.x = actor.x + 150;
+					case 'singUP':
+						props.y = actor.y - 150;
+					case 'singDOWN':
+						props.y = actor.y + 150;
 				}
-			});
 
+				FlxTween.tween(Sprite, props, Conductor.crochet * 0.0025, {
+					ease: FlxEase.elasticInOut,
+					onComplete: function(twn:FlxTween) {
+						Sprite.destroy();
+					}
+				});
+			}
 		}
+
 		lastHitStrumTime = justHitStrumTime;
 
 		if (atlasMode && atlas != null) {
@@ -709,8 +740,8 @@ class Character extends ReflectedSprite {
 			animation.play(AnimName, Force, Reversed, Frame);
 		}
 
-		preventDanceForAnim = false; // reset it
-		
+		preventDanceForAnim = false;
+
 		if (AnimName.contains('dodge'))
 			preventDanceForAnim = true;
 
@@ -722,24 +753,34 @@ class Character extends ReflectedSprite {
 			offset.set(offsetOffset[0], offsetOffset[1]);
 	}
 
-	public function addOffset(name:String, x:Float = 0, y:Float = 0)
-		{
-			if((isPlayer && offsetsFlipWhenPlayer) || (!isPlayer && offsetsFlipWhenEnemy))
-			{
-				drawFlipped = true;
-				x = 0 - x;
-			} //
 
-			animOffsets.set(name, [x, y]);
+		public function addOffset(name:String, x:Float = 0, y:Float = 0)
+			{
+				if((isPlayer && offsetsFlipWhenPlayer) || (!isPlayer && offsetsFlipWhenEnemy))
+				{
+					drawFlipped = true;
+					x = 0 - x;
+				} //
+
+				animOffsets.set(name, [x, y]);
+			}
+		
+		public function getMainCharacter():Character {
+			if (isCharacterGroup  && followMainCharacter) {
+				return otherCharacters[mainCharacterID];
+			}
+			return this;
 		}
-	
-	public function getMainCharacter():Character {
-		if (isCharacterGroup  && followMainCharacter) {
-			return otherCharacters[mainCharacterID];
+		public function getCameraCharacter():Character {
+			if (isCharacterGroup) {
+				if (followAllCharacter)
+					return otherCharacters[activeCharacterID];
+				else if (followMainCharacter)
+					return otherCharacters[mainCharacterID];
+			}
+			return this;
 		}
-		return this;
 	}
-}
 
 typedef PsychCharacterFile = {
 	var animations:Array<PsychAnimArray>;

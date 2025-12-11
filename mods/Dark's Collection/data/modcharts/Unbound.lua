@@ -5,6 +5,7 @@ local sprites = {
     {'tres', 'corrupt/3', 0, 0,1,"hud"},
     {'jump', 'corrupt/Jump', 200, 100,0.7,"hud"},-- -250
 }
+mirrorDir,perro = 1,0
 function createPost()
      setCamZoom(1)
      for _, sprite in ipairs(sprites) do
@@ -26,6 +27,8 @@ function createPost()
     setShaderProperty("ruleta","color",0.98)
     setShaderProperty("ruleta","rotationDir",1)
     local shaders = { 
+        {"glitch2", "glitchyPeak", {strength = 0,angle = 5}}, 
+        {"glitch", "glitchChromatic", {GLITCH = 1}},
         {"color", "SwapManiaColor", {hueShift = 0,saturationBoost = 0.8,strength = 0.8,brightnessBoost= 1 , blendOverlay = true}},
         {"greyscale", "GreyscaleEffect", {strength = 1}},
         {"vcrchroma", "vcrchroma", {strength = 1,speed = 1.2}},
@@ -33,11 +36,10 @@ function createPost()
         {"mirror", "BarrelBlurEffect", {zoom = 1, angle = 0, x = 0, y = 0, barrel = 0, warp = 0 ,doChroma = true}},
         {"bump", "BarrelBlurEffect", {zoom = 1, angle = 0, x = 0, y = 0, barrel = 0, doChroma = false}},
         {"bars", "bars", {effect = 0.55,effect2 = 0, angle1 = 0 , angle2 = 0}},
-        {"mirror2", "BarrelBlurEffect", {zoom = 1, angle = 0, x = 0, y = 0, barrel = -2, doChroma = true}},
+        {"mirror2", "BarrelBlurEffect", {zoom = 1, angle = 0, x = 0, y = 0, barrel = -2, doChroma = true,Ydirection = 0 , Xdirection = 0}},
         {"blur", "zoomblur", {focusPower = 5, posY = 0}},
+      
         {"bloom", "BloomEffect", {contrast = 1 , brightness = 0,effect = 0, strength = 0.5}},
-        {"glitch2", "glitchyPeak", {strength = 0,angle = 5}}, 
-        {"glitch", "glitchChromatic", {GLITCH = 1}},
         {"ca", "ChromAbEffect", {strength = 0.0035}},
         {"fish", "EyeFishEffect", {power = 0.15}}
      }
@@ -46,13 +48,14 @@ function createPost()
         local name, effect, properties = shader[1], shader[2], shader[3]
         initShader(name, effect)
         
-                setCameraShader('game', name)    -- Aplica los demás shaders a la cámara
+                setCameraShader('game', name)   
             
        
         for prop, value in pairs(properties) do
             setShaderProperty(name, prop, value)
         end
     end
+    setCameraShader('hud', "bump")
     setCameraShader('hud', "greyscale")
 end
 function mirror(set,tween,value,value2,valor,valor2,s,speed,ease)
@@ -72,6 +75,11 @@ bf,matt = false,false
 otracamara = false
 local perlinX,perlinY,perlinZ ,time = 0, 0, 0,0
 local perlinSpeed,perlinXRange,perlinYRange,perlinZRange = 2, 0.075, 0.075,5
+
+local perlinX2, perlinY2 = 0, 0
+local perlinSpeed2 = 2 
+local perlinXRange2 = 4.5
+local perlinYRange2 = 4.5
 function update(elapsed)
       x = lerp(x, 0, elapsed * 8)
     y = lerp(y, 0, elapsed * 8)
@@ -105,6 +113,21 @@ function update(elapsed)
     setShaderProperty("ruleta","iTime",time*4)
     setShaderProperty("vcrchroma","iTime",time*2)
      setShaderProperty("color","iTime",time/4)
+     if curStep >= 2784 and curStep < 2896 then
+          perlinX2 = perlinX2 + elapsed*math.random()*perlinSpeed2
+        perlinY2 = perlinY2 + elapsed*math.random()*perlinSpeed2
+        setShaderProperty('mirror2', 'Xdirection', ((-0.5 + perlin(perlinX2, 0, 0))*perlinXRange2))
+        setShaderProperty('mirror2', 'Ydirection', ((-0.5 + perlin(0, perlinY2, 0))*perlinYRange2))
+        if curStep % 16 == 8 then
+            setShaderProperty("color","iTime",time/2)
+        elseif curStep % 16 == 0 then
+            setShaderProperty("color","iTime",time/4)
+        end
+    else
+        setShaderProperty('mirror2', 'Xdirection', 0)
+        setShaderProperty('mirror2', 'Ydirection', 0)
+        setShaderProperty("color","iTime",time/4)
+    end
 end
 function songStart()
      tweenShader('mirror2','barrel',0,crochet*0.004) 
@@ -206,7 +229,8 @@ local bumpPatterns = {
 }
 lol = 1
 bfomatt = {{272,"bf"},{288,"matt"},{304,"bf"},{320,"matt"},{336,"nada"},{384,"bf"},{400,"matt"},{464,"bf"},{528,"nada"},{656,"matt"},{720,"bf"},{784,"matt"},{848,"bf"},{928,"nada"},{1184,"matt"},{1312,"bf"},{1424,"nada"}}
-glitch = {{50,1},{52,0},{176,1},{180,0},{194,1},{198,0},{242,1},{245,0},{258,1},{261,0},{322,1},{326,0},{386,1},{390,0},{432,1},{436,0},{450,1},{454,0},{560,1},{564,0},{592,1},{596,0}}
+glitch = {{50,1},{52,0},{176,1},{180,0},{194,1},{198,0},{242,1},{245,0},{258,1},{261,0},{322,1},{326,0},{386,1},{390,0},{432,1},{436,0},{450,1},{454,0},{560,1},{564,0},{592,1},{596,0},{2176,1},{2180,0},{2194,1},{2196,0},{2242,1},{2244,0},{2258,1},{2260,0}
+,{2320,1},{2324,0},{2384,1},{2388,0},{2432,1},{2436,0},{2448,1},{2452,0},{2560,1},{2564,0},{2592,1},{2596,0}}
 function stepHit()
     for i = 1, #glitch do
         local step = glitch[i][1]-4     
@@ -372,12 +396,12 @@ function stepHit()
          mirror(true,true,"zoom","zoom",3,1,3,crochet,"quadOut")
     elseif curStep == 624 then
         tweenShader('color','strength',0,crochet*0.008,"quadIn") 
-    elseif curStep == 640 then
+    elseif curStep == 640 or curStep == 2640 then
         tweenShader('bars','effect',0.55,crochet*0.004,"quadIn") 
-    elseif curStep == 648 then
+    elseif curStep == 648 or curStep == 2648 then
          mirror(false,true,"","zoom",0,3,2,crochet,"quadIn")
           mirror(false,true,"","angle",0,180,2,crochet,"quadIn")
-    elseif curStep == 656 then
+    elseif curStep == 656 or curStep == 2656 then
          tweenShader('color','strength',0.8,crochet*0.002,"quadOut") 
           tweenShader('bars','effect',0.1,crochet*0.003,"quadOut") 
          mirror(true,true,"zoom","zoom",0,1,3,crochet,"quadOut")
@@ -619,8 +643,275 @@ mirror(true, true, "y", "y",0, 1, 16, crochet, "quadIn")
          tweenShader('greyscale', 'strength', 0,crochet*0.003,"quadOut")
           tweenShader('mirror3', 'zoom', 1,crochet*0.003,"quadOut")
             tweenShader('mirror3', 'angle',0,crochet*0.003,"quadOut")
+     elseif curStep == 2264 then
+        mirror(false,true,"","zoom",0,1.5,1,crochet,"quadOut")
+     elseif curStep == 2268 then
+        tweenShader('greyscale', 'strength', 1,crochet*0.001,"quadIn")
+        mirror(false,true,"","zoom",0,1.25,1,crochet,"quadInOut")
+     elseif curStep == 2274 then
+        mirror(false,true,"","zoom",0,1,1,crochet,"quadIn")
+     elseif curStep == 2278 then
+        tweenShader('greyscale', 'strength', 0,crochet*0.001,"quadOut")
+     elseif curStep == 2384 then
+         tweenShader('greyscale', 'strength', 1,crochet*0.002,"quadOut")
+        mirror(false,true,"","zoom",0,1.25,1,crochet,"quadOut")
+         mirror(false,true,"","angle",0,-25,1,crochet,"quadOut")
+     elseif curStep == 2392 then
+          tweenShader('greyscale', 'strength', 0,crochet*0.002,"quadIn")
+         mirror(false,true,"","zoom",0,1.5,1,crochet,"quadOut")
+         mirror(false,true,"","angle",0,-45,1,crochet,"quadOut")
+     elseif curStep == 2396 then
+         mirror(false,true,"","zoom",0,1,1,crochet,"quadIn")
+         mirror(false,true,"","angle",0,180,1,crochet,"quadIn")
+     elseif curStep == 2400 then
+        mirror(false,true,"","angle",0,360,3,crochet,"quadOut")
                       --  tweenShader('bars', 'effect', 0.55,crochet*0.004,"quadIn")
          end
+    if curStep == 2420 then
+    setShaderProperty("color","strength",0.7)
+     setShaderProperty("color","hueShift",0.7)
+    
+        tweenShader('bars', 'effect', 0.1,crochet*0.001,"quadOut")
+         mirror(false,true,"","zoom",0,1.25,1,crochet,"quadOut")
+         mirror(true,true,"angle","angle",15,0,1,crochet,"quadOut")
+    elseif curStep == 2424 then
+          setShaderProperty("color","hueShift",0.4)
+        tweenShader('bars', 'effect', 0.2,crochet*0.001,"quadOut")
+        mirror(false,true,"","zoom",0,1.5,1,crochet,"quadOut")
+         mirror(true,true,"angle","angle",-15,0,1,crochet,"quadOut")
+          mirror(true,true,"y","y",-4,0,4,crochet,"quadInOut")
+    elseif curStep == 2428 then
+          setShaderProperty("color","hueShift",0.2)
+        tweenShader('bars', 'effect', 0.25,crochet*0.0005,"quadOut")
+        mirror(false,true,"","zoom",0,2,0.5,crochet,"quadOut")
+         mirror(true,true,"angle","angle",-15,0,1,crochet,"quadOut")
+    elseif curStep == 2430 or curStep == 2530 then
+        tweenShader('bars', 'effect', 0,crochet*0.0005,"quadIn")
+        mirror(false,true,"","zoom",0,1,0.5,crochet,"quadIn")
+          setShaderProperty("color","hueShift",0)
+    elseif curStep == 2448 then
+        tweenShader('mirror3', 'angle', 180,crochet*0.004,"quadIn")
+    elseif curStep == 2456 then
+         mirror(true,true,"x","x",0,2,4,crochet,"quadInOut")
+    elseif curStep == 2464 then
+                tweenShader('mirror3', 'angle', 360,crochet*0.003,"quadOut")
+    elseif curStep == 2524 then
+         tweenShader('greyscale', 'strength', 1,crochet*0.001,"quadIn")
+     elseif curStep == 2528 then
+         tweenShader('greyscale', 'strength', 0,crochet*0.001,"quadIn")
+        tweenShader('bars', 'effect', 0.15,crochet*0.0005,"quadOut")
+        mirror(false,true,"","zoom",0,2,0.5,crochet,"quadOut")
+         mirror(true,true,"angle","angle",-15,0,1,crochet,"quadOut")
+     elseif curStep == 2540 or curStep == 2584 then
+        mirror(true,true,"y","y",0,1,2,crochet,"quadInOut")
+     elseif curStep == 2544 or curStep == 2592 then
+        mirror(false,true,"","zoom",0,2,2,crochet,"quadOut")
+    elseif curStep == 2556 or curStep == 2604 then
+        mirror(true,true,"y","y",1,2,2,crochet,"quadInOut")
+     elseif curStep == 2560 or curStep == 2608 then
+        mirror(false,true,"","zoom",0,1,1,crochet,"quadOut")
+     elseif curStep == 2616 or curStep == 2632 then
+           mirror(true,true,"angle","angle",15,0,1,crochet,"quadOut")
+    elseif curStep == 2600 then
+           mirror(true,true,"angle","angle",-15,0,1,crochet,"quadOut")
+     elseif curStep == 2632 then
+        mirror(false,true,"","zoom",0,0.5,2,crochet,"quadOut")
+     elseif curStep == 2672 then
+  
+          tweenShader('bars', 'effect', 0.2,crochet*0.002,"quadOut")
+     elseif curStep == 2680 then
+
+      elseif curStep == 2688 then
+
+      elseif curStep == 2696 then
+         mirror(true,true,"y","y",1,2,4,crochet,"quadInOut")
+          tweenShader('bars', 'effect', 0.25,crochet*0.002,"quadOut")
+      elseif curStep == 2700 then
+        mirror(false, true, "", "zoom", 0, 1.25, 1, crochet, "cubeIn")
+         elseif curStep == 2704 then
+            bf ,matt= false,true
+             mirror(false, true, "", "zoom", 0, 1.5, 1, crochet, "cubeIn")
+             elseif curStep == 2708 then
+             mirror(false, true, "", "zoom", 0, 2, 1, crochet, "cubeIn")
+              elseif curStep == 2712 then
+             mirror(false, true, "", "zoom", 0, 2.5, 1, crochet, "cubeIn")
+          tweenShader('bars', 'effect', 0.55,crochet*0.002,"cubeIn")
+     elseif curStep == 2716 then
+          -- mirror(true,true,"y","y",0,1,4,crochet,"quadInOut")
+             mirror(false, true, "", "zoom", 0, 1, 1, crochet, "cubeIn")
+     elseif curStep == 2720 then
+         mirror(true,true,"y","y",0,1,2,crochet,"cubeIn")
+          tweenShader('bars', 'effect', 0.1,crochet*0.002,"quadOut")
+        flashCamera("game","",1)
+     elseif curStep == 2728 or curStep == 2744 then
+         mirror(true,true,"y","y",1,2,2,crochet,"cubeIn")
+     elseif curStep == 2736 then
+         mirror(true,true,"y","y",1,2,2,crochet,"cubeIn")
+        
+    end
+    if curStep == 2656 then
+        bf = true
+    elseif curStep == 2664 then
+         mirror(true,true,"y","y",0,1,4,crochet,"quadInOut")
+    elseif curStep == 2784 or curStep == 2848 then
+        if curStep == 2784 then
+            triggerEvent('screen shake', (crochet*0.064)..',0.009')
+        end
+        matt = false
+        perlinSpeed,perlinXRange,perlinYRange,perlinZRange = 3, 0.1, 0.1,7
+                   setShaderProperty("color","hueShift",1.1)
+          tweenShader('glitch','GLITCH',0.5,crochet*0.001,"quadOut") 
+         st(true, true, 'greyscale', 'strength', 'strength', 1, 0, 2, crochet, "quadOut")
+         mirror(false, true, "", "zoom", 0, 2, 2, crochet, "quadOut")
+    elseif curStep == 2788 or curStep == 2852 then
+        st(true, true, 'mirror2', 'y', 'y', 0, 1.2, 1, crochet, "cubeIn")
+    elseif curStep == 2792 or curStep == 2856 then
+         bloom(4, 1, crochet, 2, "quadOut")
+          tweenShader('glitch','GLITCH',1,crochet*0.001,"quadOut") 
+        angle,x = 15,0.1  tweenShader('mirror2','y',1,crochet*0.002,"quadOut") 
+    elseif curStep == 2800 or curStep == 2864 then
+          tweenShader('glitch','GLITCH',0.5,crochet*0.001,"quadOut") 
+        mirror(false, true, "", "zoom", 0, 2.5, 2, crochet, "quadOut")
+    elseif curStep == 2804 or curStep == 2868 then
+          st(true, true, 'mirror2', 'x', 'x', 0, 1.2, 1, crochet, "cubeIn")
+     elseif curStep == 2808 or curStep == 2872 then
+         bloom(4, 1, crochet, 2, "quadOut")
+          tweenShader('glitch','GLITCH',1,crochet*0.001,"quadOut") 
+        angle,x = -15,-0.1  tweenShader('mirror2','x',1,crochet*0.002,"quadOut")
+    elseif curStep == 2816 or curStep == 2880 then
+          tweenShader('glitch','GLITCH',0.5,crochet*0.001,"quadOut") 
+        mirror(false, true, "", "zoom", 0, 1.5, 2, crochet, "quadOut") 
+    elseif curStep == 2820 or curStep == 2884 then
+        st(true, true, 'mirror2', 'y', 'y', 1, 2.2, 1, crochet, "cubeIn")
+     elseif curStep == 2824 or curStep == 2888 then
+         bloom(4, 1, crochet, 2, "quadOut")
+          tweenShader('glitch','GLITCH',1,crochet*0.001,"quadOut") 
+        angle,x = -15,0.1  tweenShader('mirror2','y',2,crochet*0.002,"quadOut") 
+     elseif curStep == 2832 then
+          tweenShader('glitch','GLITCH',0.5,crochet*0.001,"quadOut") 
+        mirror(false, true, "", "zoom", 0, 1, 2, crochet, "quadOut") 
+    elseif curStep == 2836 then
+          st(true, true, 'mirror2', 'x', 'x', 1, 2.2, 1, crochet, "cubeIn")
+    elseif curStep == 2840 then
+         bloom(4, 1, crochet, 2, "quadOut")
+          tweenShader('glitch','GLITCH',1,crochet*0.001,"quadOut") 
+        angle,x = 15,-0.1  tweenShader('mirror2','x',2,crochet*0.002,"quadOut")
+    elseif curStep == 2896 then
+         tweenShader('bloom','brightness',1,crochet*0.004,"cubeIn") 
+         mirror(false, true, "", "zoom", 0, 0.7,4, crochet, "cubeInOut") 
+           mirror(true, true, "y", "y", 0, -2,4, crochet, "cubeIn") 
+    elseif curStep == 2904 then
+         tweenShader('bars','effect',0.55,crochet*0.002,"quadIn") 
+    elseif curStep == 2912 then
+        perlinSpeed,perlinXRange,perlinYRange,perlinZRange = 2, 0.075, 0.075,5
+         st(true, true, 'mirror2', 'x', 'x', 0, 2, 5, crochet, "quadOut")
+        st(true, true, 'greyscale', 'strength', 'strength', 0, 1, 4, crochet, "quadOut")
+         tweenShader('glitch','GLITCH',0,crochet*0.001,"quadOut") 
+                tweenShader('bars','effect',0.1,crochet*0.004,"cubeOut") 
+         tweenShader('bloom','brightness',0,crochet*0.002,"cubeOut") 
+         mirror(true, true, "zoom", "zoom", 0, 1.35,6, crochet, "cubeOut") 
+         mirror(true, true, "angle", "angle", 90, 0,6, crochet, "cubeOut") 
+           mirror(true, true, "", "y", -1, 0,4, crochet, "cubeOut") 
+    elseif curStep == 3040 then
+               tweenShader('bars','effect',0.35,crochet*0.004,"cubeOut") 
+        mirror(false, true, "", "zoom", 0, 3,4, crochet, "cubeOut") 
+    elseif curStep == 3066 then
+         mirror(false, true, "", "zoom", 0, 13,3, crochet, "cubeIn") 
+          mirror(false, true, "", "angle", 0, 90,3, crochet, "cubeIn") 
+    elseif curStep == 3072 then
+         tweenShader('bars','effect',0.55,crochet*0.001,"cubeIn") 
+    end
+    if curStep >= 2912 and curStep < 3040 then
+        if curStep % 16 == 0 then
+            bloom(1.7, 1, crochet, 4, "quadOut")
+              tweenShader('mirror3','zoom',1,crochet*0.002,"cubeOut") 
+        elseif curStep % 16 == 12 then
+              tweenShader('mirror3','zoom',0.67,crochet*0.001,"cubeIn") 
+        end
+    end
+    if (curStep >= 2656 and curStep < 2768) then
+    local speed    = (curStep >= 2720) and (crochet * 0.001) or (crochet * 0.002)
+    local strength = (curStep >= 2720) and 2 or 4
+    local q        = (curStep >= 2720) and 8 or 16
+    local q2       = (curStep >= 2720) and 4 or 8
+
+    if (curStep % q == 0) then
+        bumps()
+        bloom(2, 1, crochet, 2, "quadOut")
+        st(true, true, 'greyscale', 'strength', 'strength', 0, 1, strength, crochet, "quadOut")
+        tweenShader('mirror3', 'zoom', 1.25, speed, "quadOut")
+    elseif (curStep % q == q2) then
+        tweenShader('mirror3', 'zoom', 0.89, speed, "quadIn")
+    end
+
+    if not mirrorDir then mirrorDir = 1 end
+
+    if (curStep >= 2656 and curStep < 2768) then
+        local speed    = (curStep >= 2720) and (crochet * 0.001) or (crochet * 0.002)
+        local strength = (curStep >= 2720) and 2 or 4
+        local q        = (curStep >= 2720) and 8 or 16
+        local q2       = (curStep >= 2720) and 4 or 8
+
+        if (curStep % q == 0) then
+            bumps()
+            bloom(2, 1, crochet, 2, "quadOut")
+            st(true, true, 'greyscale', 'strength', 'strength', 0, 1, strength, crochet, "quadOut")
+            tweenShader('mirror3', 'zoom', 1.25, speed, "quadOut")
+                 tweenShader('mirror2', 'barrel', 0,speed,"quadOut")
+                 setStageColorSwap('hue', perro)
+                  perro = perro + 0.1
+                if perro > 1 then
+                    perro = 0.3
+                end
+        
+        elseif (curStep % q == q2) then
+               tweenShader('mirror2', 'barrel', -1,speed,"quadOut")
+            tweenShader('mirror3', 'zoom', 0.89, speed, "quadIn")
+        end
+
+        local inFirst = (curStep < 2720)
+        local stepDiv = inFirst and 32 or 16
+        local switchEvery = inFirst and 8 or 4
+
+        if (curStep % switchEvery == 0) then
+            mirrorDir = -mirrorDir
+        end
+
+        local ang  = 15 * mirrorDir
+        local offX = 0.3 * mirrorDir
+
+        if inFirst then
+            if curStep % 32 == 0 then
+                y = 0.2
+                tweenShader('mirror3', 'angle', ang, crochet*0.002, "quadOut")
+                mirror(true, true, "x", "x", 0, offX, 2, crochet, "quadOut")
+            elseif curStep % 32 == 8 then
+                tweenShader('mirror3', 'angle', ang, crochet*0.002, "cubeIn")
+                mirror(false, true, "", "x", 0, offX, 2, crochet, "cubeIn")
+            elseif curStep % 32 == 16 then
+                y = 0.2
+                tweenShader('mirror3', 'angle', 0, crochet*0.004, "cubeIn")
+                mirror(false, true, "", "x", 0, 0, 4, crochet, "cubeIn")
+            end
+        else
+            if curStep % 16 == 0 then
+                y = -0.2
+                tweenShader('mirror3', 'angle', ang, crochet*0.001, "quadOut")
+                mirror(false, true, "", "x", 0, offX, 1, crochet, "quadOut")
+            elseif curStep % 16 == 4 then
+                tweenShader('mirror3', 'angle', ang, crochet*0.001, "cubeIn")
+                mirror(false, true, "", "x", 0, offX, 1, crochet, "cubeIn")
+            elseif curStep % 16 == 8 then
+                y = -0.2
+                tweenShader('mirror3', 'angle', 0, crochet*0.002, "cubeIn")
+                mirror(false, true, "", "x", 0, 0, 2, crochet, "cubeIn")
+            end
+        end
+    end
+
+end
+
+
     if curStep == 1792 then
         tween("tres",{angleX = 0},crochet*0.001,"quadOut")
     elseif curStep == 1796 then
@@ -638,9 +929,10 @@ mirror(true, true, "y", "y",0, 1, 16, crochet, "quadIn")
     elseif curStep == 1820 then
         tween("jump",{angleX = -90},crochet*0.001,"quadIn")
     end
-    if curStep == 1736 or curStep == 1744 then
+    if curStep == 1736 or curStep == 1744 or curStep == 2336 or curStep == 2340 
+     or curStep == 2364 or curStep == 2366 or curStep == 2370 then
         x = -0.2
-    elseif curStep == 1740 or curStep == 1748 then
+    elseif curStep == 1740 or curStep == 1748 or curStep == 2338 or curStep == 2368 then
        x = 0.2
     end
     if curStep == 1440 or curStep == 1468 or curStep == 1480 or curStep == 1484 or curStep == 1492 
@@ -666,27 +958,38 @@ mirror(true, true, "y", "y",0, 1, 16, crochet, "quadIn")
         end
 
 
-    if curStep == 272 or curStep == 304 or curStep == 312 then
+    if curStep == 272 or curStep == 304 or curStep == 312 or curStep == 2304 or curStep == 2312
+    or curStep == 2554 or curStep == 2558 then
          st(true,true,'mirror3','y','y',-0.1,0,0.5,crochet,"quadOut")
           st(true,true,'mirror3','x','x',-0.2,0,0.5,crochet,"quadOut")
         mirror(true,true,"angle","angle",-25,0,0.5,crochet,"quadOut")
-    elseif curStep == 276 or curStep == 308 or curStep == 316 then
+    elseif curStep == 276 or curStep == 308 or curStep == 316 or curStep == 2308 or curStep == 2552
+    or curStep == 2556 then
           st(true,true,'mirror3','y','y',0.1,0,0.5,crochet,"quadOut")
           st(true,true,'mirror3','x','x',0.2,0,0.5,crochet,"quadOut")
             mirror(true,true,"angle","angle",25,0,0.5,crochet,"quadOut")
     end
+    if curStep == 2544 or curStep == 2548 then
+        st(true,true,'mirror3','angle','angle',25,0,0.5,crochet,"quadOut")
+    elseif curStep == 2546 then
+        st(true,true,'mirror3','angle','angle',-25,0,0.5,crochet,"quadOut")
+    end
     if curStep == 532 or curStep == 536 or curStep == 544 or curStep == 548 or curStep == 564 or curStep == 568
     or curStep == 576 or curStep == 582 or curStep == 596 or curStep == 600 or curStep == 608 or curStep == 612
-    or curStep == 628 or curStep == 632 or curStep == 640 or curStep == 644 then
+    or curStep == 628 or curStep == 632 or curStep == 640 or curStep == 644 or curStep == 2532 or curStep == 2536
+    or curStep == 2566 or curStep == 2570 or curStep == 2596 or curStep == 2600 or curStep == 2608 or curStep == 2624
+    or curStep == 2628 or curStep == 2632 then
          st(true,true,'mirror3','x','x',-0.1,0,0.5,crochet,"quadOut")
     elseif curStep == 534 or curStep == 538 or curStep == 546 or curStep == 566 or curStep == 566 or curStep == 570
     or curStep == 580 or curStep == 598 or curStep == 602 or curStep == 610 or curStep == 630 or curStep == 634 
-    or curStep == 642 then
+    or curStep == 642 or curStep == 2534 or curStep == 2564 or curStep == 2568 or curStep == 2598 or curStep == 2602
+    or curStep == 2610 or curStep == 2626 or curStep == 2630 then
          st(true,true,'mirror3','x','x',0.1,0,0.5,crochet,"quadOut")
      elseif curStep == 552 or curStep == 556 or curStep == 560 or curStep == 588 or curStep == 616 or curStep == 620
-     or curStep == 624 then
+     or curStep == 624 or curStep == 2544 or curStep == 2576 or curStep == 2588 or curStep == 2620 or curStep == 2624 then
          st(true,true,'mirror3','y','y',0.1,0,0.5,crochet,"quadOut")
-     elseif curStep == 554 or curStep == 558 or curStep == 590 or curStep == 618 or curStep == 622 or curStep == 626 then
+     elseif curStep == 554 or curStep == 558 or curStep == 590 or curStep == 618 or curStep == 622 or curStep == 626
+     or curStep == 2546 or curStep == 2578 or curStep == 2590 or curStep == 2622 then
          st(true,true,'mirror3','y','y',-0.1,0,0.5,crochet,"quadOut")
     end
     if curStep >= 536 and curStep < 648 then

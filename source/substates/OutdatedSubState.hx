@@ -33,7 +33,7 @@ class OutdatedSubState extends MusicBeatState {
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK));
 
 		var txt:FlxText = new FlxText(0, 100, FlxG.width,
-			"Nueva actualización encontrada para Darks Collection!\n" +
+			"Nueva update encontrada para Darks Collection!\n" +
 			"Versión actual: " + CoolUtil.getCurrentVersion() +
 			"\nÚltima versión: " + version +
 			"\n\nRevisa los cambios abajo:",
@@ -73,7 +73,7 @@ class OutdatedSubState extends MusicBeatState {
 			changelog = data;
 			if (changelogTxt != null) changelogTxt.text = changelog;
 		}
-		http.onError = (error:String) -> trace("No se pudo cargar el changelog: " + error);
+		http.onError = (error:String) -> trace("no se pudo cargar el cangelog: " + error);
 		http.request();
 	}
 
@@ -108,14 +108,13 @@ class OutdatedSubState extends MusicBeatState {
 
 					if (needsUpdate) {
 						if (FileSystem.exists(localPath)) {
-							trace("[MODIFICADO] " + localPath);
+							trace("modificado " + localPath);
 						} else {
-							trace("[NUEVO] " + localPath);
+							trace("nuevo" + localPath);
 						}
 						downloadQueue.push({url: escapeURL(file.download_url), path: localPath});
 					}
 				} else if (file.type == "dir") {
-					// 👇 si es carpeta, volvemos a llamar updateFromGit
 					updateFromGit(file.path, localBase);
 				}
 			}
@@ -124,7 +123,7 @@ class OutdatedSubState extends MusicBeatState {
 				for (fileName in FileSystem.readDirectory(localBase)) {
 					var fullPath = localBase + "/" + fileName;
 					if (!remoteFiles.contains(fullPath) && !FileSystem.isDirectory(fullPath)) {
-						trace("[ELIMINADO] " + fullPath);
+						trace("borrado " + fullPath);
 					}
 				}
 			}
@@ -164,7 +163,7 @@ class OutdatedSubState extends MusicBeatState {
 	}
 
 	function onUpdateFinished() {
-		changelogTxt.text = "¡Juego actualizado correctamente!";
+		changelogTxt.text = "gg actualizado";
 		btnUpdate.visible = false;
 		btnMenu.x = FlxG.width / 2 - 100;
 
