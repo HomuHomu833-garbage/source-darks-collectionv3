@@ -292,7 +292,7 @@ class CreditsState extends MusicBeatState {
         if (controls.ACCEPT) {
             var selectedCredit = credits[curSelected];
             if (selectedCredit.url != null && selectedCredit.url != "") {
-                #if desktop
+                #if (desktop || mobile)
                 lime.system.System.openURL(selectedCredit.url);
                 #end
             }

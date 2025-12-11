@@ -1736,7 +1736,7 @@ class PlayState extends MusicBeatState {
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
 
-		#if desktop
+		#if (desktop || mobile)
 		Conductor.recalculateStuff(songMultiplier);
 
 		var lowerSong:String = curSong.toLowerCase();

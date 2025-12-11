@@ -100,20 +100,6 @@
 	<assets path="assets/shared" library="shared" />
 	<assets path="assets/preload/fonts" rename="assets/fonts" library="fonts" />
 
-	<assets path="CHANGELOG.md" rename='changelog.txt' />
-
-	<assets path="version.txt" />
-	<!--https://github.com/FunkinCrew/Funkin/pull/3318-->
-	<assets path="alsoft.ini" if="windows" />
-	<assets path="alsoft.ini" rename="alsoft.conf" unless="windows" />
-
-	<assets path="crash/bin/Crash-windows.exe" if="windows" rename="Crash.exe" />
-
-	<assets path="crash/bin/Crash-linux.x86_64" if="linux" rename="Crash.x86_64" />
-
-	<assets path="build/linux_dependencies.txt" rename='linux_dependencies.txt' if="linux" />
-
-
 	<!-- Export Settings. -->
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
@@ -135,7 +121,7 @@
 	<haxelib name="scriptless-polymod" if="MODDING_ALLOWED" />
 	<haxelib name="flxanimate" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED" />
-	<haxelib name="linc_luajit" if="LUA_ALLOWED" version="git" />
+	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />
 	<haxelib name="hxNoise" />
 	<haxelib name="fnf-modcharting-tools" if="MODCHARTING_TOOLS" unless="hl" />
@@ -182,9 +168,6 @@
 	<define name="HXCPP_STACK_LINE" if="release" />
 	<define name="HXCPP_STACK_TRACE" if="release" />
 	<!-- <define name="HXCPP_GC_GENERATIONAL" /> -->
-
-	<!-- Target-Specific Defines. -->
-	<define name="NO_PRECOMPILED_HEADERS" if="linux" />
 
 	<!-- Window Icon Path -->
 	<icon path="art/icon.png" />

@@ -6,14 +6,14 @@ import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.graphics.frames.FlxAtlasFrames;
-#if desktop
+#if (desktop || mobile)
 import funkin.vis.dsp.SpectralAnalyzer;
 #end
 
 using Lambda;
 
 class ABotVis extends FlxSpriteGroup {
-	#if desktop
+	#if (desktop || mobile)
 	var analyzer:SpectralAnalyzer;
 	#end
 
@@ -47,7 +47,7 @@ class ABotVis extends FlxSpriteGroup {
 			viz.animation.play('VIZ', false, false, 6);
 		}
 
-		#if desktop
+		#if (desktop || mobile)
 		@:privateAccess
 		analyzer = new SpectralAnalyzer(FlxG.sound.music._channel.__audioSource, 7, 0.1, 40);
 		analyzer.fftN = 256;
@@ -64,14 +64,14 @@ class ABotVis extends FlxSpriteGroup {
       
 
 	override function update(elapsed:Float) {
-		#if desktop
+		#if (desktop || mobile)
 		if (FlxG.sound.music != null) {
 			var levels = analyzer.getLevels();
 
 			for (i in 0...min(group.members.length, levels.length)) {
 				var animFrame:Int = Math.round(levels[i].value * 5);
 
-				#if desktop
+				#if (desktop || mobile)
 				// Web version scales with the Flixel volume level.
 				// This line brings platform parity but looks worse.
 				// animFrame = Math.round(animFrame * FlxG.sound.volume);

@@ -10,6 +10,7 @@ import utilities.DiscordClient;
 #if MODDING_ALLOWED
 import modding.PolymodHandler;
 #end
+import lime.ui.WindowVSyncMode;
 import utilities.NoteVariables;
 import lime.app.Application;
 import states.TitleState;
@@ -115,7 +116,7 @@ class BoolOption extends Option {
 					FlxSprite.defaultAntialiasing = optionChecked;
 				}
 			case "vSync":
-				FlxG.stage.window.vsync = optionChecked;
+				FlxG.stage.application.window.setVSyncMode(optionChecked == true ? WindowVSyncMode.ON : WindowVSyncMode.OFF);
 			case "darkHeader":
 				Main.toggleDarkMode(optionChecked);
 			case "throwExceptionOnError":

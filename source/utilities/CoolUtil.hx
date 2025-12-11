@@ -258,7 +258,7 @@ class CoolUtil {
 	 * @param path
 	 */
 	public static inline function setWindowIcon(path:String) {
-		#if desktop
+		#if (desktop || mobile)
 		FlxG.stage.window.setIcon(Image.fromFile(path));
 		#end
 	}

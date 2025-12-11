@@ -4,6 +4,7 @@ import flixel.math.FlxMath;
 #if DISCORD_ALLOWED
 import utilities.DiscordClient;
 #end
+import lime.ui.WindowVSyncMode;
 import utilities.PlayerSettings;
 import shaders.NoteColors;
 import modding.ModList;
@@ -78,7 +79,7 @@ class TitleState extends MusicBeatState {
 			LogStyle.ERROR.throwException = Options.getData("throwExceptionOnError");
 			FlxSprite.defaultAntialiasing = Options.getData("antialiasing");
 
-			FlxG.stage.window.vsync = Options.getData("vSync");
+			FlxG.stage.application.window.setVSyncMode(Options.getData("vSync") == true ? WindowVSyncMode.ON : WindowVSyncMode.OFF);
 
 			PlayerSettings.init();
 			PlayerSettings.player1.controls.loadKeyBinds();
