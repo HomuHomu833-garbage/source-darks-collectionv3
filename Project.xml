@@ -18,7 +18,6 @@
 	<!-- LEATHER ENGINE CUSTOMIZATION -->
 	<!-- Comment out or delete a line to disable a feature. -->
 
-	<define name="VIDEOS_ALLOWED" /> <!--  Allows support for video files -->
 	<define name="DISCORD_ALLOWED" if="desktop" /> <!--  Allows support for Discord Rich Presence -->
 	<define name="LUA_ALLOWED" /> <!--  Allows support for Lua scripting -->
 	<define name="HSCRIPT_ALLOWED" /> <!--  Allows support for Haxe scripting (HScript) -->
